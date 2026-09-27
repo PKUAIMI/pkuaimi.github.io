@@ -92,7 +92,8 @@ function newsPage(){return filterBar('news')+news.map((item,i)=>{
  let body=item.bodyHtml;
  body=body.replace(/^\s*<h[1-6]>([\s\S]*?)<\/h[1-6]>/, (whole,title)=>plain(title)===item.title?'':whole);
  const pictures=(item.images||[]).filter(im=>!body.includes(im.url));
- return `<article class="news-entry" id="${item.id}" data-filter-item><span class="entry-number">AIMI NEWS <span aria-hidden="true"> / </span> ${String(i+1).padStart(2,'0')}</span><h2>${esc(item.title)}</h2><div class="prose">${html(body)}${pictures.map(im=>figure(im.url,im.alt||item.title)).join('')}</div></article>`;
+ const gallery=pictures.length?`<div class="news-gallery">${pictures.map(im=>figure(im.url,im.alt||item.title)).join('')}</div>`:'';
+ return `<article class="news-entry" id="${item.id}" data-filter-item><span class="entry-number">AIMI NEWS <span aria-hidden="true"> / </span> ${String(i+1).padStart(2,'0')}</span><h2>${esc(item.title)}</h2><div class="prose">${html(body)}${gallery}</div></article>`;
 }).join('');}
 function peoplePage(){const groups=[...new Set(people.map(p=>p.group))];return groups.map((group,i)=>`<section class="people-group" aria-labelledby="group-${i}"><h2 class="people-group-title" id="group-${i}">${esc(group==='Falculty'?'Faculty':group)}</h2><div class="people-cards">${people.filter(p=>p.group===group).map(person=>{
  const url=person.profilePath?localUrl(person.profilePath):null;
