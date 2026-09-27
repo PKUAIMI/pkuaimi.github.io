@@ -1,0 +1,12 @@
+{
+  "id": "person-{{slug}}",
+  "group": "phd",
+  "image": "/assets/TODO-member.jpg",
+  "profilePath": null,
+  "en": {
+    "name": "TODO: English name"
+  },
+  "zh": {
+    "name": "TODO：中文姓名"
+  }
+}

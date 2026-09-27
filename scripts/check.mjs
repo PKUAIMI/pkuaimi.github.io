@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { loadContent, ROOT } from '../src/content.mjs';
 
 // Validate the delivered HTML against its editable content, without a browser,
 // network access, third-party packages, or assumptions about source file order.
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const root = ROOT;
 const dist = path.join(root, 'dist');
 const readJSON = name => JSON.parse(fs.readFileSync(path.join(root, name), 'utf8'));
 const errors = [];
@@ -58,25 +58,15 @@ if (!fs.existsSync(dist)) {
   console.error('Missing dist/. Run npm run build before npm run check.');
   process.exit(1);
 }
-const config = readJSON('site.config.json');
-const ui = readJSON('content/ui.json');
+const { config, ui, pages, news, people, publications, projects, home, media, displayMedia: display } = loadContent(root);
 const site = new URL(config.url);
-const pages = readJSON('content/pages.json');
-const news = readJSON('content/news.json');
-const people = readJSON('content/people.json');
-const publications = readJSON('content/publications.json');
-const projects = readJSON('content/research.json');
 const locales = [{ key: 'en', htmlLang: 'en', prefix: '' }, { key: 'zh', htmlLang: 'zh-CN', prefix: '/zh' }];
 const localizedPath = (route, locale) => locale.prefix + route;
 const basePath = route => route.startsWith('/zh/') ? route.slice(3) : route;
-const localization = {};
-for (const name of ['news', 'pages', 'research', 'people']) {
-  const file = `content/${name}.locales.json`;
-  check(fs.existsSync(path.join(root, file)), `Missing required localization file ${file}`);
-  localization[name] = fs.existsSync(path.join(root, file)) ? readJSON(file) : {};
-}
-const translated = (name, item, locale) => localization[name][String(item.id)]?.[locale.key] || {};
-const sourceProfiles = pages.filter(page => !['/', '/contact/'].includes(page.path) && !['news', 'people', 'publications', 'research'].includes(page.slug));
+const translated = (name, item, locale) => item[locale.key] || {};
+const sourceProfiles = pages.filter(page => ['profile', 'page'].includes(page.type));
+const routeForType = type => pages.find(page => page.type === type).path;
+const pageLabel = page => page.en?.title || page.path;
 for (const [name, records, fields] of [
   ['news', news, ['title', 'bodyHtml']],
   ['research', projects, ['title', 'descriptionHtml']],
@@ -88,16 +78,13 @@ for (const [name, records, fields] of [
     for (const field of fields) {
       // Three imported research projects contain only a title and figure. An
       // explicit empty description preserves that source without inventing prose.
-      const mayBeEmpty = field === 'descriptionHtml' && !textHTML(item.descriptionHtml || '').trim();
+      const mayBeEmpty = field === 'descriptionHtml';
       check(typeof entry[field] === 'string' && (mayBeEmpty || entry[field].trim().length > 0), `${name} ${item.id}: missing ${locale.key}.${field} localization`);
     }
   }
-  for (const id of Object.keys(localization[name])) check(records.some(item => String(item.id) === id), `${name} localization ${id}: no matching editable content record`);
 }
 const inventory = readJSON('content/migration-inventory.json');
 const manifest = readJSON('content/media-manifest.json');
-const media = readJSON('content/media-map.json');
-const display = fs.existsSync(path.join(root, 'content/media-display-map.json')) ? readJSON('content/media-display-map.json') : {};
 const fullSizeForDisplay = new Map();
 for (const [source, target] of Object.entries(display)) {
   const displayPath = typeof target === 'string' ? target : target.path || target.displayPath;
@@ -241,33 +228,42 @@ const pageRoutes = new Map();
 const expectedDocuments = new Set(['404.html', 'zh/404.html']);
 const relativeForRoute = route => unquote(route).replace(/^\/+/, '') + (route.endsWith('/') ? 'index.html' : '');
 for (const page of pages) {
-  const original = documentForPath(page.path);
-  check(!!original, `Source page ${page.title}: original pathname ${page.path} is missing`);
-  if (!original) continue;
-  const route = canonical(original);
-  if (!route) continue;
+  const route = page.path;
+  const original = documentForPath(route);
+  check(!!original, `Source page ${pageLabel(page)}: canonical pathname ${route} is missing`);
   pageRoutes.set(page.id, route);
-  expectedDocuments.add(relativeForRoute(page.path));
-  // Imported media remains authoritative even when its surrounding prose has
-  // separate translations. Structured listing media is checked per record below.
-  const structuredListing = ['news', 'people', 'publications', 'research'].includes(page.slug);
+  expectedDocuments.add(relativeForRoute(route));
+  for (const alias of page.aliases || []) {
+    expectedDocuments.add(relativeForRoute(alias));
+    const aliasDocument = documentForPath(alias);
+    check(!!aliasDocument, `Source page ${pageLabel(page)}: legacy pathname ${alias} is missing`);
+    if (aliasDocument) {
+      check(canonical(aliasDocument) === route, `Legacy pathname ${alias}: canonical should be ${route}`);
+      check(aliasDocument.elements.find(node => node.tag === 'html')?.attrs.lang === 'en', `Legacy pathname ${alias}: should use the default English language`);
+      if (original) check(fs.readFileSync(aliasDocument.file).equals(fs.readFileSync(original.file)), `Legacy pathname ${alias}: content differs from canonical page ${route}`);
+    }
+  }
+  // Listing media is checked per record below; prose images are checked against
+  // each language's editable HTML, and homepage artwork has its own settings.
+  const structuredListing = ['news', 'people', 'publications', 'research'].includes(page.type);
   for (const locale of locales) {
     const translatedRoute = localizedPath(route, locale);
     canonicalPages.add(translatedRoute);
     expectedDocuments.add(relativeForRoute(translatedRoute));
     const document = documentForPath(translatedRoute);
-    check(!!document, `Source page ${page.title}: ${locale.key} canonical route ${translatedRoute} is missing`);
+    check(!!document, `Source page ${pageLabel(page)}: ${locale.key} canonical route ${translatedRoute} is missing`);
     if (!document) continue;
     check(canonical(document) === translatedRoute, `${translatedRoute}: canonical points to a different page`);
     if (!structuredListing) {
-      const currentSource = parseHTML(page.html);
-      for (const image of currentSource.elements.filter(node => node.tag === 'img' && node.attrs.src)) assertImage(document.document, image.attrs.src, `${locale.key} source page ${page.title}`);
       const entry = translated('pages', page, locale);
-      if (sourceProfiles.includes(page)) assertContent(document.document, textHTML(entry.html || ''), `${locale.key} profile ${page.title}`);
-      if (page.path === '/') {
-        const paragraphs = parseHTML(entry.html || '').elements.filter(node => node.tag === 'p' && normalized(text(node)).length > 150);
-        check(paragraphs.length > 0, `${locale.key} homepage: localized introduction is missing`);
-        for (const paragraph of paragraphs) assertContent(document.document, text(paragraph), `${locale.key} homepage introduction`);
+      const currentSource = parseHTML(entry.html || '');
+      for (const image of currentSource.elements.filter(node => node.tag === 'img' && node.attrs.src)) assertImage(document.document, image.attrs.src, `${locale.key} source page ${pageLabel(page)}`);
+      if (sourceProfiles.includes(page)) assertContent(document.document, textHTML(entry.html || ''), `${locale.key} content page ${pageLabel(page)}`);
+      if (page.type === 'home') {
+        assertContent(document.document, textHTML(entry.html || ''), `${locale.key} homepage introduction`);
+        assertImage(document.document, home.hero.display, `${locale.key} homepage hero`);
+        check(document.elements.some(node => node.tag === 'a' && node.attrs.href === home.hero.original && descendants(node).some(image => image.tag === 'img' && image.attrs.src === home.hero.display)), `${locale.key} homepage: hero should open its original image`);
+        for (const image of home.gallery) assertImage(document.document, image.url, `${locale.key} homepage gallery`);
       }
     }
   }
@@ -275,14 +271,14 @@ for (const page of pages) {
 check(canonicalPages.size === pages.length * locales.length, 'Two source pages resolve to the same canonical page.');
 check(documents.size === expectedDocuments.size, `Expected ${expectedDocuments.size} HTML files across both languages and legacy paths, found ${documents.size}.`);
 for (const relative of expectedDocuments) check(documents.has(relative), `Missing generated page ${relative}`);
-for (const source of inventory.pages) check(pages.some(page => page.id === source.id && unquote(page.path) === unquote(source.path)), `Migration inventory page ${source.id} / ${source.title} has been dropped.`);
+for (const source of inventory.pages) check(pages.some(page => page.id === source.id && [page.path, ...(page.aliases || [])].some(route => unquote(route) === unquote(source.path))), `Migration inventory page ${source.id} / ${source.title}: original page or path has been dropped.`);
 
 for (const [records, label] of [[news, 'news'], [people, 'people'], [publications, 'publications'], [projects, 'research']]) check(new Set(records.map(record => record.id)).size === records.length, `${label}: duplicate content record ids`);
 for (const locale of locales) {
-  const newsDocument = documentForPath(localizedPath('/news/', locale));
-  const peopleDocument = documentForPath(localizedPath('/people/', locale));
-  const publicationDocument = documentForPath(localizedPath('/publications/', locale));
-  const researchDocument = documentForPath(localizedPath('/research/', locale));
+  const newsDocument = documentForPath(localizedPath(routeForType('news'), locale));
+  const peopleDocument = documentForPath(localizedPath(routeForType('people'), locale));
+  const publicationDocument = documentForPath(localizedPath(routeForType('publications'), locale));
+  const researchDocument = documentForPath(localizedPath(routeForType('research'), locale));
   for (const [records, doc, className, label] of [[news, newsDocument, 'news-entry', 'news'], [people, peopleDocument, 'person-card', 'people'], [publications, publicationDocument, 'publication-item', 'publications'], [projects, researchDocument, 'project-entry', 'research']]) {
     check(!!doc, `Missing ${locale.key} ${label} listing page`);
     if (doc) check(doc.elements.filter(node => hasClass(node, className)).length === records.length, `${locale.key} ${label}: rendered count differs from ${records.length} editable records`);
@@ -296,13 +292,13 @@ for (const locale of locales) {
   }
   for (const person of people) {
     const entry = translated('people', person, locale);
-    const node = recordNode(peopleDocument, person, `${locale.key} person ${person.name}`);
-    assertContent(node, entry.name || '', `${locale.key} person ${person.name}`);
-    assertImage(node, person.image, `${locale.key} person ${person.name}`);
+    const node = recordNode(peopleDocument, person, `${locale.key} person ${person.en.name}`);
+    assertContent(node, entry.name || '', `${locale.key} person ${person.en.name}`);
+    assertImage(node, person.image, `${locale.key} person ${person.en.name}`);
     if (person.profilePath && node) {
       const original = documentForPath(person.profilePath);
-      check(!!original, `Person ${person.name}: missing original profile path`);
-      if (original) check(node.attrs.href === localizedPath(canonical(original), locale), `${locale.key} person ${person.name}: profile card links to the wrong person or language`);
+      check(!!original, `Person ${person.en.name}: missing original profile path`);
+      if (original) check(node.attrs.href === localizedPath(canonical(original), locale), `${locale.key} person ${person.en.name}: profile card links to the wrong person or language`);
     }
   }
   for (const publication of publications) {
@@ -318,9 +314,9 @@ for (const locale of locales) {
     assertContent(node, textHTML(entry.descriptionHtml || ''), `${locale.key} research ${project.id} description`);
     for (const image of project.images || []) assertImage(node, image.url, `${locale.key} research ${project.id}`);
   }
-  const contact = documentForPath(localizedPath('/contact/', locale));
+  const contact = documentForPath(localizedPath(routeForType('contact'), locale));
   if (contact) {
-    assertContent(contact.document, locale.key === 'en' ? config.address : ui.zh.address, `${locale.key} contact address`);
+    assertContent(contact.document, ui[locale.key].address, `${locale.key} contact address`);
     const address = contact.elements.find(node => node.tag === 'address');
     check(!!address && text(address).trim().length > 0, `${locale.key} contact page: missing address`);
     check(contact.elements.some(n => n.tag === 'a' && n.attrs.href === 'mailto:' + config.email), `${locale.key} contact page is missing the email action.`);
@@ -347,7 +343,7 @@ for (const locale of locales) {
   }
   for (const item of news) {
     const entry = translated('news', item, locale);
-    const record = search.find(record => record.url === localizedPath('/news/#' + item.id, locale));
+    const record = search.find(record => record.url === localizedPath(routeForType('news') + '#' + item.id, locale));
     check(!!record, `${locale.key} news ${item.id}: missing from search index`);
     if (record) {
       check(normalized(record.title) === normalized(entry.title || ''), `${locale.key} news ${item.id}: search title is out of sync with its localized title`);
@@ -355,30 +351,28 @@ for (const locale of locales) {
     }
   }
   for (const item of publications) {
-    const record = search.find(record => record.url === localizedPath('/publications/#' + item.id, locale));
+    const record = search.find(record => record.url === localizedPath(routeForType('publications') + '#' + item.id, locale));
     check(!!record, `${locale.key} publication ${item.id}: missing from search index`);
     if (record) check(normalized(record.text).includes(normalized(item.citation)), `${locale.key} publication ${item.id}: search text is missing the original citation`);
   }
   for (const page of pages) {
     const route = pageRoutes.get(page.id);
-    if (!route || ['/news/', '/publications/'].includes(route)) continue;
+    if (!route || ['news', 'publications'].includes(page.type)) continue;
     const translatedRoute = localizedPath(route, locale);
     const record = search.find(record => record.url === translatedRoute);
     check(!!record, `${locale.key} page ${translatedRoute}: missing from search index`);
     if (!record) continue;
     const document = documentForPath(translatedRoute);
     const entry = translated('pages', page, locale);
-    if (sourceProfiles.includes(page)) check(normalized(record.text).includes(normalized(textHTML(entry.html || ''))), `${locale.key} profile ${page.title}: localized content missing from search index`);
-    if (route === '/') {
-      for (const paragraph of parseHTML(entry.html || '').elements.filter(node => node.tag === 'p' && normalized(text(node)).length > 150)) check(normalized(record.text).includes(normalized(text(paragraph))), `${locale.key} homepage: localized introduction missing from search index`);
-    }
-    if (route === '/contact/') {
+    if (sourceProfiles.includes(page)) check(normalized(record.text).includes(normalized(textHTML(entry.html || ''))), `${locale.key} profile ${pageLabel(page)}: localized content missing from search index`);
+    if (page.type === 'home') check(normalized(record.text).includes(normalized(textHTML(entry.html || ''))), `${locale.key} homepage: localized introduction missing from search index`);
+    if (page.type === 'contact') {
       const address = document?.elements.find(node => node.tag === 'address');
       if (address) check(normalized(record.text).includes(normalized(text(address))), `${locale.key} contact: address missing from search index`);
       check(record.text.includes(config.email), `${locale.key} contact: email missing from search index`);
     }
-    if (route === '/people/') for (const person of people) check(normalized(record.text).includes(normalized(translated('people', person, locale).name || '')), `${locale.key} person ${person.id}: missing from people search text`);
-    if (route === '/research/') for (const project of projects) check(normalized(record.text).includes(normalized(textHTML(translated('research', project, locale).descriptionHtml || ''))), `${locale.key} research ${project.id}: missing from research search text`);
+    if (page.type === 'people') for (const person of people) check(normalized(record.text).includes(normalized(translated('people', person, locale).name || '')), `${locale.key} person ${person.id}: missing from people search text`);
+    if (page.type === 'research') for (const project of projects) check(normalized(record.text).includes(normalized(textHTML(translated('research', project, locale).descriptionHtml || ''))), `${locale.key} research ${project.id}: missing from research search text`);
   }
 }
 const sitemap = fs.readFileSync(path.join(dist, 'sitemap.xml'), 'utf8');

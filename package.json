@@ -7,7 +7,11 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "validate:content": "node scripts/validate-content.mjs",
+    "new": "node scripts/new-content.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "verify": "npm run test && npm run build && npm run check"
   },
   "engines": { "node": ">=22" }
 }

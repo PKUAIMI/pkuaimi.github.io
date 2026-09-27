@@ -1,0 +1,42 @@
+[
+  {
+    "id": "faculty",
+    "en": "Faculty",
+    "zh": "教师"
+  },
+  {
+    "id": "postdocs",
+    "en": "Post-Doctors",
+    "zh": "博士后"
+  },
+  {
+    "id": "assistants",
+    "en": "Research Assistants",
+    "zh": "科研助理"
+  },
+  {
+    "id": "phd",
+    "en": "PhD Students",
+    "zh": "博士研究生"
+  },
+  {
+    "id": "masters",
+    "en": "Master Students",
+    "zh": "硕士研究生"
+  },
+  {
+    "id": "visiting",
+    "en": "Visiting Graduate Students",
+    "zh": "访问研究生"
+  },
+  {
+    "id": "bachelors",
+    "en": "Bachelor Students",
+    "zh": "本科生"
+  },
+  {
+    "id": "alumni",
+    "en": "Alumni",
+    "zh": "往届成员"
+  }
+]

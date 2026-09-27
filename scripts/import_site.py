@@ -4,6 +4,7 @@
 Normal use: python3 scripts/import_site.py
 To fetch a fresh source export first: python3 scripts/import_site.py --fetch
 This only reads publicly available endpoints; it does not change the old site.
+Output goes to migration/imported/ for comparison, never to editable content/.
 """
 from __future__ import annotations
 
@@ -20,7 +21,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'migration' / 'source'
-OUT = ROOT / 'content'
+OUT = ROOT / 'migration' / 'imported'
 ORIGIN = 'https://pkuaimi.com'
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'}
 BLOCK = {'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'ul', 'ol', 'figure', 'figcaption', 'table', 'tr', 'div', 'section'}
@@ -210,7 +211,7 @@ def first_sentence(text):
 
 
 def run():
-    OUT.mkdir(exist_ok=True)
+    OUT.mkdir(parents=True, exist_ok=True)
     raw_pages = json.loads((SOURCE / 'wp-pages.json').read_text())
     raw_posts = json.loads((SOURCE / 'wp-posts.json').read_text())
     records = raw_pages + raw_posts

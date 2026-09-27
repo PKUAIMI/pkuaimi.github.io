@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "网站基本设置",
+  "description": "网站发布地址、联系邮箱和源码链接。双语名称、所属单位、地址和简介统一在 content/ui.json 中维护。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "url",
+    "email",
+    "github",
+    "repository"
+  ],
+  "properties": {
+    "url": {
+      "type": "string",
+      "const": "https://pkuaimi.github.io",
+      "description": "网站唯一发布域名，当前使用 pkuaimi.github.io，不带结尾斜杠。"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "实验室联系邮箱。"
+    },
+    "github": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://",
+      "description": "页脚 GitHub 主页的完整链接。"
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://",
+      "description": "网站源码仓库的完整链接。"
+    }
+  }
+}

@@ -13,10 +13,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Build website
-        run: npm run build
-      - name: Validate pages and assets
-        run: npm run check
+      - name: Test, build and validate website
+        run: npm run verify
       - name: Verify published files match source
         run: git diff --exit-code
 # GitHub Pages already publishes main / (branch mode).

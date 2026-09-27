@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "成员分组",
+  "description": "数组顺序决定团队页的分组顺序；没有成员的分组不会显示。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "en",
+      "zh"
+    ],
+    "properties": {
+      "id": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/definitions/id"
+          }
+        ],
+        "description": "成员分组唯一标识；people.json 中的 group 引用此值。"
+      },
+      "en": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/definitions/nonEmptyText"
+          }
+        ],
+        "description": "分组英文显示名称。"
+      },
+      "zh": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/definitions/nonEmptyText"
+          }
+        ],
+        "description": "分组中文显示名称。"
+      }
+    }
+  }
+}

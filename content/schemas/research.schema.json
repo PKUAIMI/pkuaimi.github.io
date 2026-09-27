@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "研究项目",
+  "description": "按数组顺序展示研究项目，并自动生成首页研究卡片。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "images",
+      "en",
+      "zh"
+    ],
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/definitions/id"
+      },
+      "images": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "$ref": "common.schema.json#/definitions/image"
+        },
+        "description": "至少填写一张图片；第一张同时用于首页研究卡片。"
+      },
+      "en": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "descriptionHtml"
+        ],
+        "properties": {
+          "title": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "当前语言的研究项目标题。"
+          },
+          "descriptionHtml": {
+            "type": "string",
+            "description": "当前语言的研究介绍 HTML；暂无介绍时可以填写空字符串。"
+          }
+        },
+        "description": "研究项目的一个语言版本。"
+      },
+      "zh": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "descriptionHtml"
+        ],
+        "properties": {
+          "title": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "当前语言的研究项目标题。"
+          },
+          "descriptionHtml": {
+            "type": "string",
+            "description": "当前语言的研究介绍 HTML；暂无介绍时可以填写空字符串。"
+          }
+        },
+        "description": "研究项目的一个语言版本。"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "hero": {
+    "original": "/assets/lab-group-2026.jpg",
+    "display": "/assets/lab-group-2026-web.jpg",
+    "width": 1920,
+    "height": 1080
+  },
+  "gallery": [
+    {
+      "url": "https://pkuaimi.com/wp-content/uploads/2025/11/%E5%90%88%E5%BD%B12.jpg",
+      "altKey": "groupPhotoAlt",
+      "captionKey": "ourTeam"
+    },
+    {
+      "url": "https://pkuaimi.com/wp-content/uploads/2025/11/AIMI2.png",
+      "altKey": "circuitTreeAlt",
+      "captionKey": "fullName"
+    }
+  ],
+  "newsLimit": 3,
+  "publicationLimit": 3
+}

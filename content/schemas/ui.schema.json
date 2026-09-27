@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "中英文界面文字",
+  "description": "导航、按钮、标题、搜索提示等界面文字。两个语言对象的键名必须一一对应。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "en",
+    "zh"
+  ],
+  "properties": {
+    "en": {
+      "type": "object",
+      "propertyNames": {
+        "minLength": 1
+      },
+      "additionalProperties": {
+        "$ref": "common.schema.json#/definitions/nonEmptyText"
+      },
+      "description": "界面文字键名到文本的映射。en 和 zh 必须具有相同键名；构建检查缺失译文。部分文字允许 <br> 等既有 HTML。"
+    },
+    "zh": {
+      "type": "object",
+      "propertyNames": {
+        "minLength": 1
+      },
+      "additionalProperties": {
+        "$ref": "common.schema.json#/definitions/nonEmptyText"
+      },
+      "description": "界面文字键名到文本的映射。en 和 zh 必须具有相同键名；构建检查缺失译文。部分文字允许 <br> 等既有 HTML。"
+    }
+  }
+}

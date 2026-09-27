@@ -3,173 +3,126 @@
     "id": "publication-1",
     "year": 2026,
     "section": "AIMI",
-    "citation": "X. Wu, J. Liu, H. Yu, A. Maier, Y. Huang, Self-Cascade Latent Schrödinger Bridge for CT Field-of-View Extension, Physics in Medicine and Biology. 2026",
-    "html": "<p><b>X. Wu</b>, J. Liu, <b>H. Yu</b>, A. Maier, <b>Y. Huang</b>, Self-Cascade Latent Schrödinger Bridge for CT Field-of-View Extension, <i>Physics in Medicine and Biology</i>. 2026</p>",
-    "links": []
+    "html": "<p><b>X. Wu</b>, J. Liu, <b>H. Yu</b>, A. Maier, <b>Y. Huang</b>, Self-Cascade Latent Schrödinger Bridge for CT Field-of-View Extension, <i>Physics in Medicine and Biology</i>. 2026</p>"
   },
   {
     "id": "publication-2",
     "year": 2026,
     "section": "AIMI",
-    "citation": "Z. Li, S. Ni, L. Yang, X. Yin, H. Yu, J. Wang, H. Han, W. Hu, Y. Huang. Efficient Image-to-Image Schrödinger Bridge for CT Field of View Extension. IEEE Transactions on Radiation and Plasma Medical Sciences. 2026",
-    "html": "<p><strong>Z. Li</strong>, <strong>S. Ni</strong>, L. Yang, X. Yin, <strong>H. Yu</strong>, J. Wang, H. Han, W. Hu, <strong>Y. Huang</strong>. Efficient Image-to-Image Schrödinger Bridge for CT Field of View Extension. <em>IEEE Transactions on Radiation and Plasma Medical Sciences</em>. 2026</p>",
-    "links": []
+    "html": "<p><strong>Z. Li</strong>, <strong>S. Ni</strong>, L. Yang, X. Yin, <strong>H. Yu</strong>, J. Wang, H. Han, W. Hu, <strong>Y. Huang</strong>. Efficient Image-to-Image Schrödinger Bridge for CT Field of View Extension. <em>IEEE Transactions on Radiation and Plasma Medical Sciences</em>. 2026</p>"
   },
   {
     "id": "publication-3",
     "year": 2026,
     "section": "AIMI",
-    "citation": "Y. Yuluo, K. Shen, Y. Ma, A. Wang, T. Jing, Y. Huang*, F. Wang*. GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction. IEEE Transactions on Computational Imaging. 2026",
-    "html": "<p><strong>Y. Yuluo,</strong> K. Shen, Y. Ma, <strong>A. Wang</strong>, T. Jing, <strong>Y. Huang</strong>*, F. Wang*. GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction. <em>IEEE Transactions on Computational Imaging</em>. 2026</p>",
-    "links": []
+    "html": "<p><strong>Y. Yuluo,</strong> K. Shen, Y. Ma, <strong>A. Wang</strong>, T. Jing, <strong>Y. Huang</strong>*, F. Wang*. GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction. <em>IEEE Transactions on Computational Imaging</em>. 2026</p>"
   },
   {
     "id": "publication-4",
     "year": 2025,
     "section": "AIMI",
-    "citation": "Y. Huang, A. Maier, F. Fan, B. Kreher, X. Huang, R. Fietkau, H. Han, F. Putz, C. Bert. Learning Perspective Distortion Correction in Cone-Beam X-Ray Transmission Imaging. IEEE Transactions on Radiation and Plasma Medical Sciences. 2025",
-    "html": "<p><strong>Y. Huang,</strong> A. Maier, F. Fan, B. Kreher, X. Huang, R. Fietkau, H. Han, F. Putz, C.  Bert. Learning Perspective Distortion Correction in Cone-Beam X-Ray Transmission Imaging. <em>IEEE Transactions on Radiation and Plasma Medical Sciences</em>. 2025</p>",
-    "links": []
+    "html": "<p><strong>Y. Huang,</strong> A. Maier, F. Fan, B. Kreher, X. Huang, R. Fietkau, H. Han, F. Putz, C.  Bert. Learning Perspective Distortion Correction in Cone-Beam X-Ray Transmission Imaging. <em>IEEE Transactions on Radiation and Plasma Medical Sciences</em>. 2025</p>"
   },
   {
     "id": "publication-5",
     "year": 2025,
     "section": "Publications Before AIMI",
-    "citation": "Y. Huang, Gomaa A, Hoefler D, Schubert P, Gaipl U, Frey B, Fietkau R, Bert C, Putz F. Principles of artificial intelligence in radiooncology. Strahlentherapie und Onkologie. 2025",
-    "html": "<p><strong>Y. Huang</strong>, Gomaa A, Hoefler D, Schubert P, Gaipl U, Frey B, Fietkau R, Bert C, Putz F. Principles of artificial intelligence in radiooncology. Strahlentherapie und Onkologie. 2025</p>",
-    "links": []
+    "html": "<p><strong>Y. Huang</strong>, Gomaa A, Hoefler D, Schubert P, Gaipl U, Frey B, Fietkau R, Bert C, Putz F. Principles of artificial intelligence in radiooncology. Strahlentherapie und Onkologie. 2025</p>"
   },
   {
     "id": "publication-6",
     "year": 2024,
     "section": "Publications Before AIMI",
-    "citation": "Y. Huang, Z. Khodabakhshi, A.Gomaa, M. Schmidt, R. Fietkau, M. Guckenberger, N. Andratschke, C. Bert, S.Tanadini-Lang, F. Putz, “Multicenter privacy-preserving model training for deep learning brain metastases autosegmentation,” Radiotherapy and Oncology, 2024 (Radiation oncology top journal)",
-    "html": "<p><strong>Y. Huang</strong>, Z. Khodabakhshi, A.Gomaa, M. Schmidt, R. Fietkau, M. Guckenberger, N. Andratschke, C. Bert, S.Tanadini-Lang, F. Putz, “Multicenter privacy-preserving model training for deep learning brain metastases autosegmentation,” Radiotherapy and Oncology, 2024 (<strong>Radiation oncology top journal</strong>)</p>",
-    "links": []
+    "html": "<p><strong>Y. Huang</strong>, Z. Khodabakhshi, A.Gomaa, M. Schmidt, R. Fietkau, M. Guckenberger, N. Andratschke, C. Bert, S.Tanadini-Lang, F. Putz, “Multicenter privacy-preserving model training for deep learning brain metastases autosegmentation,” Radiotherapy and Oncology, 2024 (<strong>Radiation oncology top journal</strong>)</p>"
   },
   {
     "id": "publication-7",
     "year": 2024,
     "section": "Publications Before AIMI",
-    "citation": "Y. Huang, C. Bert, A. Gomaa, R. Fietkau, A. Maier, F. Putz, “An experimental survey of incremental transfer learning for multicenter collaboration,” IEEE Access. 2024",
-    "html": "<p><strong>Y. Huang</strong>, C. Bert, A. Gomaa, R. Fietkau, A. Maier, F. Putz, “An experimental survey of incremental transfer learning for multicenter collaboration,” <em>IEEE Access</em>. 2024</p>",
-    "links": []
+    "html": "<p><strong>Y. Huang</strong>, C. Bert, A. Gomaa, R. Fietkau, A. Maier, F. Putz, “An experimental survey of incremental transfer learning for multicenter collaboration,” <em>IEEE Access</em>. 2024</p>"
   },
   {
     "id": "publication-8",
     "year": 2023,
     "section": "Publications Before AIMI",
-    "citation": "Y. Huang, A. Gomaa, T. Weissmann, J. Grigo, H. Ben Tkhayat, B. Frey, U. Gaipl, L. Distel, A. Maier, R. Fietkau, C. Bert, F. Putz, “Benchmarking ChatGPT-4 on ACR radiation oncology in-training exam (TXIT): Potentials and challenges for AI-assisted medical education and decision making in radiation oncology.” Front. Oncol. 2023",
-    "html": "<p> <strong>Y. Huang</strong>, A. Gomaa, T. Weissmann, J. Grigo, H. Ben Tkhayat, B. Frey, U. Gaipl, L. Distel, A. Maier, R. Fietkau, C. Bert, F. Putz, “Benchmarking ChatGPT-4 on ACR radiation oncology in-training exam (TXIT): Potentials and challenges for AI-assisted medical education and decision making in radiation oncology.” <em>Front. Oncol</em>. 2023</p>",
-    "links": []
+    "html": "<p> <strong>Y. Huang</strong>, A. Gomaa, T. Weissmann, J. Grigo, H. Ben Tkhayat, B. Frey, U. Gaipl, L. Distel, A. Maier, R. Fietkau, C. Bert, F. Putz, “Benchmarking ChatGPT-4 on ACR radiation oncology in-training exam (TXIT): Potentials and challenges for AI-assisted medical education and decision making in radiation oncology.” <em>Front. Oncol</em>. 2023</p>"
   },
   {
     "id": "publication-9",
     "year": 2021,
     "section": "Publications Before AIMI",
-    "citation": "Y. Huang, A. Preuhs, M. Manhart, G. Lauritsch, and A. Maier, “Data Extrapolation from Learned Prior Images for Truncation Correction in Computed Tomography,” IEEE Trans. Med. Imaging, 2021 (Medical imaging top journal)",
-    "html": "<p><strong>Y. Huang</strong>, A. Preuhs, M. Manhart, G. Lauritsch, and A. Maier, “Data Extrapolation from Learned Prior Images for Truncation Correction in Computed Tomography,” <em>IEEE Trans. Med. Imaging</em>, 2021 (<strong>Medical imaging top journal</strong>)</p>",
-    "links": []
+    "html": "<p><strong>Y. Huang</strong>, A. Preuhs, M. Manhart, G. Lauritsch, and A. Maier, “Data Extrapolation from Learned Prior Images for Truncation Correction in Computed Tomography,” <em>IEEE Trans. Med. Imaging</em>, 2021 (<strong>Medical imaging top journal</strong>)</p>"
   },
   {
     "id": "publication-10",
     "year": 2021,
     "section": "Publications Before AIMI",
-    "citation": "Y. Huang, F. Fan, C. Syben, P. Roser, L. Mill, and A. Maier, “Cephalogram Synthesis and Landmark Detection in Dental Cone-Beam CT Systems,” Med. Image Anal. 2021 (Medical imaging top journal)",
-    "html": "<p><strong>Y. Huang</strong>, F. Fan, C. Syben, P. Roser, L. Mill, and A. Maier, “Cephalogram Synthesis and Landmark Detection in Dental Cone-Beam CT Systems,” <em>Med. Image Anal.</em> 2021  (<strong>Medical imaging top journal</strong>)</p>",
-    "links": []
+    "html": "<p><strong>Y. Huang</strong>, F. Fan, C. Syben, P. Roser, L. Mill, and A. Maier, “Cephalogram Synthesis and Landmark Detection in Dental Cone-Beam CT Systems,” <em>Med. Image Anal.</em> 2021  (<strong>Medical imaging top journal</strong>)</p>"
   },
   {
     "id": "publication-11",
     "year": 2020,
     "section": "Publications Before AIMI",
-    "citation": "Y. Huang, S. Wang, Y. Guan, and A. Maier, “Limited Angle Tomography for Transmission X-Ray Microscopy Using Deep Learning,” J. Synchrotron Radiat. 2020",
-    "html": "<p><strong>Y. Huang</strong>, S. Wang, Y. Guan, and A. Maier, “Limited Angle Tomography for Transmission X-Ray Microscopy Using Deep Learning,” <em>J. Synchrotron Radiat.</em> 2020</p>",
-    "links": []
+    "html": "<p><strong>Y. Huang</strong>, S. Wang, Y. Guan, and A. Maier, “Limited Angle Tomography for Transmission X-Ray Microscopy Using Deep Learning,” <em>J. Synchrotron Radiat.</em> 2020</p>"
   },
   {
     "id": "publication-12",
     "year": 2025,
     "section": "Publications Before AIMI",
-    "citation": "Hou Y, Bert C, Gomaa A, Lahmer G, Höfler D, Weissmann T, Voigt R, Schubert P, Schmitter C, Depardon A, Semrau S., A. Maier, F. Rainer, Y. Huang✉, F. Putz, Fine-tuning a local LLaMA-3 large language model for automated privacy-preserving physician letter generation in radiation oncology. Frontiers in Artificial Intelligence. 2025",
-    "html": "<p>Hou Y, Bert C, Gomaa A, Lahmer G, Höfler D, Weissmann T, Voigt R, Schubert P, Schmitter C, Depardon A, Semrau S., A. Maier, F. Rainer, <strong>Y. Huang<sup>✉</sup></strong>, F. Putz,  Fine-tuning a local LLaMA-3 large language model for automated privacy-preserving physician letter generation in radiation oncology. Frontiers in Artificial Intelligence. 2025</p>",
-    "links": []
+    "html": "<p>Hou Y, Bert C, Gomaa A, Lahmer G, Höfler D, Weissmann T, Voigt R, Schubert P, Schmitter C, Depardon A, Semrau S., A. Maier, F. Rainer, <strong>Y. Huang<sup>✉</sup></strong>, F. Putz,  Fine-tuning a local LLaMA-3 large language model for automated privacy-preserving physician letter generation in radiation oncology. Frontiers in Artificial Intelligence. 2025</p>"
   },
   {
     "id": "publication-13",
     "year": 2024,
     "section": "Publications Before AIMI",
-    "citation": "F. Putz, M. Haderlein, S. Lettmaier, S. Semrau, R. Fietkau, Y. Huang✉, “Exploring the Capabilities and Limitations of Large Language Models for Radiation Oncology Decision Support”, International Journal of Radiation Oncology, Biology, Physics. 2024 (Radiation oncology top journal)",
-    "html": "<p>F. Putz, M. Haderlein, S. Lettmaier, S. Semrau, R. Fietkau, <strong>Y. Huang<sup>✉</sup></strong>, “Exploring the Capabilities and Limitations of Large Language Models for Radiation Oncology Decision Support”,<em> International Journal of Radiation Oncology, Biology, Physics. </em>2024 (<strong>Radiation oncology top journal</strong>)</p>",
-    "links": []
+    "html": "<p>F. Putz, M. Haderlein, S. Lettmaier, S. Semrau, R. Fietkau, <strong>Y. Huang<sup>✉</sup></strong>, “Exploring the Capabilities and Limitations of Large Language Models for Radiation Oncology Decision Support”,<em> International Journal of Radiation Oncology, Biology, Physics. </em>2024 (<strong>Radiation oncology top journal</strong>)</p>"
   },
   {
     "id": "publication-14",
     "year": 2022,
     "section": "Publications Before AIMI",
-    "citation": "F. Fan, B. Kreher, H. Keil, A. Maier, and Y. Huang✉, “Fiducial Marker Recovery and Detection from Severely Truncated Data in Navigation Assisted Spine Surgery,” Med. Phys. 2022",
-    "html": "<p>F. Fan, B. Kreher, H. Keil, A. Maier, and <strong>Y. Huang<sup>✉</sup></strong>, “Fiducial Marker Recovery and Detection from Severely Truncated Data in Navigation Assisted Spine Surgery,” <em>Med. Phys</em>. 2022</p>",
-    "links": []
+    "html": "<p>F. Fan, B. Kreher, H. Keil, A. Maier, and <strong>Y. Huang<sup>✉</sup></strong>, “Fiducial Marker Recovery and Detection from Severely Truncated Data in Navigation Assisted Spine Surgery,” <em>Med. Phys</em>. 2022</p>"
   },
   {
     "id": "publication-15",
     "year": 2022,
     "section": "Publications Before AIMI",
-    "citation": "B. Dutta, K. Root, I. Ullmann, F. Wagner, M. Mayr, M. Seuret, M. Thies, D. Stromer, V. Christlein, J. Schür, A. Maier, Y. Huang✉, “Deep Learning for Terahertz Image Denoising in Nondestructive Historical Document Analysis,” Sci. Rep. 2022",
-    "html": "<p>B. Dutta, K. Root, I. Ullmann, F. Wagner, M. Mayr, M. Seuret, M. Thies, D. Stromer, V. Christlein, J. Schür, A. Maier, <strong>Y. Huang<sup>✉</sup></strong>, “Deep Learning for Terahertz Image Denoising in Nondestructive Historical Document Analysis,” <em>Sci. Rep.</em>  2022</p>",
-    "links": []
+    "html": "<p>B. Dutta, K. Root, I. Ullmann, F. Wagner, M. Mayr, M. Seuret, M. Thies, D. Stromer, V. Christlein, J. Schür, A. Maier, <strong>Y. Huang<sup>✉</sup></strong>, “Deep Learning for Terahertz Image Denoising in Nondestructive Historical Document Analysis,” <em>Sci. Rep.</em>  2022</p>"
   },
   {
     "id": "publication-16",
     "year": 2023,
     "section": "Publications Before AIMI",
-    "citation": "J. Chen*, H. Yu*, S. Ni, C. Liu, W. Ge, Y. Huang✉, and F. Liu✉. “Weighted filtered back-projection for source translation computed tomography reconstruction,” IEEE Trans. Instrum. Meas. 2023.",
-    "html": "<p>J. Chen*, <strong>H. Yu</strong>*, <strong>S. Ni</strong>, C. Liu, W. Ge, <strong>Y. Huang<sup>✉</sup></strong>, and F. Liu<strong><sup>✉</sup></strong>. “Weighted filtered back-projection for source translation computed tomography reconstruction,” <em>IEEE Trans. Instrum. Meas.</em> 2023.</p>",
-    "links": []
+    "html": "<p>J. Chen*, <strong>H. Yu</strong>*, <strong>S. Ni</strong>, C. Liu, W. Ge, <strong>Y. Huang<sup>✉</sup></strong>, and F. Liu<strong><sup>✉</sup></strong>. “Weighted filtered back-projection for source translation computed tomography reconstruction,” <em>IEEE Trans. Instrum. Meas.</em> 2023.</p>"
   },
   {
     "id": "publication-17",
     "year": 2024,
     "section": "Publications Before AIMI",
-    "citation": "H. Yu, S. Ni, M. Thies, F. Wagner, Y. Huang✉, F. Liu✉, A. Maier, “Multiple source translation micro-CT improves both field-of-view and spatial resolution,” IEEE Trans. Instrum. Meas. 2024.",
-    "html": "<p><strong>H. Yu</strong>, <strong>S. Ni</strong>, M. Thies, F. Wagner, <strong>Y. Huang<sup>✉</sup></strong>, F. Liu<strong><sup>✉</sup></strong>, A. Maier, “Multiple source translation micro-CT improves both field-of-view and spatial resolution,” <em>IEEE Trans. Instrum. Meas.</em> 2024.</p>",
-    "links": []
+    "html": "<p><strong>H. Yu</strong>, <strong>S. Ni</strong>, M. Thies, F. Wagner, <strong>Y. Huang<sup>✉</sup></strong>, F. Liu<strong><sup>✉</sup></strong>, A. Maier, “Multiple source translation micro-CT improves both field-of-view and spatial resolution,” <em>IEEE Trans. Instrum. Meas.</em> 2024.</p>"
   },
   {
     "id": "publication-18",
     "year": 2023,
     "section": "Publications Before AIMI",
-    "citation": "T. Weissmann, S. Mansoorian, M. S. May, S. Lettmaier, D. Höfler, L. Deloch, S. Speer, M. Balk, B. Frey, U. Gaipl, C. Bert, L. Distel, F. Walter, C. Belka, S. Semrau, H. Iro, R. Fietkau, Y. Huang✉, F. Putz✉, “Deep Learning and Registration-Based Mapping for Analyzing the Distribution of Nodal Metastases in Head and Neck Cancer Cohorts: Informing Optimal Radiotherapy Target Volume Design.” Cancers, 2023",
-    "html": "<p>T. Weissmann, S. Mansoorian, M. S. May, S. Lettmaier, D. Höfler, L. Deloch, S. Speer, M. Balk, B. Frey, U. Gaipl, C. Bert, L. Distel, F. Walter, C. Belka, S. Semrau, H. Iro, R. Fietkau, <strong>Y. Huang</strong><sup>✉</sup>, F. Putz<sup>✉</sup>, “Deep Learning and Registration-Based Mapping for Analyzing the Distribution of Nodal Metastases in Head and Neck Cancer Cohorts: Informing Optimal Radiotherapy Target Volume Design.” <em>Cancers</em>, 2023</p>",
-    "links": []
+    "html": "<p>T. Weissmann, S. Mansoorian, M. S. May, S. Lettmaier, D. Höfler, L. Deloch, S. Speer, M. Balk, B. Frey, U. Gaipl, C. Bert, L. Distel, F. Walter, C. Belka, S. Semrau, H. Iro, R. Fietkau, <strong>Y. Huang</strong><sup>✉</sup>, F. Putz<sup>✉</sup>, “Deep Learning and Registration-Based Mapping for Analyzing the Distribution of Nodal Metastases in Head and Neck Cancer Cohorts: Informing Optimal Radiotherapy Target Volume Design.” <em>Cancers</em>, 2023</p>"
   },
   {
     "id": "publication-19",
     "year": 2024,
     "section": "Publications Before AIMI",
-    "citation": "A. Hagag, A. Gomaa, D. Kornek, A. Maier, R. Fietkau, C. Bert, Y. Huang✉, and F. Putz. “Deep Learning for Cancer Prognosis Prediction Using Portrait Photos by StyleGAN Embedding.” MICCAI 2024.",
-    "html": "<p>A. Hagag, A. Gomaa, D. Kornek, A. Maier, R. Fietkau, C. Bert, <strong>Y. Huang<sup>✉</sup></strong>, and F. Putz. “Deep Learning for Cancer Prognosis Prediction Using Portrait Photos by StyleGAN Embedding.” MICCAI 2024.</p>",
-    "links": []
+    "html": "<p>A. Hagag, A. Gomaa, D. Kornek, A. Maier, R. Fietkau, C. Bert, <strong>Y. Huang<sup>✉</sup></strong>, and F. Putz. “Deep Learning for Cancer Prognosis Prediction Using Portrait Photos by StyleGAN Embedding.” MICCAI 2024.</p>"
   },
   {
     "id": "publication-20",
     "year": 2023,
     "section": "Publications Before AIMI",
-    "citation": "Y. Huang, A. Maier, R. Fietkau, C. Bert, and F. Putz, “Deep learning for perspective deformation correction in X-ray imaging,” European Society for Radiotherapy and Oncology (ESTRO), Vienna, Austria 2023",
-    "html": "<p><strong>Y. Huang</strong>, A. Maier, R. Fietkau, C. Bert, and F. Putz, “Deep learning for perspective deformation correction in X-ray imaging,” <em>European Society for Radiotherapy and Oncology (ESTRO),</em> Vienna, Austria 2023</p>",
-    "links": []
+    "html": "<p><strong>Y. Huang</strong>, A. Maier, R. Fietkau, C. Bert, and F. Putz, “Deep learning for perspective deformation correction in X-ray imaging,” <em>European Society for Radiotherapy and Oncology (ESTRO),</em> Vienna, Austria 2023</p>"
   },
   {
     "id": "publication-21",
     "year": 2022,
     "section": "Publications Before AIMI",
-    "citation": "Y. Huang, C. Bert, P. Sommer, B. Frey, U. Gaipl, L. Distel, T. Weissmann, M. Uder, M. Schmidt, A. Dörfler, A. Maier, R. Fietkau, and F. Putz, “Improvement of Deep Learning-Based Auto-detection of Brain Metastases by Integrating prior MRI Images,”Strahlentherapie und Onkologie 2022. doi: 10.1007/s00066-022-01932-3 (Best Abstract Award in German Society of Radiation Oncology (DEGRO) conference)",
-    "html": "<p><strong>Y. Huang</strong>, C. Bert, P. Sommer, B. Frey, U. Gaipl, L. Distel, T. Weissmann, M. Uder, M. Schmidt, A. Dörfler, A. Maier, R. Fietkau, and F. Putz, “Improvement of Deep Learning-Based Auto-detection of Brain Metastases by Integrating prior MRI Images,”Strahlentherapie und Onkologie 2022. doi: <a href=\"https://link.springer.com/content/pdf/10.1007/s00066-022-01932-3.pdf\" rel=\"noopener noreferrer\">10.1007/s00066-022-01932-3</a> (<strong>Best Abstract Award</strong> in German Society of Radiation Oncology (DEGRO) conference)</p>",
-    "links": [
-      {
-        "url": "https://link.springer.com/content/pdf/10.1007/s00066-022-01932-3.pdf",
-        "text": "10.1007/s00066-022-01932-3"
-      }
-    ]
+    "html": "<p><strong>Y. Huang</strong>, C. Bert, P. Sommer, B. Frey, U. Gaipl, L. Distel, T. Weissmann, M. Uder, M. Schmidt, A. Dörfler, A. Maier, R. Fietkau, and F. Putz, “Improvement of Deep Learning-Based Auto-detection of Brain Metastases by Integrating prior MRI Images,”Strahlentherapie und Onkologie 2022. doi: <a href=\"https://link.springer.com/content/pdf/10.1007/s00066-022-01932-3.pdf\" rel=\"noopener noreferrer\">10.1007/s00066-022-01932-3</a> (<strong>Best Abstract Award</strong> in German Society of Radiation Oncology (DEGRO) conference)</p>"
   }
 ]

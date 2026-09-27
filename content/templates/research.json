@@ -1,0 +1,16 @@
+{
+  "id": "research-{{slug}}",
+  "images": [
+    {
+      "url": "/assets/TODO-research.png"
+    }
+  ],
+  "en": {
+    "title": "TODO: Research title",
+    "descriptionHtml": "<p>TODO: Describe the research in English.</p>"
+  },
+  "zh": {
+    "title": "TODO：研究标题",
+    "descriptionHtml": "<p>TODO：填写中文研究介绍。</p>"
+  }
+}

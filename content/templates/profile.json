@@ -1,0 +1,14 @@
+{
+  "id": "profile-{{slug}}",
+  "type": "profile",
+  "path": "/people/{{slug}}/",
+  "aliases": [],
+  "en": {
+    "title": "TODO: English name",
+    "html": "<h2>Biography</h2><p>TODO: Write the biography in English.</p><h2>Research interests</h2><p>TODO: Describe the research interests.</p>"
+  },
+  "zh": {
+    "title": "TODO：中文姓名",
+    "html": "<h2>个人简介</h2><p>TODO：填写中文个人简介。</p><h2>研究方向</h2><p>TODO：介绍研究方向。</p>"
+  }
+}

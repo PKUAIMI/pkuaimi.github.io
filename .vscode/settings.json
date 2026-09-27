@@ -1,0 +1,58 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "/content/news.json"
+      ],
+      "url": "./content/schemas/news.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/content/people.json"
+      ],
+      "url": "./content/schemas/people.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/content/research.json"
+      ],
+      "url": "./content/schemas/research.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/content/publications.json"
+      ],
+      "url": "./content/schemas/publications.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/content/pages.json"
+      ],
+      "url": "./content/schemas/pages.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/content/groups.json"
+      ],
+      "url": "./content/schemas/groups.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/content/home.json"
+      ],
+      "url": "./content/schemas/home.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/content/ui.json"
+      ],
+      "url": "./content/schemas/ui.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/site.config.json"
+      ],
+      "url": "./content/schemas/site-config.schema.json"
+    }
+  ]
+}

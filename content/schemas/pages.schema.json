@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "页面路由与正文",
+  "description": "集中维护页面类型、地址和旧地址。home、profile、page 需要 en/zh 正文；新闻、成员、研究、论文与联系页面由对应内容自动生成，不填写 en/zh。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "type",
+      "path"
+    ],
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/definitions/pageId"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "home",
+          "news",
+          "people",
+          "research",
+          "publications",
+          "contact",
+          "profile",
+          "page"
+        ],
+        "description": "页面类型。六个基础页面类型各保留一个；profile 是个人主页，page 是通用内容页。"
+      },
+      "path": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/definitions/route"
+          }
+        ],
+        "description": "页面规范路径。首页必须为 /，其余页面不能使用 /；无需填写中文 /zh/ 路径。"
+      },
+      "aliases": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "$ref": "common.schema.json#/definitions/route"
+        },
+        "description": "可选旧地址列表，用于保留旧链接；没有旧地址时填 [] 或省略。不能与其他规范路径或旧地址重复。"
+      },
+      "en": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "html"
+        ],
+        "properties": {
+          "title": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "当前语言页面标题。"
+          },
+          "html": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/html"
+              }
+            ],
+            "description": "当前语言正文。首页填写实验室介绍；个人主页和通用页面填写完整正文。"
+          }
+        },
+        "description": "自定义页面或首页介绍的一个语言版本。"
+      },
+      "zh": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "html"
+        ],
+        "properties": {
+          "title": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "当前语言页面标题。"
+          },
+          "html": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/html"
+              }
+            ],
+            "description": "当前语言正文。首页填写实验室介绍；个人主页和通用页面填写完整正文。"
+          }
+        },
+        "description": "自定义页面或首页介绍的一个语言版本。"
+      }
+    },
+    "allOf": [
+      {
+        "if": {
+          "properties": {
+            "type": {
+              "enum": [
+                "home",
+                "profile",
+                "page"
+              ]
+            }
+          }
+        },
+        "then": {
+          "required": [
+            "en",
+            "zh"
+          ]
+        },
+        "else": {
+          "properties": {
+            "en": false,
+            "zh": false
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "type": {
+              "const": "home"
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "path": {
+              "const": "/"
+            }
+          }
+        },
+        "else": {
+          "properties": {
+            "path": {
+              "not": {
+                "const": "/"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

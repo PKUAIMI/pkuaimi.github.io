@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "团队成员",
+  "description": "成员按 groups.json 的分组顺序展示，同组内按此数组顺序展示。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "group",
+      "image",
+      "en",
+      "zh"
+    ],
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/definitions/id"
+      },
+      "group": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/definitions/id"
+          }
+        ],
+        "description": "成员分组 id，必须与 content/groups.json 中的一个 id 完全一致。"
+      },
+      "image": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/definitions/asset"
+          }
+        ],
+        "description": "成员头像路径；将新头像放入 public/assets/ 后填写 /assets/文件名。"
+      },
+      "profilePath": {
+        "anyOf": [
+          {
+            "$ref": "common.schema.json#/definitions/route"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "可选个人主页地址，必须对应 pages.json 中 type 为 profile 的规范 path。没有个人主页时填 null 或省略。"
+      },
+      "en": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "当前语言显示的姓名，可包含职称。没有已确认的中文名时保留英文姓名，不要猜写汉字。"
+          }
+        },
+        "description": "成员在当前语言页面上显示的名称。"
+      },
+      "zh": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "当前语言显示的姓名，可包含职称。没有已确认的中文名时保留英文姓名，不要猜写汉字。"
+          }
+        },
+        "description": "成员在当前语言页面上显示的名称。"
+      }
+    }
+  }
+}

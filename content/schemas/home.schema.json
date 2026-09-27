@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "首页配置",
+  "description": "控制首页合影、介绍配图和新闻/论文展示数量。介绍正文放在 pages.json 的 home 条目，界面文字放在 ui.json。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "hero",
+    "gallery",
+    "newsLimit",
+    "publicationLimit"
+  ],
+  "properties": {
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "original",
+        "display",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "original": {
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/asset"
+            }
+          ],
+          "description": "首页合影原图，点击大图时打开。"
+        },
+        "display": {
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/asset"
+            }
+          ],
+          "description": "首页实际显示的合影，推荐使用经过压缩的清晰图片。"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "显示图片的实际宽度，单位为像素。"
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "显示图片的实际高度，单位为像素。"
+        }
+      }
+    },
+    "gallery": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "url",
+          "altKey",
+          "captionKey"
+        ],
+        "properties": {
+          "url": {
+            "$ref": "common.schema.json#/definitions/asset"
+          },
+          "altKey": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "替代文字在 content/ui.json 中的键名；该键必须同时有 en 和 zh。"
+          },
+          "captionKey": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "图片说明在 content/ui.json 中的键名；该键必须同时有 en 和 zh。"
+          }
+        }
+      },
+      "description": "首页介绍区下方的图片，按数组顺序显示。"
+    },
+    "newsLimit": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "首页展示的最新新闻条数。"
+    },
+    "publicationLimit": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "首页展示的论文条数。"
+    }
+  }
+}

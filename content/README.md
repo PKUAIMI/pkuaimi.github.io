@@ -1,29 +1,58 @@
-# AIMI 网站内容
+# 内容文件速查
 
-本站内容于 2026-09-28 从 <https://pkuaimi.com/> 的公开 WordPress API 和网站地图迁移。所有内容文件采用 UTF-8；可以直接用代码编辑器维护。
+日常新增步骤和完整示例见 [维护指南](../docs/MAINTENANCE.md)。这些文件均为 UTF-8 JSON：数组中的一项就是一条内容，英文 `en` 与中文 `zh` 在同一项内维护。
 
-| 文件 | 内容 | 常用字段 |
-| --- | --- | --- |
-| `pages.json` | 10 个原站页面的完整正文，包括首页、联系页和 4 个成员个人主页 | `title`、`path`、`html`、`images` |
-| `news.json` | 24 条新闻，顺序与原站一致 | `title`、`bodyHtml`、`images`、`date`（可选） |
-| `people.json` | 20 位成员，保留原分组 | `name`、`group`、`image`、`profilePath`（可选） |
-| `publications.json` | 21 条实验室论文记录 | `year`、`section`、`citation`、`html`、`links` |
-| `research.json` | 4 个研究项目 | `title`、`descriptionHtml`、`images` |
-| `news.locales.json` | 按新闻 `id` 存放 `en` / `zh` 版本 | `title`、`bodyHtml` |
-| `pages.locales.json` | 按首页或个人页 `id` 存放两种语言 | `title`、`html` |
-| `people.locales.json` | 按成员 `id` 存放两种语言 | `name` |
-| `research.locales.json` | 按研究项目 `id` 存放两种语言 | `title`、`descriptionHtml` |
-| `ui.json` | 导航、按钮、提示、首页介绍及中文机构信息 | `en` / `zh` 界面文字 |
-| `media-manifest.json` | 从原站正文提取的 55 个媒体源文件 | `url`、`aliases`、`sourcePages` |
-| `media-map.json` | 原媒体地址到本地文件地址的映射 | 由素材归档步骤生成 |
-| `migration-inventory.json` | 页面覆盖清单及需要确认的原站内容差异 | `pages`、`editorialNotes` |
+## 可编辑内容
 
-**页面显示以 `*.locales.json` 为准**，原始 JSON 继续提供顺序、分组、图片、路由及迁移记录。日常修改正文请编辑本地化文件；每个条目都要同时维护 `en` 和 `zh`，构建检查会验证语言覆盖。原有双语内容已拆开，缺少的译文已补齐。英文为默认版本，中文版在 `/zh/`。论文正式引文保留原文。
+| 文件 | 每条记录的主要字段 |
+| --- | --- |
+| `news.json` | `id`、`images`、`en/zh.title`、`en/zh.bodyHtml`；可选 `date`、`dateKind` |
+| `people.json` | `id`、`group`、`image`、`profilePath`、`en/zh.name` |
+| `groups.json` | `id`、`en`、`zh`；数组顺序决定成员分组顺序 |
+| `research.json` | `id`、`images`、`en/zh.title`、`en/zh.descriptionHtml` |
+| `publications.json` | `id`、`year`、`section`、`html` |
+| `pages.json` | `id`、`type`、`path`、`aliases`；首页和正文页另有 `en/zh.title`、`en/zh.html` |
+| `home.json` | `hero`、`gallery`、`newsLimit`、`publicationLimit` |
+| `ui.json` | `en`、`zh` 两组界面文字、机构名称与地址，键名一一对应 |
+| `templates/` | 新增命令使用的 JSON 草稿模板，含待替换的 `TODO` |
 
-`html`、`bodyHtml`、`descriptionHtml` 保留链接与加粗等基本格式，已移除原页面构建器的布局、脚本、统计代码、后台登录和空社交链接。原站内链已转换为本站路径；原来指向外部论文、学术主页和新闻的链接仍然指向外部页面。新增图片可以放在 `public/assets/` 后，直接将内容中的图片路径设为 `/assets/文件名`。
+公共网址、邮箱、GitHub 与仓库链接在根目录的 `site.config.json`；中英文显示文字在本目录的 `ui.json` 中维护。
 
-新闻中的 `date` 仅记录原文明确出现的活动日期，**不是新闻发布日期**。`2026-09` 表示原文仅精确到月。没有明确日期的新闻不填写该字段，不要用图片上传日期或页面更新时间代替。
+### 通用约定
 
-原站有几处文字差异，例如李萌入组新闻的中文日期为 2026 年 4 月 1 日、英文日期为 2025 年 4 月 1 日。迁移保留原文，详情见 `migration-inventory.json`。确认正确内容后，可直接在相应本地化文件的 `en` / `zh` 中修订。
+- `id` 是稳定标识。修改标题、姓名或顺序时保留原 `id`，避免已有链接失效。
+- 新闻、成员、研究与正文页的 `en` / `zh` 都要填写。正式论文引文只写一份，在两种语言中共用。
+- `html`、`bodyHtml`、`descriptionHtml` 支持 `<p>`、`<h2>`、`<h3>`、`<a>`、`<strong>`、`<ul>` 等 HTML。JSON 字符串里的双引号写作 `\"`。
+- 图片先放进 `public/assets/`，再填写 `/assets/文件名.jpg`。新闻可以没有图；研究项目至少一张图，第一张用于首页。
+- 列表顺序由数组顺序决定，不按 `id` 或日期自动排序。成员先按 `groups.json` 分组，再按 `people.json` 中的顺序排列。
+- 不维护手写的搜索文本。论文的 `citation`、`links` 和各页面搜索索引均从正文自动生成。
 
-`migration/source/` 保存原始公开导出，`scripts/import_site.py` 可从该导出重建上述迁移数据；加 `--fetch` 可重新读取旧站。**重新导入会覆盖上述内容文件中的本地修改**，日常更新只需编辑内容文件并重新构建网站，无需重新导入。原始导出用于追溯，日常无需编辑。
+### 页面与个人主页
+
+`type` 可为 `home`、`news`、`people`、`research`、`publications`、`contact`、`profile` 或 `page`。前六种对应现有首页与栏目，`profile` 用于成员个人页，`page` 用于普通正文页。
+
+`path` 是英文规范地址，例如 `/people/jane-doe/`。中文地址自动生成 `/zh/people/jane-doe/`，不要再添加一条中文页面记录。`aliases` 保存需要继续支持的旧英文地址，没有时填 `[]`。成员的 `profilePath` 指向规范 `path`；没有个人页时填 `null`。
+
+首页 `type: "home"` 条目的 `en.html` / `zh.html` 就是 About 正文，会完整呈现。首页其他文案在 `ui.json`，图片和展示数量在 `home.json`。
+
+### 日期与论文
+
+新闻日期可写 `YYYY-MM-DD` 或 `YYYY-MM`，不知道时省略 `date`。`dateKind: "event"` 表示活动日期，`"published"` 表示有明确依据的发布日期。原站导入的日期属于活动日期，不应当作发布日期，也不要根据图片上传时间推测。
+
+论文 `year` 使用数字，例如 `2026`；`section` 只用 `AIMI` 或 `Publications Before AIMI`。作者、题名、期刊及链接都在 `html` 中编辑，搜索文本和链接列表自动提取。
+
+## 归档和来源记录
+
+以下文件用于保留旧站素材与迁移依据，普通新增内容无需修改：
+
+| 文件 | 用途 |
+| --- | --- |
+| `media-map.json` | 旧站图片地址到本站原图的映射 |
+| `media-display-map.json` | 旧站图片地址到较小显示图的映射 |
+| `media-manifest.json` | 迁移素材清单 |
+| `media-provenance.json` | 原图来源、尺寸与校验信息 |
+| `migration-inventory.json` | 原页面覆盖情况与待核对的内容差异 |
+
+[`migration/source/`](../migration/source/) 保留原始公开导出。重新运行导入工具只会生成 `migration/imported/` 下的比较材料，不会覆盖本目录。
+
+编辑后运行 `npm run validate:content`；发布前运行 `npm run verify`。错误会指出文件、条目 `id` 和需要修改的字段。

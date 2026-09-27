@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "内容字段通用定义",
+  "description": "供本地内容 Schema 引用，不直接绑定任何内容文件。",
+  "definitions": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]*$",
+      "not": {
+        "enum": [
+          "main",
+          "about",
+          "lab-welcome",
+          "primary-navigation",
+          "content-filter",
+          "year-filter",
+          "search-dialog",
+          "search-input",
+          "search-results",
+          "search-title"
+        ]
+      },
+      "description": "稳定且唯一的内容标识，仅使用小写英文、数字、连字符或下划线。发布后请勿改名，已有页面锚点依赖此值。"
+    },
+    "pageId": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        {
+          "$ref": "#/definitions/id"
+        }
+      ],
+      "description": "页面唯一标识。已有迁移页面使用正整数，新页面也可使用小写英文、数字、连字符或下划线。发布后保持不变。"
+    },
+    "nonEmptyText": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "填写非空文本。正式内容中不要保留 TODO、FIXME 或 Lorem ipsum 占位文字。"
+    },
+    "html": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "HTML 正文，可使用 <p>、<a>、<strong>、<ul> 等标签；图片使用 /assets/ 路径。填写当前语言内容，不混用双语正文。"
+    },
+    "asset": {
+      "type": "string",
+      "anyOf": [
+        {
+          "pattern": "^/assets/[^\\\\?#\\u0000-\\u001f]+$"
+        },
+        {
+          "pattern": "^https?://",
+          "format": "uri"
+        }
+      ],
+      "description": "新图片先保存到 public/assets/，此处填写 /assets/文件名。已有迁移图片的旧网址可以保留；构建会校验迁移映射和本地图片是否存在，不会自动下载新网址。"
+    },
+    "image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "$ref": "#/definitions/asset"
+        },
+        "alt": {
+          "type": "string",
+          "description": "可选图片描述。新闻和研究页面显示时使用对应语言的条目标题作为图片替代文字。"
+        }
+      }
+    },
+    "route": {
+      "type": "string",
+      "pattern": "^/(?:[^\\s\\\\?#<>\"'./][^\\s\\\\?#<>\"'/]*/)*$",
+      "description": "以 / 开头和结尾的规范目录地址，例如 /people/jane-doe/。不要写 /zh/ 前缀，中文版路径会自动生成；地址应唯一且不能使用系统保留路径。"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "id": "publication-{{slug}}",
+  "year": null,
+  "section": "AIMI",
+  "html": "<p>TODO: Authors. Paper title. <em>Journal or conference</em>. Year. <a href=\"https://doi.org/TODO\">DOI</a></p>"
+}

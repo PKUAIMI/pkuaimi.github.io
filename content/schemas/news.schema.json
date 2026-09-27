@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "实验室新闻",
+  "description": "按数组顺序展示新闻；新增新闻通常放在最前面。每条新闻集中维护 en 和 zh 两种语言。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "images",
+      "en",
+      "zh"
+    ],
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/definitions/id"
+      },
+      "date": {
+        "type": "string",
+        "pattern": "^[1-9][0-9]{3}-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12][0-9]|3[01]))?$",
+        "description": "可选真实日期：YYYY-MM-DD，或仅知道月份时填写 YYYY-MM。未知日期请省略；构建还会校验闰年和每月天数。"
+      },
+      "dateKind": {
+        "type": "string",
+        "enum": [
+          "event",
+          "published"
+        ],
+        "description": "可选日期含义：event 为活动发生日期，published 为新闻发布日期。填写时必须同时填写 date。"
+      },
+      "images": {
+        "type": "array",
+        "items": {
+          "$ref": "common.schema.json#/definitions/image"
+        },
+        "description": "新闻图片，按此数组顺序展示；无图片时填写 []。"
+      },
+      "en": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "bodyHtml"
+        ],
+        "properties": {
+          "title": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "当前语言的新闻标题。"
+          },
+          "bodyHtml": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/html"
+              }
+            ],
+            "description": "当前语言的新闻正文；不必重复标题，图片通常放到外层 images 数组。"
+          }
+        },
+        "description": "填写这一条新闻的完整单语版本。"
+      },
+      "zh": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "bodyHtml"
+        ],
+        "properties": {
+          "title": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "当前语言的新闻标题。"
+          },
+          "bodyHtml": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/html"
+              }
+            ],
+            "description": "当前语言的新闻正文；不必重复标题，图片通常放到外层 images 数组。"
+          }
+        },
+        "description": "填写这一条新闻的完整单语版本。"
+      }
+    },
+    "dependencies": {
+      "dateKind": [
+        "date"
+      ]
+    }
+  }
+}

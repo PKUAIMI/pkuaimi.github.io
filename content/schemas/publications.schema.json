@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "学术成果",
+  "description": "每条论文只维护 id、year、section、html。各分组内按数组顺序展示，首页展示数组最前面的若干条。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "year",
+      "section",
+      "html"
+    ],
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/definitions/id"
+      },
+      "year": {
+        "type": "integer",
+        "minimum": 1000,
+        "maximum": 9999,
+        "description": "四位数发表年份，不加引号；必须用真实年份替换模板中的 null。"
+      },
+      "section": {
+        "type": "string",
+        "enum": [
+          "AIMI",
+          "Publications Before AIMI"
+        ],
+        "description": "AIMI：实验室成立后的成果；Publications Before AIMI：实验室成立前的成果。"
+      },
+      "html": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/definitions/html"
+          }
+        ],
+        "description": "完整正式论文引文，可加入 DOI、论文或代码的 <a> 链接。中英文页面共用正式原文；citation 和 links 会自动提取，不要手写这些字段。"
+      }
+    }
+  }
+}

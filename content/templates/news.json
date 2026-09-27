@@ -1,0 +1,12 @@
+{
+  "id": "news-{{slug}}",
+  "images": [],
+  "en": {
+    "title": "TODO: News title",
+    "bodyHtml": "<p>TODO: Write the English news text.</p>"
+  },
+  "zh": {
+    "title": "TODO：新闻标题",
+    "bodyHtml": "<p>TODO：填写中文新闻正文。</p>"
+  }
+}
