@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--generator='jetpack-16.3-a.3'-->
+<!--Jetpack_Sitemap_Buffer_Master_XMLWriter-->
+<?xml-stylesheet type="text/xsl" href="//pkuaimi.com/sitemap-index.xsl"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+ <sitemap>
+  <loc>https://pkuaimi.com/sitemap-1.xml</loc>
+  <lastmod>2026-09-10T15:38:11Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://pkuaimi.com/image-sitemap-1.xml</loc>
+  <lastmod>2026-09-10T05:41:46Z</lastmod>
+ </sitemap>
+</sitemapindex>

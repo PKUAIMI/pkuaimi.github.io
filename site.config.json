@@ -1,0 +1,13 @@
+{
+  "url": "https://pkuaimi.github.io",
+  "name": "AIMI Lab",
+  "fullName": "Artificial Intelligence for Medical Imaging",
+  "chineseName": "北京大学医学部医学技术研究院智能医学影像实验室",
+  "institution": "Peking University Health Science Center",
+  "institute": "Institute of Medical Technology",
+  "email": "huangyx@pku.edu.cn",
+  "address": "240 Pathology Building, Peking University Medical School, No.38 Xueyuan Road, Haidian District, Beijing",
+  "github": "https://github.com/YixingHuang",
+  "repository": "https://github.com/PKUAIMI/pkuaimi.github.io",
+  "description": "The AIMI Lab at Peking University advances artificial intelligence for medical imaging, from fundamental research to clinical translation."
+}

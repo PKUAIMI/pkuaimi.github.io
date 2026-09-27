@@ -1,0 +1,24 @@
+name: Validate website
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build website
+        run: npm run build
+      - name: Validate pages and assets
+        run: npm run check
+      - name: Verify published files match source
+        run: git diff --exit-code
+# GitHub Pages already publishes main / (branch mode).
+# The build produces the committed HTML and assets at the repository root.
+# This preserves the current publishing settings and requires no admin change.

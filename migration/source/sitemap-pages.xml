@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--generator='jetpack-16.3-a.3'-->
+<!--Jetpack_Sitemap_Buffer_Page_XMLWriter-->
+<?xml-stylesheet type="text/xsl" href="//pkuaimi.com/sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+ <url>
+  <loc>https://pkuaimi.com/</loc>
+  <lastmod>2026-09-01T07:21:11Z</lastmod>
+ </url>
+ <url>
+  <loc>https://pkuaimi.com/%e5%85%b3%e4%ba%8e/people/</loc>
+  <lastmod>2026-09-10T05:14:31Z</lastmod>
+ </url>
+ <url>
+  <loc>https://pkuaimi.com/research/</loc>
+  <lastmod>2026-06-21T10:00:08Z</lastmod>
+ </url>
+ <url>
+  <loc>https://pkuaimi.com/publications/</loc>
+  <lastmod>2026-09-10T09:26:47Z</lastmod>
+ </url>
+ <url>
+  <loc>https://pkuaimi.com/news/</loc>
+  <lastmod>2026-09-10T15:38:11Z</lastmod>
+ </url>
+ <url>
+  <loc>https://pkuaimi.com/contact/</loc>
+  <lastmod>2025-11-23T14:29:01Z</lastmod>
+ </url>
+ <url>
+  <loc>https://pkuaimi.com/200-2/</loc>
+  <lastmod>2026-06-29T08:19:46Z</lastmod>
+ </url>
+ <url>
+  <loc>https://pkuaimi.com/meng-li/</loc>
+  <lastmod>2026-04-13T08:15:20Z</lastmod>
+ </url>
+ <url>
+  <loc>https://pkuaimi.com/wang-ao/</loc>
+  <lastmod>2026-06-29T04:36:34Z</lastmod>
+ </url>
+ <url>
+  <loc>https://pkuaimi.com/yixing-huang-2/</loc>
+  <lastmod>2026-09-01T07:23:49Z</lastmod>
+ </url>
+</urlset>

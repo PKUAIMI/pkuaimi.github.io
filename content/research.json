@@ -1,0 +1,54 @@
+[
+  {
+    "id": "research-1",
+    "title": "Brain metastases detection and segmentation",
+    "descriptionHtml": "<p>Major contributions：(1) prior scan to reduce false positive rate; (2) novel VSS loss to adjust sensitivity and precision; (3) dual models for human-AI interaction, high efficiency and robustness, fit well for clinical practice.</p>",
+    "images": [
+      {
+        "url": "https://pkuaimi.com/wp-content/uploads/2025/11/%E8%84%91%E8%BD%AC%E7%A7%BB%E7%98%A4%E7%9F%A2%E9%87%8F.png",
+        "alt": "脑转移瘤矢量",
+        "width": "1024",
+        "height": "324"
+      }
+    ]
+  },
+  {
+    "id": "research-2",
+    "title": "Deep learning CBCT FOV extension for adaptive radiotherapy",
+    "descriptionHtml": "",
+    "images": [
+      {
+        "url": "https://pkuaimi.com/wp-content/uploads/2025/11/FOV-extension.png",
+        "alt": "FOV extension",
+        "width": "1024",
+        "height": "254"
+      }
+    ]
+  },
+  {
+    "id": "research-3",
+    "title": "Deep Learning for Perspective Deformation Correction in Cone-Beam Computed Tomography",
+    "descriptionHtml": "",
+    "images": [
+      {
+        "url": "https://pkuaimi.com/wp-content/uploads/2025/11/GraphicalAbstract2.png",
+        "alt": "GraphicalAbstract2",
+        "width": "1024",
+        "height": "423"
+      }
+    ]
+  },
+  {
+    "id": "research-4",
+    "title": "LLM-based decision support for radiation oncology",
+    "descriptionHtml": "",
+    "images": [
+      {
+        "url": "https://pkuaimi.com/wp-content/uploads/2025/11/LLMDecisionSupport.png",
+        "alt": "LLMDecisionSupport",
+        "width": "1024",
+        "height": "330"
+      }
+    ]
+  }
+]

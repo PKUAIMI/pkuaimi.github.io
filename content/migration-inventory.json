@@ -1,0 +1,86 @@
+{
+  "sourceOrigin": "https://pkuaimi.com",
+  "targetOrigin": "https://pkuaimi.github.io",
+  "sourceSnapshotDate": "2026-09-28",
+  "pageCount": 10,
+  "postCount": 0,
+  "newsCount": 24,
+  "peopleCount": 20,
+  "publicationCount": 21,
+  "researchCount": 4,
+  "mediaCount": 55,
+  "sitemapPageCount": 10,
+  "missingSitemapUrls": [],
+  "pages": [
+    {
+      "id": 1084,
+      "title": "Yixing Huang",
+      "path": "/yixing-huang-2/",
+      "sourceUrl": "https://pkuaimi.com/yixing-huang-2/"
+    },
+    {
+      "id": 1001,
+      "title": "Ao Wang",
+      "path": "/wang-ao/",
+      "sourceUrl": "https://pkuaimi.com/wang-ao/"
+    },
+    {
+      "id": 772,
+      "title": "Meng Li",
+      "path": "/meng-li/",
+      "sourceUrl": "https://pkuaimi.com/meng-li/"
+    },
+    {
+      "id": 200,
+      "title": "Haijun Yu",
+      "path": "/200-2/",
+      "sourceUrl": "https://pkuaimi.com/200-2/"
+    },
+    {
+      "id": 97,
+      "title": "Contact",
+      "path": "/contact/",
+      "sourceUrl": "https://pkuaimi.com/contact/"
+    },
+    {
+      "id": 95,
+      "title": "News",
+      "path": "/news/",
+      "sourceUrl": "https://pkuaimi.com/news/"
+    },
+    {
+      "id": 93,
+      "title": "Publications",
+      "path": "/publications/",
+      "sourceUrl": "https://pkuaimi.com/publications/"
+    },
+    {
+      "id": 88,
+      "title": "Research Projects",
+      "path": "/research/",
+      "sourceUrl": "https://pkuaimi.com/research/"
+    },
+    {
+      "id": 41,
+      "title": "People",
+      "path": "/%e5%85%b3%e4%ba%8e/people/",
+      "sourceUrl": "https://pkuaimi.com/%e5%85%b3%e4%ba%8e/people/"
+    },
+    {
+      "id": 1,
+      "title": "AIMI",
+      "path": "/",
+      "sourceUrl": "https://pkuaimi.com/"
+    }
+  ],
+  "editorialNotes": [
+    "The original People category is spelled Falculty; original text retained in the content data.",
+    "Meng Li joining news says 2026-04-01 in Chinese and 2025-04-01 in English. Both original statements retained; no event date assigned.",
+    "The Contact page lists 240 Pathology Building, No.38 Xueyuan Road; three member profiles also contain the address 北京市昌平区北大产业园12号楼405 and weekday office hours. All original addresses retained.",
+    "The Physics in Medicine & Biology news English headline says provisional acceptance, while its Chinese headline and English body say accepted. Original wording retained.",
+    "The news page has no per-item publication timestamps. Only dates stated explicitly within event text are included, with dateKind=event. Source order is retained.",
+    "Original English and Chinese member-name capitalization is retained. Names and spellings are not silently standardized.",
+    "WordPress editor login, empty social-media placeholder links, theme layout, scripts, and analytics are omitted from the public static content.",
+    "External research, DOI, paper, institutional news, WeChat, GitHub and scholar links remain external. No external sites have been cloned."
+  ]
+}
