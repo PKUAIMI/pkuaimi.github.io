@@ -59,12 +59,41 @@ if (!fs.existsSync(dist)) {
   process.exit(1);
 }
 const config = readJSON('site.config.json');
+const ui = readJSON('content/ui.json');
 const site = new URL(config.url);
 const pages = readJSON('content/pages.json');
 const news = readJSON('content/news.json');
 const people = readJSON('content/people.json');
 const publications = readJSON('content/publications.json');
 const projects = readJSON('content/research.json');
+const locales = [{ key: 'en', htmlLang: 'en', prefix: '' }, { key: 'zh', htmlLang: 'zh-CN', prefix: '/zh' }];
+const localizedPath = (route, locale) => locale.prefix + route;
+const basePath = route => route.startsWith('/zh/') ? route.slice(3) : route;
+const localization = {};
+for (const name of ['news', 'pages', 'research', 'people']) {
+  const file = `content/${name}.locales.json`;
+  check(fs.existsSync(path.join(root, file)), `Missing required localization file ${file}`);
+  localization[name] = fs.existsSync(path.join(root, file)) ? readJSON(file) : {};
+}
+const translated = (name, item, locale) => localization[name][String(item.id)]?.[locale.key] || {};
+const sourceProfiles = pages.filter(page => !['/', '/contact/'].includes(page.path) && !['news', 'people', 'publications', 'research'].includes(page.slug));
+for (const [name, records, fields] of [
+  ['news', news, ['title', 'bodyHtml']],
+  ['research', projects, ['title', 'descriptionHtml']],
+  ['people', people, ['name']],
+  ['pages', pages.filter(page => page.path === '/' || sourceProfiles.includes(page)), ['title', 'html']]
+]) {
+  for (const item of records) for (const locale of locales) {
+    const entry = translated(name, item, locale);
+    for (const field of fields) {
+      // Three imported research projects contain only a title and figure. An
+      // explicit empty description preserves that source without inventing prose.
+      const mayBeEmpty = field === 'descriptionHtml' && !textHTML(item.descriptionHtml || '').trim();
+      check(typeof entry[field] === 'string' && (mayBeEmpty || entry[field].trim().length > 0), `${name} ${item.id}: missing ${locale.key}.${field} localization`);
+    }
+  }
+  for (const id of Object.keys(localization[name])) check(records.some(item => String(item.id) === id), `${name} localization ${id}: no matching editable content record`);
+}
 const inventory = readJSON('content/migration-inventory.json');
 const manifest = readJSON('content/media-manifest.json');
 const media = readJSON('content/media-map.json');
@@ -150,11 +179,40 @@ for (const document of documents.values()) {
   check(document.elements.filter(n => n.tag === 'h1').length === 1, `${document.relative}: expected exactly one h1`);
   check(document.elements.filter(n => n.tag === 'main').length === 1, `${document.relative}: expected one main landmark`);
   check(document.ids.has('main'), `${document.relative}: missing #main skip-link target`);
-  canonical(document);
+  const route = canonical(document);
+  const locale = document.relative.startsWith('zh/') ? locales[1] : locales[0];
+  const otherLocale = locales.find(item => item.key !== locale.key);
+  const htmlElement = document.elements.find(node => node.tag === 'html');
+  check(htmlElement?.attrs.lang === locale.htmlLang, `${document.relative}: expected html lang=${locale.htmlLang}`);
+  const descriptions = document.elements.filter(node => node.tag === 'meta' && node.attrs.name === 'description');
+  check(descriptions.length === 1 && descriptions[0].attrs.content?.trim().length > 0, `${document.relative}: expected one nonempty description`);
+  if (route) {
+    check(route.startsWith('/zh/') === (locale.key === 'zh'), `${document.relative}: canonical URL has the wrong locale`);
+    const cleanRoute = basePath(route);
+    const switches = document.elements.filter(node => node.tag === 'a' && 'data-language-switch' in node.attrs);
+    check(switches.length === 1, `${document.relative}: expected one language switch`);
+    if (switches[0]) check(new URL(switches[0].attrs.href, site).pathname === localizedPath(cleanRoute, otherLocale), `${document.relative}: language switch does not target the same page in ${otherLocale.key}`);
+    const alternates = document.elements.filter(node => node.tag === 'link' && node.attrs.rel === 'alternate' && node.attrs.hreflang);
+    check(alternates.length === 3, `${document.relative}: expected en, zh-CN and x-default alternate URLs`);
+    for (const [language, alternateRoute] of [['en', cleanRoute], ['zh-CN', localizedPath(cleanRoute, locales[1])], ['x-default', cleanRoute]]) {
+      const matches = alternates.filter(node => node.attrs.hreflang === language);
+      check(matches.length === 1 && matches[0].attrs.href === new URL(alternateRoute, site).href, `${document.relative}: incorrect ${language} alternate URL`);
+    }
+    const openGraphURL = document.elements.filter(node => node.tag === 'meta' && node.attrs.property === 'og:url');
+    check(openGraphURL.length === 1 && openGraphURL[0].attrs.content === new URL(route, site).href, `${document.relative}: Open Graph URL differs from canonical URL`);
+  }
+  const main = document.elements.find(node => node.tag === 'main');
+  if (locale.key === 'en' && main) check(!/[\u3400-\u9fff]/u.test(text(main)), `${document.relative}: English main content still contains untranslated Chinese text`);
   for (const [id, entries] of document.ids) check(entries.length === 1, `${document.relative}: duplicate id ${id}`);
   for (const node of document.elements) {
     for (const attribute of ['href', 'src', 'poster']) {
       if (attribute in node.attrs) validateURL(node.attrs[attribute], location, `${document.relative} <${node.tag}> ${attribute}`, { image: node.tag === 'img' && attribute === 'src' });
+    }
+    if (node.tag === 'a' && node.attrs.href && !('data-language-switch' in node.attrs)) {
+      try {
+        const target = new URL(node.attrs.href, location);
+        if (target.origin === site.origin && documentForPath(target.pathname)) check(target.pathname.startsWith('/zh/') === (locale.key === 'zh'), `${document.relative}: navigation changes language unexpectedly: ${node.attrs.href}`);
+      } catch { /* Invalid URLs are reported by validateURL above. */ }
     }
     if (node.tag === 'img') {
       check('alt' in node.attrs, `${document.relative}: image missing alt attribute`);
@@ -179,70 +237,94 @@ for (const document of documents.values()) {
 check(pages.length >= inventory.pages.length, 'Editable pages contain fewer pages than the initial migration; original migrated pages must remain available.');
 check(inventory.missingSitemapUrls.length === 0, 'Migration inventory has missing sitemap URLs.');
 const canonicalPages = new Set();
+const pageRoutes = new Map();
+const expectedDocuments = new Set(['404.html', 'zh/404.html']);
+const relativeForRoute = route => unquote(route).replace(/^\/+/, '') + (route.endsWith('/') ? 'index.html' : '');
 for (const page of pages) {
-  const document = documentForPath(page.path);
-  check(!!document, `Source page ${page.title}: original pathname ${page.path} is missing`);
-  if (!document) continue;
-  const route = canonical(document);
-  if (route) { canonicalPages.add(route); check(!!documentForPath(route), `Source page ${page.title}: canonical route ${route} is missing`); }
-  // Structured listings are validated against their current records below. Their
-  // imported pages.json image lists are historical, not a second editable source.
+  const original = documentForPath(page.path);
+  check(!!original, `Source page ${page.title}: original pathname ${page.path} is missing`);
+  if (!original) continue;
+  const route = canonical(original);
+  if (!route) continue;
+  pageRoutes.set(page.id, route);
+  expectedDocuments.add(relativeForRoute(page.path));
+  // Imported media remains authoritative even when its surrounding prose has
+  // separate translations. Structured listing media is checked per record below.
   const structuredListing = ['news', 'people', 'publications', 'research'].includes(page.slug);
-  if (!structuredListing) {
-    const currentSource = parseHTML(page.html);
-    for (const image of currentSource.elements.filter(node => node.tag === 'img' && node.attrs.src)) assertImage(document.document, image.attrs.src, `Source page ${page.title}`);
-    // HTML is authoritative; imported .text is only a source snapshot.
-    if (!['/', '/contact/'].includes(page.path)) assertContent(document.document, text(currentSource.document), `Profile ${page.title}`);
+  for (const locale of locales) {
+    const translatedRoute = localizedPath(route, locale);
+    canonicalPages.add(translatedRoute);
+    expectedDocuments.add(relativeForRoute(translatedRoute));
+    const document = documentForPath(translatedRoute);
+    check(!!document, `Source page ${page.title}: ${locale.key} canonical route ${translatedRoute} is missing`);
+    if (!document) continue;
+    check(canonical(document) === translatedRoute, `${translatedRoute}: canonical points to a different page`);
+    if (!structuredListing) {
+      const currentSource = parseHTML(page.html);
+      for (const image of currentSource.elements.filter(node => node.tag === 'img' && node.attrs.src)) assertImage(document.document, image.attrs.src, `${locale.key} source page ${page.title}`);
+      const entry = translated('pages', page, locale);
+      if (sourceProfiles.includes(page)) assertContent(document.document, textHTML(entry.html || ''), `${locale.key} profile ${page.title}`);
+      if (page.path === '/') {
+        const paragraphs = parseHTML(entry.html || '').elements.filter(node => node.tag === 'p' && normalized(text(node)).length > 150);
+        check(paragraphs.length > 0, `${locale.key} homepage: localized introduction is missing`);
+        for (const paragraph of paragraphs) assertContent(document.document, text(paragraph), `${locale.key} homepage introduction`);
+      }
+    }
   }
 }
-check(canonicalPages.size === pages.length, 'Two source pages resolve to the same canonical page.');
+check(canonicalPages.size === pages.length * locales.length, 'Two source pages resolve to the same canonical page.');
+check(documents.size === expectedDocuments.size, `Expected ${expectedDocuments.size} HTML files across both languages and legacy paths, found ${documents.size}.`);
+for (const relative of expectedDocuments) check(documents.has(relative), `Missing generated page ${relative}`);
 for (const source of inventory.pages) check(pages.some(page => page.id === source.id && unquote(page.path) === unquote(source.path)), `Migration inventory page ${source.id} / ${source.title} has been dropped.`);
 
-const newsDocument = documentForPath('/news/');
-const peopleDocument = documentForPath('/people/');
-const publicationDocument = documentForPath('/publications/');
-const researchDocument = documentForPath('/research/');
-for (const [records, doc, className, label] of [[news, newsDocument, 'news-entry', 'news'], [people, peopleDocument, 'person-card', 'people'], [publications, publicationDocument, 'publication-item', 'publications'], [projects, researchDocument, 'project-entry', 'research']]) {
-  check(!!doc, `Missing ${label} listing page`);
-  if (doc) check(doc.elements.filter(n => hasClass(n, className)).length === records.length, `${label}: rendered count differs from ${records.length} editable records`);
-  check(new Set(records.map(record => record.id)).size === records.length, `${label}: duplicate content record ids`);
-}
-for (const item of news) {
-  const node = recordNode(newsDocument, item, `News ${item.id}`);
-  assertContent(node, textHTML(item.bodyHtml), `News ${item.id}`);
-  for (const image of item.images || []) assertImage(node, image.url, `News ${item.id}`);
-}
-for (const person of people) {
-  const node = recordNode(peopleDocument, person, `Person ${person.name}`);
-  assertContent(node, person.name, `Person ${person.name}`);
-  assertImage(node, person.image, `Person ${person.name}`);
-  if (person.profilePath && node) {
-    const original = documentForPath(person.profilePath);
-    check(!!original, `Person ${person.name}: missing original profile path`);
-    if (original) check(node.attrs.href === canonical(original), `Person ${person.name}: profile card links to the wrong person`);
+for (const [records, label] of [[news, 'news'], [people, 'people'], [publications, 'publications'], [projects, 'research']]) check(new Set(records.map(record => record.id)).size === records.length, `${label}: duplicate content record ids`);
+for (const locale of locales) {
+  const newsDocument = documentForPath(localizedPath('/news/', locale));
+  const peopleDocument = documentForPath(localizedPath('/people/', locale));
+  const publicationDocument = documentForPath(localizedPath('/publications/', locale));
+  const researchDocument = documentForPath(localizedPath('/research/', locale));
+  for (const [records, doc, className, label] of [[news, newsDocument, 'news-entry', 'news'], [people, peopleDocument, 'person-card', 'people'], [publications, publicationDocument, 'publication-item', 'publications'], [projects, researchDocument, 'project-entry', 'research']]) {
+    check(!!doc, `Missing ${locale.key} ${label} listing page`);
+    if (doc) check(doc.elements.filter(node => hasClass(node, className)).length === records.length, `${locale.key} ${label}: rendered count differs from ${records.length} editable records`);
   }
-}
-for (const publication of publications) {
-  const node = recordNode(publicationDocument, publication, `Publication ${publication.id}`);
-  assertContent(node, publication.citation, `Publication ${publication.id}`);
-  for (const link of publication.links || []) check(descendants(node).some(n => n.tag === 'a' && n.attrs.href === link.url), `Publication ${publication.id}: missing citation link ${link.url}`);
-}
-for (const project of projects) {
-  const node = recordNode(researchDocument, project, `Research ${project.id}`);
-  assertContent(node, project.title, `Research ${project.id} title`);
-  assertContent(node, textHTML(project.descriptionHtml), `Research ${project.id} description`);
-  for (const image of project.images || []) assertImage(node, image.url, `Research ${project.id}`);
-}
-const home = documentForPath('/');
-const sourceHome = pages.find(page => page.path === '/');
-if (home && sourceHome) {
-  const paragraphs = parseHTML(sourceHome.html).elements.filter(n => n.tag === 'p' && normalized(text(n)).length > 150);
-  for (const paragraph of paragraphs) assertContent(home.document, text(paragraph), 'Homepage introduction');
-}
-const contact = documentForPath('/contact/');
-if (contact) {
-  assertContent(contact.document, config.address, 'Contact address');
-  check(contact.elements.some(n => n.tag === 'a' && n.attrs.href === 'mailto:' + config.email), 'Contact page is missing the email action.');
+  for (const item of news) {
+    const entry = translated('news', item, locale);
+    const node = recordNode(newsDocument, item, `${locale.key} news ${item.id}`);
+    assertContent(node, entry.title || '', `${locale.key} news ${item.id} title`);
+    assertContent(node, textHTML(entry.bodyHtml || ''), `${locale.key} news ${item.id} body`);
+    for (const image of item.images || []) assertImage(node, image.url, `${locale.key} news ${item.id}`);
+  }
+  for (const person of people) {
+    const entry = translated('people', person, locale);
+    const node = recordNode(peopleDocument, person, `${locale.key} person ${person.name}`);
+    assertContent(node, entry.name || '', `${locale.key} person ${person.name}`);
+    assertImage(node, person.image, `${locale.key} person ${person.name}`);
+    if (person.profilePath && node) {
+      const original = documentForPath(person.profilePath);
+      check(!!original, `Person ${person.name}: missing original profile path`);
+      if (original) check(node.attrs.href === localizedPath(canonical(original), locale), `${locale.key} person ${person.name}: profile card links to the wrong person or language`);
+    }
+  }
+  for (const publication of publications) {
+    const node = recordNode(publicationDocument, publication, `${locale.key} publication ${publication.id}`);
+    // Official publication citations stay unchanged in both localized interfaces.
+    assertContent(node, publication.citation, `${locale.key} publication ${publication.id}`);
+    for (const link of publication.links || []) check(descendants(node).some(n => n.tag === 'a' && n.attrs.href === link.url), `${locale.key} publication ${publication.id}: missing citation link ${link.url}`);
+  }
+  for (const project of projects) {
+    const entry = translated('research', project, locale);
+    const node = recordNode(researchDocument, project, `${locale.key} research ${project.id}`);
+    assertContent(node, entry.title || '', `${locale.key} research ${project.id} title`);
+    assertContent(node, textHTML(entry.descriptionHtml || ''), `${locale.key} research ${project.id} description`);
+    for (const image of project.images || []) assertImage(node, image.url, `${locale.key} research ${project.id}`);
+  }
+  const contact = documentForPath(localizedPath('/contact/', locale));
+  if (contact) {
+    assertContent(contact.document, locale.key === 'en' ? config.address : ui.zh.address, `${locale.key} contact address`);
+    const address = contact.elements.find(node => node.tag === 'address');
+    check(!!address && text(address).trim().length > 0, `${locale.key} contact page: missing address`);
+    check(contact.elements.some(n => n.tag === 'a' && n.attrs.href === 'mailto:' + config.email), `${locale.key} contact page is missing the email action.`);
+  }
 }
 
 for (const item of manifest) {
@@ -252,22 +334,51 @@ for (const item of manifest) {
     check(!!file && fs.statSync(file).size > 0, `Media manifest: original asset missing or empty ${media[item.url]}`);
   }
 }
-const search = readJSON('dist/search-index.json');
-for (const record of search) validateURL(record.url, site, `Search result ${record.title}`);
-for (const item of news) {
-  const record = search.find(record => record.url === '/news/#' + item.id);
-  check(!!record, `News ${item.id}: missing from search index`);
-  if (record) check(normalized(record.text) === normalized(textHTML(item.bodyHtml)), `News ${item.id}: search text is out of sync with its current bodyHtml`);
-}
-for (const item of publications) check(search.some(record => record.url === '/publications/#' + item.id), `Publication ${item.id}: missing from search index`);
-for (const page of pages) {
-  const document = documentForPath(page.path);
-  if (!document) continue;
-  const route = canonical(document);
-  if (!['/news/', '/publications/'].includes(route)) {
-    const record = search.find(record => record.url === route);
-    check(!!record, `Page ${route}: missing from search index`);
-    if (record) check(normalized(record.text) === normalized(textHTML(page.html)), `Page ${route}: search text is out of sync with its current html`);
+for (const locale of locales) {
+  const searchFile = `dist${locale.prefix}/search-index.json`;
+  check(fs.existsSync(path.join(root, searchFile)), `Missing ${locale.key} search index`);
+  if (!fs.existsSync(path.join(root, searchFile))) continue;
+  const search = readJSON(searchFile);
+  check(new Set(search.map(record => record.url)).size === search.length, `${locale.key} search index: duplicate result URLs`);
+  for (const record of search) {
+    validateURL(record.url, site, `${locale.key} search result ${record.title}`);
+    check(record.url.startsWith('/zh/') === (locale.key === 'zh'), `${locale.key} search result ${record.title}: wrong language URL`);
+    check(typeof record.title === 'string' && record.title.trim().length > 0 && typeof record.text === 'string' && record.text.trim().length > 0, `${locale.key} search result ${record.url}: missing title or text`);
+  }
+  for (const item of news) {
+    const entry = translated('news', item, locale);
+    const record = search.find(record => record.url === localizedPath('/news/#' + item.id, locale));
+    check(!!record, `${locale.key} news ${item.id}: missing from search index`);
+    if (record) {
+      check(normalized(record.title) === normalized(entry.title || ''), `${locale.key} news ${item.id}: search title is out of sync with its localized title`);
+      check(normalized(record.text) === normalized(textHTML(entry.bodyHtml || '')), `${locale.key} news ${item.id}: search text is out of sync with its localized bodyHtml`);
+    }
+  }
+  for (const item of publications) {
+    const record = search.find(record => record.url === localizedPath('/publications/#' + item.id, locale));
+    check(!!record, `${locale.key} publication ${item.id}: missing from search index`);
+    if (record) check(normalized(record.text).includes(normalized(item.citation)), `${locale.key} publication ${item.id}: search text is missing the original citation`);
+  }
+  for (const page of pages) {
+    const route = pageRoutes.get(page.id);
+    if (!route || ['/news/', '/publications/'].includes(route)) continue;
+    const translatedRoute = localizedPath(route, locale);
+    const record = search.find(record => record.url === translatedRoute);
+    check(!!record, `${locale.key} page ${translatedRoute}: missing from search index`);
+    if (!record) continue;
+    const document = documentForPath(translatedRoute);
+    const entry = translated('pages', page, locale);
+    if (sourceProfiles.includes(page)) check(normalized(record.text).includes(normalized(textHTML(entry.html || ''))), `${locale.key} profile ${page.title}: localized content missing from search index`);
+    if (route === '/') {
+      for (const paragraph of parseHTML(entry.html || '').elements.filter(node => node.tag === 'p' && normalized(text(node)).length > 150)) check(normalized(record.text).includes(normalized(text(paragraph))), `${locale.key} homepage: localized introduction missing from search index`);
+    }
+    if (route === '/contact/') {
+      const address = document?.elements.find(node => node.tag === 'address');
+      if (address) check(normalized(record.text).includes(normalized(text(address))), `${locale.key} contact: address missing from search index`);
+      check(record.text.includes(config.email), `${locale.key} contact: email missing from search index`);
+    }
+    if (route === '/people/') for (const person of people) check(normalized(record.text).includes(normalized(translated('people', person, locale).name || '')), `${locale.key} person ${person.id}: missing from people search text`);
+    if (route === '/research/') for (const project of projects) check(normalized(record.text).includes(normalized(textHTML(translated('research', project, locale).descriptionHtml || ''))), `${locale.key} research ${project.id}: missing from research search text`);
   }
 }
 const sitemap = fs.readFileSync(path.join(dist, 'sitemap.xml'), 'utf8');
@@ -285,5 +396,5 @@ if (errors.length) {
 } else {
   console.log(`Passed ${checks} checks across ${documents.size} HTML files, including all ${pages.length} source pages and legacy paths.`);
   console.log(`Verified ${news.length} news items, ${people.length} people, ${publications.length} publications, ${projects.length} projects, and ${manifest.length} archived media assets.`);
-  console.log('Content preservation, links, anchors, image coverage, search, metadata and sitemap are valid.');
+  console.log('Localized content, language navigation, links, anchors, image coverage, search, metadata and sitemap are valid.');
 }

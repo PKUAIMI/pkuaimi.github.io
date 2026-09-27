@@ -1,0 +1,162 @@
+{
+  "person-1": {
+    "en": {
+      "name": "Asst. Prof. Dr.-Ing. Yixing Huang"
+    },
+    "zh": {
+      "name": "黄益星（助理教授、工学博士）"
+    }
+  },
+  "person-2": {
+    "en": {
+      "name": "Dr. Haijun Yu"
+    },
+    "zh": {
+      "name": "余海军博士"
+    }
+  },
+  "person-3": {
+    "en": {
+      "name": "Dr. Meng Li"
+    },
+    "zh": {
+      "name": "李萌博士"
+    }
+  },
+  "person-4": {
+    "en": {
+      "name": "YiKuang YuLuo"
+    },
+    "zh": {
+      "name": "余罗一匡"
+    }
+  },
+  "person-5": {
+    "en": {
+      "name": "ZiWei Dong"
+    },
+    "zh": {
+      "name": "董子维"
+    }
+  },
+  "person-6": {
+    "en": {
+      "name": "Ao Wang"
+    },
+    "zh": {
+      "name": "王奥"
+    }
+  },
+  "person-7": {
+    "en": {
+      "name": "ZuoDong Zhong"
+    },
+    "zh": {
+      "name": "钟祚栋"
+    }
+  },
+  "person-8": {
+    "en": {
+      "name": "ShuangYang Zhong"
+    },
+    "zh": {
+      "name": "钟双阳"
+    }
+  },
+  "person-9": {
+    "en": {
+      "name": "JiaChen Tang"
+    },
+    "zh": {
+      "name": "唐佳晨"
+    }
+  },
+  "person-10": {
+    "en": {
+      "name": "YuJie Liu"
+    },
+    "zh": {
+      "name": "刘雨洁"
+    }
+  },
+  "person-11": {
+    "en": {
+      "name": "YuWen Zhang"
+    },
+    "zh": {
+      "name": "张玉雯"
+    }
+  },
+  "person-12": {
+    "en": {
+      "name": "CuoMu SuoLang"
+    },
+    "zh": {
+      "name": "索朗措姆"
+    }
+  },
+  "person-13": {
+    "en": {
+      "name": "YiHe Wei"
+    },
+    "zh": {
+      "name": "魏一禾"
+    }
+  },
+  "person-14": {
+    "en": {
+      "name": "SiYuan Mei"
+    },
+    "zh": {
+      "name": "梅思远"
+    }
+  },
+  "person-15": {
+    "en": {
+      "name": "Jia Wei"
+    },
+    "zh": {
+      "name": "魏佳"
+    }
+  },
+  "person-16": {
+    "en": {
+      "name": "ZiHao Wang"
+    },
+    "zh": {
+      "name": "王子豪"
+    }
+  },
+  "person-17": {
+    "en": {
+      "name": "YuChen Yang"
+    },
+    "zh": {
+      "name": "杨雨辰"
+    }
+  },
+  "person-18": {
+    "en": {
+      "name": "Rui Liu"
+    },
+    "zh": {
+      "name": "Rui Liu"
+    }
+  },
+  "person-19": {
+    "en": {
+      "name": "ChaoLiang He"
+    },
+    "zh": {
+      "name": "何朝良"
+    }
+  },
+  "person-20": {
+    "en": {
+      "name": "Song Ni"
+    },
+    "zh": {
+      "name": "Song Ni"
+    }
+  }
+}

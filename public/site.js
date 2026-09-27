@@ -1,5 +1,14 @@
 (() => {
   document.documentElement.classList.remove('no-js');
+  const language = document.documentElement.dataset.language;
+  const messages = JSON.parse(document.getElementById('ui-messages').textContent);
+  const languageSwitch = document.querySelector('[data-language-switch]');
+  if (languageSwitch) {
+    const target = languageSwitch.getAttribute('href');
+    const updateLanguageLink = () => { languageSwitch.href = target + location.hash; };
+    updateLanguageLink();
+    window.addEventListener('hashchange', updateLanguageLink);
+  }
   const menu = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-nav-links]');
   const desktop = window.matchMedia('(min-width: 901px)');
@@ -8,7 +17,7 @@
     menu.setAttribute('aria-expanded', String(open));
     nav.classList.toggle('is-open', open);
     const label = menu.querySelector('[data-menu-label]');
-    if (label) label.textContent = open ? 'Close' : 'Menu';
+    if (label) label.textContent = open ? messages.menuClose : messages.menu;
     if (restoreFocus) menu.focus();
   };
   menu?.addEventListener('click', () => setMenuOpen(menu.getAttribute('aria-expanded') !== 'true'));
@@ -58,7 +67,7 @@
     wrapper.className = 'table-scroll';
     wrapper.tabIndex = 0;
     wrapper.setAttribute('role', 'region');
-    wrapper.setAttribute('aria-label', 'Scrollable table');
+    wrapper.setAttribute('aria-label', messages.scrollableTable);
     table.before(wrapper); wrapper.append(table);
   });
 
@@ -73,7 +82,7 @@
   let previousOverflow;
   let searchVersion = 0;
   const getIndex = () => {
-    if (!indexRequest) indexRequest = fetch('/search-index.json')
+    if (!indexRequest) indexRequest = fetch(language === 'zh' ? '/zh/search-index.json' : '/search-index.json')
       .then(response => { if (!response.ok) throw new Error('Unable to load search'); return response.json(); })
       .then(data => (index = data))
       .catch(error => {indexRequest = undefined; throw error;});
@@ -83,16 +92,16 @@
     const version = ++searchVersion;
     const query = input.value.trim().toLocaleLowerCase();
     results.replaceChildren();
-    if (!query) {status.textContent = 'Search people, research, news and publications. 支持中文搜索。'; return;}
-    status.textContent = 'Searching…';
+    if (!query) {status.textContent = messages.searchHint; return;}
+    status.textContent = messages.searching;
     try { await getIndex(); } catch {
-      if (version === searchVersion) status.textContent = 'Search could not load. Please try again, or use the main navigation.';
+      if (version === searchVersion) status.textContent = messages.searchError;
       return;
     }
     if (version !== searchVersion) return;
     const terms = query.split(/\s+/).filter(Boolean);
     const matches = index.filter(item => terms.every(term => `${item.title} ${item.text}`.toLocaleLowerCase().includes(term))).slice(0,30);
-    status.textContent = matches.length ? `${matches.length} ${matches.length === 1 ? 'result' : 'results'}` : 'No matching results. Try another name or keyword.';
+    status.textContent = matches.length ? `${matches.length} ${matches.length === 1 ? messages.resultSingular : messages.resultPlural}` : messages.searchEmpty;
     for (const item of matches) {
       const li = document.createElement('li');
       const a = document.createElement('a'); a.href = item.url;
