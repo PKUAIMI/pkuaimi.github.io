@@ -1,19 +1,29 @@
 (() => {
+  document.documentElement.classList.remove('no-js');
   const menu = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-nav-links]');
-  menu?.addEventListener('click', () => {
-    const open = menu.getAttribute('aria-expanded') !== 'true';
+  const desktop = window.matchMedia('(min-width: 901px)');
+  const setMenuOpen = (open, restoreFocus = false) => {
+    if (!menu || !nav) return;
     menu.setAttribute('aria-expanded', String(open));
     nav.classList.toggle('is-open', open);
-    menu.querySelector('[data-menu-label]').textContent = open ? 'Close' : 'Menu';
-  });
+    const label = menu.querySelector('[data-menu-label]');
+    if (label) label.textContent = open ? 'Close' : 'Menu';
+    if (restoreFocus) menu.focus();
+  };
+  menu?.addEventListener('click', () => setMenuOpen(menu.getAttribute('aria-expanded') !== 'true'));
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && menu?.getAttribute('aria-expanded') === 'true') {
-      menu.click(); menu.focus();
+      event.preventDefault();
+      setMenuOpen(false, true);
     }
   });
-  window.matchMedia('(min-width: 761px)').addEventListener('change', ({matches}) => {
-    if (matches && menu?.getAttribute('aria-expanded') === 'true') menu.click();
+  nav?.addEventListener('click', event => {
+    if (event.target.closest('a') && !desktop.matches) setMenuOpen(false);
+  });
+  desktop.addEventListener('change', ({matches}) => {
+    const focusWasInNav = nav?.contains(document.activeElement);
+    setMenuOpen(false, !matches && focusWasInNav);
   });
 
   const filter = document.querySelector('[data-filter]');
@@ -60,6 +70,8 @@
   let index;
   let indexRequest;
   let opener;
+  let previousOverflow;
+  let searchVersion = 0;
   const getIndex = () => {
     if (!indexRequest) indexRequest = fetch('/search-index.json')
       .then(response => { if (!response.ok) throw new Error('Unable to load search'); return response.json(); })
@@ -68,15 +80,19 @@
     return indexRequest;
   };
   const search = async () => {
+    const version = ++searchVersion;
     const query = input.value.trim().toLocaleLowerCase();
     results.replaceChildren();
     if (!query) {status.textContent = 'Search people, research, news and publications. 支持中文搜索。'; return;}
     status.textContent = 'Searching…';
-    try { await getIndex(); } catch { status.textContent = 'Search could not load. Please try again, or use the main navigation.'; return; }
-    if (query !== input.value.trim().toLocaleLowerCase()) return;
+    try { await getIndex(); } catch {
+      if (version === searchVersion) status.textContent = 'Search could not load. Please try again, or use the main navigation.';
+      return;
+    }
+    if (version !== searchVersion) return;
     const terms = query.split(/\s+/).filter(Boolean);
     const matches = index.filter(item => terms.every(term => `${item.title} ${item.text}`.toLocaleLowerCase().includes(term))).slice(0,30);
-    status.textContent = matches.length ? `${matches.length} results` : 'No matching results. Try another name or keyword.';
+    status.textContent = matches.length ? `${matches.length} ${matches.length === 1 ? 'result' : 'results'}` : 'No matching results. Try another name or keyword.';
     for (const item of matches) {
       const li = document.createElement('li');
       const a = document.createElement('a'); a.href = item.url;
@@ -89,8 +105,11 @@
     }
   };
   document.querySelectorAll('[data-search-open]').forEach(button => button.addEventListener('click', () => {
+    if (dialog.open) return;
     opener = button;
+    setMenuOpen(false);
     dialog.showModal();
+    previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     input.focus();
     getIndex().catch(() => {});
@@ -98,6 +117,10 @@
   dialog.addEventListener('keydown', event => {if (event.key === 'Escape') {event.preventDefault();event.stopPropagation();dialog.close();}});
   dialog.querySelector('[data-search-close]').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => {if(event.target === dialog) {const rect=dialog.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();}});
-  dialog.addEventListener('close', () => {document.body.style.overflow = '';opener?.focus();});
+  dialog.addEventListener('close', () => {
+    document.body.style.overflow = previousOverflow;
+    const target = opener?.getClientRects().length ? opener : menu;
+    target?.focus();
+  });
   input.addEventListener('input', search);
 })();
