@@ -132,7 +132,7 @@ function assertContent(node, expected, label) {
   if (node) check(normalized(text(node)).includes(normalized(expected)), `${label}: original text is missing or changed`);
 }
 function assertImage(node, imageURL, label) {
-  const target = display[imageURL] || media[imageURL];
+  const target = imageURL.startsWith('/assets/') ? imageURL : display[imageURL] || media[imageURL];
   const imagePath = typeof target === 'object' ? target.path || target.displayPath : target;
   check(!!imagePath, `${label}: no media mapping for ${imageURL}`);
   if (node && imagePath) check(descendants(node).some(n => n.tag === 'img' && n.attrs.src === imagePath), `${label}: missing expected image ${imagePath}`);
@@ -176,7 +176,7 @@ for (const document of documents.values()) {
   check(!/\b(?:TODO|FIXME|Lorem ipsum)\b/i.test(text(document.document)), `${document.relative}: unfinished placeholder text`);
 }
 
-check(pages.length === inventory.pageCount + inventory.postCount, 'Editable pages do not match the migration inventory; update the inventory after intentional page additions/removals.');
+check(pages.length >= inventory.pages.length, 'Editable pages contain fewer pages than the initial migration; original migrated pages must remain available.');
 check(inventory.missingSitemapUrls.length === 0, 'Migration inventory has missing sitemap URLs.');
 const canonicalPages = new Set();
 for (const page of pages) {
@@ -185,9 +185,15 @@ for (const page of pages) {
   if (!document) continue;
   const route = canonical(document);
   if (route) { canonicalPages.add(route); check(!!documentForPath(route), `Source page ${page.title}: canonical route ${route} is missing`); }
-  for (const image of page.images || []) assertImage(document.document, image.url, `Source page ${page.title}`);
-  // Profiles are rendered from their complete HTML; require the full original text.
-  if (!['/', '/news/', '/publications/', '/research/', '/contact/'].includes(page.path) && page.slug !== 'people') assertContent(document.document, page.text, `Profile ${page.title}`);
+  // Structured listings are validated against their current records below. Their
+  // imported pages.json image lists are historical, not a second editable source.
+  const structuredListing = ['news', 'people', 'publications', 'research'].includes(page.slug);
+  if (!structuredListing) {
+    const currentSource = parseHTML(page.html);
+    for (const image of currentSource.elements.filter(node => node.tag === 'img' && node.attrs.src)) assertImage(document.document, image.attrs.src, `Source page ${page.title}`);
+    // HTML is authoritative; imported .text is only a source snapshot.
+    if (!['/', '/contact/'].includes(page.path)) assertContent(document.document, text(currentSource.document), `Profile ${page.title}`);
+  }
 }
 check(canonicalPages.size === pages.length, 'Two source pages resolve to the same canonical page.');
 for (const source of inventory.pages) check(pages.some(page => page.id === source.id && unquote(page.path) === unquote(source.path)), `Migration inventory page ${source.id} / ${source.title} has been dropped.`);
@@ -248,9 +254,22 @@ for (const item of manifest) {
 }
 const search = readJSON('dist/search-index.json');
 for (const record of search) validateURL(record.url, site, `Search result ${record.title}`);
-for (const item of news) check(search.some(record => record.url === '/news/#' + item.id), `News ${item.id}: missing from search index`);
+for (const item of news) {
+  const record = search.find(record => record.url === '/news/#' + item.id);
+  check(!!record, `News ${item.id}: missing from search index`);
+  if (record) check(normalized(record.text) === normalized(textHTML(item.bodyHtml)), `News ${item.id}: search text is out of sync with its current bodyHtml`);
+}
 for (const item of publications) check(search.some(record => record.url === '/publications/#' + item.id), `Publication ${item.id}: missing from search index`);
-for (const route of canonicalPages) if (!['/news/', '/publications/'].includes(route)) check(search.some(record => record.url === route), `Page ${route}: missing from search index`);
+for (const page of pages) {
+  const document = documentForPath(page.path);
+  if (!document) continue;
+  const route = canonical(document);
+  if (!['/news/', '/publications/'].includes(route)) {
+    const record = search.find(record => record.url === route);
+    check(!!record, `Page ${route}: missing from search index`);
+    if (record) check(normalized(record.text) === normalized(textHTML(page.html)), `Page ${route}: search text is out of sync with its current html`);
+  }
+}
 const sitemap = fs.readFileSync(path.join(dist, 'sitemap.xml'), 'utf8');
 const sitemapURLs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => decode(match[1]));
 check(sitemapURLs.length === canonicalPages.size, 'Sitemap page count differs from canonical content page count.');
