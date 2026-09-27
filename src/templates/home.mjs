@@ -28,11 +28,10 @@ export function renderHome(context) {
     return text.length > limit ? text.slice(0, limit) + '…' : text;
   }
 
-  const researchCards = currentProjects().map((project, index) => `
+  const researchCards = currentProjects().map(project => `
     <a class="research-card" href="${pageUrl('/research/')}#${project.id}">
       <div class="research-image">${picture(project.images[0].url, project.title)}</div>
       <div class="research-card-copy">
-        <small>${t('researchItem')} ${String(index + 1).padStart(2, '0')}</small>
         <h3>${esc(project.title)}</h3>
         <span class="text-link">${t('discoverProject')} ${straight}</span>
       </div>
@@ -99,50 +98,41 @@ export function renderHome(context) {
         </figure>
       </div>
     </section>
-    <section class="section">
+    <section class="section home-research">
       <div class="wrap">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">${t('research')}</p>
-            <h2>${t('researchHeading')}</h2>
-            <p class="section-description">${t('researchSummary')}</p>
+            <h2>${t('researchTitle')}</h2>
+            <p class="section-description">${t('researchDescription')}</p>
           </div>
           <a class="text-link" href="${pageUrl('/research/')}">${t('allResearch')} ${straight}</a>
         </div>
         <div class="research-grid">${researchCards}</div>
       </div>
     </section>
-    <section class="section soft">
-      <div class="wrap">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">${t('fromLab')}</p>
-            <h2>${t('latestNews')}</h2>
+    <section class="section home-updates">
+      <div class="wrap updates-grid">
+        <section class="updates-news" aria-labelledby="home-news-heading">
+          <div class="section-heading">
+            <h2 id="home-news-heading">${t('latestNews')}</h2>
+            <a class="text-link" href="${pageUrl('/news/')}">${t('allNews')} ${straight}</a>
           </div>
-          <a class="text-link" href="${pageUrl('/news/')}">${t('allNews')} ${straight}</a>
-        </div>
-        <div class="news-grid">${newsCards}</div>
-      </div>
-    </section>
-    <section class="section">
-      <div class="wrap">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">${t('publications')}</p>
-            <h2>${t('publicationsHeading')}</h2>
+          <div class="news-grid">${newsCards}</div>
+        </section>
+        <section class="updates-publications" aria-labelledby="home-publications-heading">
+          <div class="section-heading">
+            <h2 id="home-publications-heading">${t('publications')}</h2>
+            <a class="text-link" href="${pageUrl('/publications/')}">${t('allPublications')} ${straight}</a>
           </div>
-          <a class="text-link" href="${pageUrl('/publications/')}">${t('allPublications')} ${straight}</a>
-        </div>
-        ${publicationPreviews}
+          ${publicationPreviews}
+        </section>
       </div>
     </section>
     <section class="section soft" id="about">
       <div class="wrap">
         <div class="about-grid">
           <div>
-            <p class="eyebrow">${t('aboutEyebrow')}</p>
-            <h2>${t('aboutHeading')}</h2>
-            <p class="section-description">${t('fullName')}</p>
+            <h2>${t('aboutLab')}</h2>
             <a class="text-link about-link" href="${pageUrl('/people/')}">${t('meetPeople')} ${straight}</a>
           </div>
           <div class="prose">${html(localized('pages', homePage.id).html)}</div>

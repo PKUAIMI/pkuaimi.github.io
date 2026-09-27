@@ -15,9 +15,11 @@ export function renderPeople(context) {
 
       return `<${tag} class="person-card"${url ? ` href="${url}"` : ''} id="${person.id}">
         ${picture(person.image, person.name)}
-        <h3>${esc(person.name)}</h3>
-        <p>${groupLabel(group)}</p>
-        ${profileLink}
+        <div class="person-copy">
+          <h3>${esc(person.name)}</h3>
+          <p>${groupLabel(group)}</p>
+          ${profileLink}
+        </div>
       </${tag}>`;
     }).join('');
 
