@@ -35,6 +35,24 @@
     }
   },
   {
+    "id": "news-72fe36f",
+    "images": [
+      {
+        "url": "https://pkuaimi.com/wp-content/uploads/2026/09/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260904203359_344_36.jpg"
+      }
+    ],
+    "date": "2026-09-01",
+    "dateKind": "event",
+    "en": {
+      "title": "Welcome PhD Student Ao Wang to Our Team!",
+      "bodyHtml": "<p>We are delighted to announce that Ao Wang has officially joined our group as a PhD student on September 1st, 2026. Ao received his master’s degree in Instrument Science and Technology from Chongqing University, and his research will focus on CT reconstruction algorithms. We believe his expertise will further strengthen our efforts in advancing cutting-edge medical imaging technologies. We look forward to his contributions and wish him great success in his doctoral studies!</p>"
+    },
+    "zh": {
+      "title": "欢迎博士新生王奥加入我们课题组！",
+      "bodyHtml": "<p>我们很高兴地宣布，王奥于 2026 年 9 月 1 日正式加入我们课题组，成为一名博士研究生。王奥硕士毕业于重庆大学仪器科学与技术专业，研究方向为 CT 重建算法。我们相信他的加入将进一步推动我们在前沿医学成像技术方面的探索，期待他的贡献，并祝愿他在博士阶段取得丰硕成果！</p>"
+    }
+  },
+  {
     "id": "news-ab4e894",
     "images": [
       {
@@ -68,24 +86,6 @@
     "zh": {
       "title": "欢迎硕士新生唐佳晨加入我们课题组！",
       "bodyHtml": "<p>我们很高兴地宣布，唐佳晨于2026年9月1日正式加入本课题组，成为一名硕士研究生。她本科毕业于北京理工大学计算机学院。本科期间，她以共同一作身份发表了一篇可解释性医学影像分析论文，该论文被医学图像领域顶会MICCAI 2025接收并荣获会议奖项。她目前的研究方向为量子计算结合人工智能的医学影像应用，一个有潜力的新兴交叉学科前沿方向。我们期待她的创新性研究，并祝愿她在研究生阶段收获丰硕、前程似锦！</p>"
-    }
-  },
-  {
-    "id": "news-72fe36f",
-    "images": [
-      {
-        "url": "https://pkuaimi.com/wp-content/uploads/2026/09/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260904203359_344_36.jpg"
-      }
-    ],
-    "date": "2026-09-01",
-    "dateKind": "event",
-    "en": {
-      "title": "Welcome PhD Student Ao Wang to Our Team!",
-      "bodyHtml": "<p>We are delighted to announce that Ao Wang has officially joined our group as a PhD student on September 1st, 2026. Ao received his master’s degree in Instrument Science and Technology from Chongqing University, and his research will focus on CT reconstruction algorithms. We believe his expertise will further strengthen our efforts in advancing cutting-edge medical imaging technologies. We look forward to his contributions and wish him great success in his doctoral studies!</p>"
-    },
-    "zh": {
-      "title": "欢迎博士新生王奥加入我们课题组！",
-      "bodyHtml": "<p>我们很高兴地宣布，王奥于 2026 年 9 月 1 日正式加入我们课题组，成为一名博士研究生。王奥硕士毕业于重庆大学仪器科学与技术专业，研究方向为 CT 重建算法。我们相信他的加入将进一步推动我们在前沿医学成像技术方面的探索，期待他的贡献，并祝愿他在博士阶段取得丰硕成果！</p>"
     }
   },
   {
