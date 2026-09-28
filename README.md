@@ -38,7 +38,8 @@ npm run dev
 | 研究项目中英文介绍与配图 | `content/research.json` |
 | 论文引文、年份与分组 | `content/publications.json` |
 | 首页 About、个人页正文、页面地址与旧地址 | `content/pages.json` |
-| 首页合影、图库、新闻与论文展示数量 | `content/home.json` |
+| 首页轮播照片与顺序（放入图片即可，按文件名排序） | `public/assets/home-slides/` |
+| 首页可选图注、图库、新闻与论文展示数量 | `content/home.json` |
 | 导航、按钮、首页欢迎语、机构名称与地址等中英文文字 | `content/ui.json` |
 | 网站域名、公共邮箱、GitHub 与仓库链接 | `site.config.json` |
 | 图片文件 | `public/assets/` |

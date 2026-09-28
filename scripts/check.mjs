@@ -3,7 +3,7 @@ import path from 'node:path';
 import { loadContent, ROOT } from '../src/content.mjs';
 
 // Validate the delivered HTML against its editable content, without a browser,
-// network access, third-party packages, or assumptions about source file order.
+// network access or assumptions about source file order.
 const root = ROOT;
 const dist = path.join(root, 'dist');
 const readJSON = name => JSON.parse(fs.readFileSync(path.join(root, name), 'utf8'));
@@ -58,7 +58,7 @@ if (!fs.existsSync(dist)) {
   console.error('Missing dist/. Run npm run build before npm run check.');
   process.exit(1);
 }
-const { config, ui, pages, news, people, labLives, publications, projects, home, media, displayMedia: display } = loadContent(root);
+const { config, ui, pages, news, people, labLives, publications, projects, home, media, displayMedia: display } = await loadContent(root);
 const site = new URL(config.url);
 const locales = [{ key: 'en', htmlLang: 'en', prefix: '' }, { key: 'zh', htmlLang: 'zh-CN', prefix: '/zh' }];
 const localizedPath = (route, locale) => locale.prefix + route;

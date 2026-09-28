@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { decodeHTML, plainText } from './html.mjs';
 import { validateContent } from './content-validation.mjs';
+import { loadHomeSlides } from './home-slides.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const LANGUAGES = ['en', 'zh'];
@@ -16,7 +17,7 @@ export function readJSON(root, file) {
 }
 
 /** Load all authoring files once. Rendering never mutates these records. */
-export function loadContent(root = ROOT) {
+export async function loadContent(root = ROOT) {
   const read = file => readJSON(root, file);
   const data = {
     config: read('site.config.json'),
@@ -33,6 +34,11 @@ export function loadContent(root = ROOT) {
     provenance: read('content/media-provenance.json'),
     publications: read('content/publications.json'),
   };
+
+  // Scan on every build so adding, renaming or removing a file updates both languages.
+  if (data.home && typeof data.home === 'object') {
+    data.home.hero = await loadHomeSlides(root, data.home.heroLabels);
+  }
 
   // A publication is edited once, in html. Search text and links are derived.
   if (Array.isArray(data.publications)) {

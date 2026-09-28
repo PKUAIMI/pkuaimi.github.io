@@ -22,7 +22,7 @@ const listingTemplates = {
 
 /** Build every edition in memory before updating published files. */
 export async function buildSite({ root = ROOT } = {}) {
-  const data = loadContent(root);
+  const data = await loadContent(root);
   const browserAssets = await buildBrowserAssets();
   const assetVersion = createHash('sha256')
     .update(fs.readFileSync(path.join(root, 'public/styles.css')))

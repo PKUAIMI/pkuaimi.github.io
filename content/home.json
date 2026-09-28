@@ -1,22 +1,18 @@
 {
-  "hero": [
-    {
-      "original": "/assets/lab-group-2026.jpg",
-      "display": "/assets/lab-group-2026-web.jpg",
-      "width": 1920,
-      "height": 1080,
+  "heroLabels": {
+    "01-summer-outing.jpg": {
       "altKey": "teamPhotoAlt",
       "captionKey": "heroLabCaption"
     },
-    {
-      "original": "/assets/lab-group-2025.jpg",
-      "display": "/assets/lab-group-2025-web.jpg",
-      "width": 1024,
-      "height": 768,
+    "02-lab-group.jpg": {
       "altKey": "groupPhotoAlt",
       "captionKey": "heroTeamCaption"
+    },
+    "03-teachers-day-2026.jpeg": {
+      "altKey": "heroTeachersDayAlt",
+      "captionKey": "heroTeachersDayCaption"
     }
-  ],
+  },
   "gallery": [
     {
       "url": "/assets/brand/silicon-based-tree-of-life.png",

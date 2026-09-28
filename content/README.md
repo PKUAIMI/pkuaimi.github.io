@@ -12,7 +12,7 @@
 | `research.json` | `id`、`images`、`en/zh.title`、`en/zh.descriptionHtml` |
 | `publications.json` | `id`、`year`、`section`、`html` |
 | `pages.json` | `id`、`type`、`path`、`aliases`；首页和正文页另有 `en/zh.title`、`en/zh.html` |
-| `home.json` | `hero`、`gallery`、`newsLimit`、`publicationLimit` |
+| `home.json` | 可选 `heroLabels`、`gallery`、`newsLimit`、`publicationLimit` |
 | `ui.json` | `en`、`zh` 两组界面文字、机构名称与地址，键名一一对应 |
 | `templates/` | 新增命令使用的 JSON 草稿模板，含待替换的 `TODO` |
 
@@ -33,7 +33,7 @@
 
 `path` 是英文规范地址，例如 `/people/jane-doe/`。中文地址自动生成 `/zh/people/jane-doe/`，不要再添加一条中文页面记录。`aliases` 保存需要继续支持的旧英文地址，没有时填 `[]`。成员的 `profilePath` 指向规范 `path`；没有个人页时填 `null`。
 
-首页 `type: "home"` 条目的 `en.html` / `zh.html` 就是 About 正文，会完整呈现。首页其他文案在 `ui.json`，图片和展示数量在 `home.json`。
+首页 `type: "home"` 条目的 `en.html` / `zh.html` 就是 About 正文，会完整呈现。首页其他文案在 `ui.json`，轮播照片在 `public/assets/home-slides/`，可选图注、介绍配图和展示数量在 `home.json`。
 
 ### 日期与论文
 
@@ -56,3 +56,5 @@
 [`migration/source/`](../migration/source/) 保留原始公开导出。重新运行导入工具只会生成 `migration/imported/` 下的比较材料，不会覆盖本目录。
 
 编辑后运行 `npm run validate:content`；发布前运行 `npm run verify`。错误会指出文件、条目 `id` 和需要修改的字段。
+
+首页轮播图片自动读取 `public/assets/home-slides/`，按文件名排序，无需在 JSON 中添加条目。`home.json` 的 `heroLabels` 仅用于可选专属图注；默认中英文图注自动补齐。

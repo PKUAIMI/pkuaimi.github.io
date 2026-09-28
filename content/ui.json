@@ -112,7 +112,9 @@
     "scrollToExplore": "Explore our lab",
     "labTotem": "Our lab totem",
     "siliconTreeTitle": "Silicon-Based Tree of Life",
-    "siliconTreeDescription": "Circuit-like branches bring computation and life into a single image. As AIMI Lab’s totem, the tree symbolizes the connection between artificial intelligence and medical imaging, and the continued growth of knowledge through exploration and collaboration."
+    "siliconTreeDescription": "Circuit-like branches bring computation and life into a single image. As AIMI Lab’s totem, the tree symbolizes the connection between artificial intelligence and medical imaging, and the continued growth of knowledge through exploration and collaboration.",
+    "heroTeachersDayAlt": "AIMI Lab members gathered outdoors on Teachers’ Day",
+    "heroTeachersDayCaption": "Together on Teachers’ Day · 2026"
   },
   "zh": {
     "overview": "首页",
@@ -227,6 +229,8 @@
     "scrollToExplore": "向下探索实验室",
     "labTotem": "实验室图腾",
     "siliconTreeTitle": "硅基生命树",
-    "siliconTreeDescription": "以电路为枝干，让计算与生命在同一棵树上相遇。作为 AIMI 实验室的图腾，硅基生命树象征着人工智能与医学影像的交汇，也寓意着知识在探索与协作中扎根、连接、持续生长。"
+    "siliconTreeDescription": "以电路为枝干，让计算与生命在同一棵树上相遇。作为 AIMI 实验室的图腾，硅基生命树象征着人工智能与医学影像的交汇，也寓意着知识在探索与协作中扎根、连接、持续生长。",
+    "heroTeachersDayAlt": "AIMI 实验室成员在教师节的户外合影",
+    "heroTeachersDayCaption": "教师节户外合影 · 2026"
   }
 }

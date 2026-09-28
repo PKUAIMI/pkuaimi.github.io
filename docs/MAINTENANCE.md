@@ -220,30 +220,36 @@ npm run new -- publication paper-2026
 | 首页欢迎语、简短介绍、按钮、栏目标题 | `content/ui.json` 中对应的 `en` / `zh` |
 | 中英文实验室名称、机构名称、联系地址与网站简介 | `content/ui.json` 中对应的 `en` / `zh` |
 | About 实验室正文 | `content/pages.json` 中 `type: "home"` 条目的 `en.html` / `zh.html` |
-| 首页轮播合影与 About 插图 | `content/home.json` |
+| 首页轮播合影与顺序 | `public/assets/home-slides/` |
+| 首页可选图注与 About 插图 | `content/home.json` |
 | 首页新闻、论文显示数量 | `home.json` 的 `newsLimit`、`publicationLimit` |
 | 网站域名、公共邮箱、GitHub 与仓库链接 | `site.config.json` |
 
 About 正文会完整呈现，不需要把段落放在特殊位置，也不从其他页面自动抽取。`site.config.json` 只保存公共设置；需要翻译的显示文字统一在 `ui.json` 中维护，避免同时修改多个文件。
 
-`home.json` 的 `hero` 数组控制首页轮播，按数组顺序播放。例如：
+### 首页轮播：把图片放进文件夹即可
+
+把需要轮播的图片放入 **`public/assets/home-slides/`**，无需修改 JSON 或填写尺寸。
+
+- 支持 JPG / JPEG、PNG、WebP、GIF、AVIF（扩展名不区分大小写）。只读取这一层文件夹，忽略隐藏文件、说明文件和子文件夹。
+- 按文件名自然排序，建议命名为 `01-summer-outing.jpg`、`02-lab-group.jpg`、`03-teachers-day-2026.jpeg`。新增、删除或重命名文件即可调整轮播。
+- 文件名可以包含中文与空格；避免 `#`、`?`、`%` 等网址特殊字符。HEIC 图片请先导出为 JPG。
+- 至少保留一张图片。损坏图片会给出具体文件名并阻止发布，本地保留上次正常预览。
+- 图片保持原比例，自动读取尺寸及手机照片的方向信息。当前三张使用已有的网页尺寸版本；新增照片建议长边约 1600–2400 像素，避免直接上传数十 MB 的原片。
+- 本地运行 `npm run dev` 时，放入或移除图片后会自动刷新。线上更新仍需运行 `npm run verify`，提交源图片和构建结果并推送；放进电脑文件夹本身不会上传到网站。
+
+没有专属说明的新图片自动使用中英文“实验室合影 / AIMI Lab”说明。可选：在 `home.json` 的 `heroLabels` 中以完整文件名为键，指定 `ui.json` 中的图注和替代文字键：
 
 ```json
-"hero": [
-  {
-    "original": "/assets/lab-group-2026.jpg",
-    "display": "/assets/lab-group-2026-web.jpg",
-    "width": 1920,
-    "height": 1080,
-    "altKey": "teamPhotoAlt",
-    "captionKey": "heroLabCaption"
+"heroLabels": {
+  "03-teachers-day-2026.jpeg": {
+    "altKey": "heroTeachersDayAlt",
+    "captionKey": "heroTeachersDayCaption"
   }
-]
+}
 ```
 
-`original` 是点击后打开的原图，`display` 是页面加载的显示图；两者也可以指向同一个文件。`width` 和 `height` 填显示图的实际像素尺寸。更换图片时先把两个文件放进 `public/assets/`。
-
-`altKey` 和 `captionKey` 引用 `ui.json` 中的中英文图片说明。添加照片时向 `hero` 追加完整对象即可；第一张同时用于网页分享预览。两张及以上会显示切换和播放/暂停按钮，每 6 秒切换；手动切换、键盘进入照片或系统设置减少动态效果时停止自动播放。鼠标悬停、大图预览、页面隐藏或滚出屏幕时暂时暂停。只有一张时显示普通图片，无 JavaScript 时仍可横向滚动查看照片。
+`heroLabels` 不控制图片是否显示，也不控制顺序；重命名后未同步的说明会回退到默认图注。第一张图片同时用于网页分享预览。两张及以上会显示切换和播放/暂停按钮，每 6 秒切换；手动切换、键盘进入照片或系统设置减少动态效果时停止自动播放。鼠标悬停、大图预览、页面隐藏或滚出屏幕时暂时暂停。只有一张时显示普通图片，无 JavaScript 时仍可横向滚动查看照片。
 
 About 区域的 `gallery` 每项包含 `url`、`altKey`、`captionKey`，可选 `eyebrowKey`（类别）和 `descriptionKey`（简介）。这些文字键引用 `ui.json`；修改时同步填写中英文。当前展示实验室图腾“硅基生命树”，原图为 `public/assets/brand/silicon-based-tree-of-life.png`，保留老师提供的透明背景与原色。`newsLimit` 和 `publicationLimit` 必须是大于零的整数。
 

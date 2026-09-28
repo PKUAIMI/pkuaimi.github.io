@@ -17,7 +17,7 @@ test('new content builds in both languages without changing rendering code', asy
     fs.cpSync(path.join(ROOT, 'content'), path.join(root, 'content'), { recursive: true });
     fs.cpSync(path.join(ROOT, 'public'), path.join(root, 'public'), { recursive: true });
     fs.copyFileSync(path.join(ROOT, 'site.config.json'), path.join(root, 'site.config.json'));
-    const before = loadContent(root);
+    const before = await loadContent(root);
     await buildSite({ root });
     const validHome = output('index.html');
     assert.match(validHome, /type="module" src="\/assets\/scroll\/home-scroll\.js/);
@@ -73,7 +73,7 @@ test('new content builds in both languages without changing rendering code', asy
     const counts = await buildSite({ root });
     assert.equal(counts.pages, before.pages.length + 1);
     assert.equal(counts.news, before.news.length + 2);
-    const data = loadContent(root);
+    const data = await loadContent(root);
     assert.equal(data.publications[0].citation, 'A. Author. Example paper. DOI');
     assert.deepEqual(data.publications[0].links, [{url: 'https://doi.org/10.1000/example', text: 'DOI'}]);
     for (const prefix of ['', 'zh/']) {
@@ -115,6 +115,17 @@ test('new content builds in both languages without changing rendering code', asy
     assert.equal(fs.existsSync(path.join(root, 'dist/people/workflow-example/index.html')), false);
     assert.equal(fs.existsSync(path.join(root, 'former-example/index.html')), false);
     assert.equal(fs.readFileSync(path.join(root, 'keep-user-file.txt'), 'utf8'), 'owned by the maintainer');
+
+    // Folder edits alone must reach both published editions and clean up on removal.
+    const addedPhoto = 'assets/home-slides/04-folder-addition.jpg';
+    fs.copyFileSync(path.join(root, 'public/assets/lab-group-2026-web.jpg'), path.join(root, 'public', addedPhoto));
+    await buildSite({ root });
+    for (const prefix of ['', 'zh/']) assert.ok(output(`${prefix}index.html`).includes(`/${addedPhoto}`));
+    fs.unlinkSync(path.join(root, 'public', addedPhoto));
+    await buildSite({ root });
+    for (const prefix of ['', 'zh/']) assert.ok(!output(`${prefix}index.html`).includes(`/${addedPhoto}`));
+    assert.equal(fs.existsSync(path.join(root, addedPhoto)), false);
+    assert.equal(fs.existsSync(path.join(root, 'dist', addedPhoto)), false);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
