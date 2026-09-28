@@ -1,7 +1,7 @@
 import { renderFilters } from './filters.mjs';
 
 export function renderNews(context) {
-  const { t, esc, plain, html, figure, currentNews } = context;
+  const { t, esc, plain, html, figure, imageSize, currentNews } = context;
   const entries = currentNews().map((item, index) => {
     const body = item.bodyHtml.replace(
       /^\s*<h[1-6]>([\s\S]*?)<\/h[1-6]>/,
@@ -9,7 +9,12 @@ export function renderNews(context) {
     );
     const pictures = (item.images || []).filter(image => !body.includes(image.url));
     const gallery = pictures.length
-      ? `<div class="news-gallery">${pictures.map(image => figure(image.url, item.title)).join('')}</div>`
+      ? `<div class="news-gallery">${pictures.map(image => {
+        const size = imageSize(image.url);
+        const width = size?.width && size?.height ? Math.min(720, 480 * size.width / size.height) : null;
+        const extra = pictures.length === 1 && width ? `style="--news-image-width:${width.toFixed(2)}px"` : '';
+        return figure(image.url, item.title, extra);
+      }).join('')}</div>`
       : '';
     const bodyWithConsistentHeadings = body
       .replace(/<h[2-6]>/g, '<h3>')

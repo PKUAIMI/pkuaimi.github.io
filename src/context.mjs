@@ -24,6 +24,7 @@ export function createContext(data, language, assetVersion) {
   };
   const localUrl = createURLResolver(data, language);
   const imageSizes = new Map([...data.provenance.assets, ...data.provenance.displayVariants].map(image => [image.path, image]));
+  const imageSize = source => imageSizes.get(localUrl(source, true));
   const dimensions = file => {
     const size = imageSizes.get(file);
     return size?.width && size?.height ? ` width="${size.width}" height="${size.height}"` : '';
@@ -39,7 +40,7 @@ export function createContext(data, language, assetVersion) {
   const current = records => records.map(record => ({ ...record, ...record[language] }));
 
   return {
-    ...data, language, assetVersion, t, localized, html, localUrl, picture, figure,
+    ...data, language, assetVersion, t, localized, html, localUrl, picture, figure, imageSize,
     esc: escapeHTML, plain: plainText, arrow, straight, searchIcon,
     navItems: navigation,
     active: (route, currentRoute) => route === '/' ? currentRoute === '/' : currentRoute.startsWith(route),
