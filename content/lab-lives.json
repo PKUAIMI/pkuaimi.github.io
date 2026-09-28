@@ -1,0 +1,57 @@
+[
+  {
+    "id": "lab-life-teachers-day-gathering",
+    "original": "/assets/2026-09-img-5483-8b79a0ac.jpeg",
+    "display": "/assets/2026-09-img-5483-8b79a0ac-web.jpeg",
+    "year": 2026,
+    "en": {
+      "caption": "Teachers’ Day gathering",
+      "alt": "AIMI Lab members celebrating Teachers’ Day together"
+    },
+    "zh": {
+      "caption": "教师节相聚",
+      "alt": "AIMI 实验室成员庆祝教师节合影"
+    }
+  },
+  {
+    "id": "lab-life-teachers-day-outdoors",
+    "original": "/assets/2026-09-img-5487-aecf1959.jpeg",
+    "display": "/assets/2026-09-img-5487-aecf1959-web.jpeg",
+    "year": 2026,
+    "en": {
+      "caption": "Together on Teachers’ Day",
+      "alt": "AIMI Lab members gathered outdoors on Teachers’ Day"
+    },
+    "zh": {
+      "caption": "教师节户外合影",
+      "alt": "AIMI 实验室成员在教师节的户外合影"
+    }
+  },
+  {
+    "id": "lab-life-summer-outing",
+    "original": "/assets/lab-group-2026.jpg",
+    "display": "/assets/lab-group-2026-web.jpg",
+    "year": 2026,
+    "en": {
+      "caption": "Summer lab outing",
+      "alt": "AIMI Lab members together during a summer outing"
+    },
+    "zh": {
+      "caption": "夏日团建",
+      "alt": "AIMI 实验室成员夏日团建合影"
+    }
+  },
+  {
+    "id": "lab-life-group-photograph",
+    "original": "/assets/lab-group-2025.jpg",
+    "display": "/assets/lab-group-2025-web.jpg",
+    "en": {
+      "caption": "Lab group photograph",
+      "alt": "AIMI Lab group photograph at Peking University"
+    },
+    "zh": {
+      "caption": "实验室团队合影",
+      "alt": "AIMI 实验室成员在北京大学的团队合影"
+    }
+  }
+]

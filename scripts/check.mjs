@@ -58,7 +58,7 @@ if (!fs.existsSync(dist)) {
   console.error('Missing dist/. Run npm run build before npm run check.');
   process.exit(1);
 }
-const { config, ui, pages, news, people, publications, projects, home, media, displayMedia: display } = loadContent(root);
+const { config, ui, pages, news, people, labLives, publications, projects, home, media, displayMedia: display } = loadContent(root);
 const site = new URL(config.url);
 const locales = [{ key: 'en', htmlLang: 'en', prefix: '' }, { key: 'zh', htmlLang: 'zh-CN', prefix: '/zh' }];
 const localizedPath = (route, locale) => locale.prefix + route;
@@ -304,6 +304,12 @@ for (const locale of locales) {
       check(!!original, `Person ${person.en.name}: missing original profile path`);
       if (original) check(node.attrs.href === localizedPath(canonical(original), locale), `${locale.key} person ${person.en.name}: profile card links to the wrong person or language`);
     }
+  }
+  for (const photo of labLives) {
+    const node = recordNode(peopleDocument, photo, `${locale.key} lab photo ${photo.id}`);
+    assertContent(node, photo[locale.key].caption, `${locale.key} lab photo ${photo.id} caption`);
+    assertImage(node, photo.display || photo.original, `${locale.key} lab photo ${photo.id}`);
+    check(!!node && descendants(node).some(n => n.tag === 'a' && n.attrs.href === (media[photo.original] || photo.original) && 'data-image-preview' in n.attrs), `${locale.key} lab photo ${photo.id}: original image preview is missing`);
   }
   for (const publication of publications) {
     const node = recordNode(publicationDocument, publication, `${locale.key} publication ${publication.id}`);

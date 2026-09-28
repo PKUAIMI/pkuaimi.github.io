@@ -10,7 +10,7 @@ const RESERVED_PATHS = new Set([
   'sitemap.xml', 'robots.txt', 'generated-files.json', 'site.config.json',
   'package.json', 'package-lock.json', 'readme.md', 'cname',
 ]);
-const RESERVED_IDS = new Set(['main', 'about', 'lab-welcome', 'primary-navigation', 'content-filter', 'year-filter', 'search-dialog', 'search-input', 'search-results', 'search-title', 'image-preview-title']);
+const RESERVED_IDS = new Set(['main', 'about', 'lab-welcome', 'lab-lives', 'lab-lives-heading', 'primary-navigation', 'content-filter', 'year-filter', 'search-dialog', 'search-input', 'search-results', 'search-title', 'image-preview-title']);
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const isString = value => typeof value === 'string';
 const isNonempty = value => isString(value) && value.trim().length > 0;
@@ -115,6 +115,7 @@ export function validateContent(data, { root = process.cwd() } = {}) {
   const pages = records('pages', 'content/pages.json', { numericId: true });
   const news = records('news', 'content/news.json');
   const people = records('people', 'content/people.json');
+  const labLives = records('labLives', 'content/lab-lives.json');
   const projects = records('projects', 'content/research.json');
   const publications = records('publications', 'content/publications.json');
   const groups = records('groups', 'content/groups.json');
@@ -190,6 +191,14 @@ export function validateContent(data, { root = process.cwd() } = {}) {
         if (!profile || profile.type !== 'profile' || profile.path !== person.profilePath) fail(location, 'profilePath', '必须指向 content/pages.json 中 type 为 profile 的规范 path；没有个人页时填写 null。');
       }
     }
+  }
+  for (const [index, photo] of labLives.entries()) {
+    const location = where('content/lab-lives.json', photo, index);
+    translations(photo, location, { caption: false, alt: false });
+    asset(photo.original, location, 'original');
+    if ('display' in photo) asset(photo.display, location, 'display');
+    if ('year' in photo && (!Number.isInteger(photo.year) || photo.year < 1000 || photo.year > 9999)) fail(location, 'year', '请填写已确认的四位数活动年份；未知时省略。');
+    if (people.some(person => person.id === photo.id)) fail(location, 'id', '不能与成员 id 重复，两者出现在同一页面。');
   }
   for (const [index, project] of projects.entries()) {
     const location = where('content/research.json', project, index);

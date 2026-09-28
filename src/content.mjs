@@ -23,6 +23,7 @@ export function loadContent(root = ROOT) {
     pages: read('content/pages.json'),
     news: read('content/news.json'),
     people: read('content/people.json'),
+    labLives: read('content/lab-lives.json'),
     projects: read('content/research.json'),
     groups: read('content/groups.json'),
     home: read('content/home.json'),

@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "实验室生活相册",
+  "description": "People 页面底部的合照，按数组顺序展示；每张照片维护中英文说明。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "original", "en", "zh"],
+    "properties": {
+      "id": { "$ref": "common.schema.json#/definitions/id" },
+      "original": {
+        "allOf": [{ "$ref": "common.schema.json#/definitions/asset" }],
+        "description": "点击后预览的原图，填写 /assets/ 下的路径。"
+      },
+      "display": {
+        "allOf": [{ "$ref": "common.schema.json#/definitions/asset" }],
+        "description": "可选压缩显示图；省略时使用 original。"
+      },
+      "year": {
+        "type": "integer",
+        "minimum": 1000,
+        "maximum": 9999,
+        "description": "可选且已确认的活动年份，不确定时省略；不使用上传年份推测。"
+      },
+      "en": { "$ref": "#/definitions/translation" },
+      "zh": { "$ref": "#/definitions/translation" }
+    }
+  },
+  "definitions": {
+    "translation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["caption", "alt"],
+      "properties": {
+        "caption": {
+          "allOf": [{ "$ref": "common.schema.json#/definitions/nonEmptyText" }],
+          "description": "照片下方的活动说明。"
+        },
+        "alt": {
+          "allOf": [{ "$ref": "common.schema.json#/definitions/nonEmptyText" }],
+          "description": "简洁描述照片内容，供屏幕阅读器使用。"
+        }
+      }
+    }
+  }
+}

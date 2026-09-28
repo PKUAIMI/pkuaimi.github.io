@@ -20,6 +20,7 @@ function fixture(t) {
     ],
     news: [{ id: 'news-welcome', images: [{ url: image }], date: '2024-02-29', dateKind: 'event', en: { title: 'Welcome', bodyHtml: '<p>Hello.</p>' }, zh: { title: '欢迎', bodyHtml: '<p>你好。</p>' } }],
     people: [{ id: 'person-jane', group: 'faculty', image, profilePath: '/people/jane/', en: { name: 'Jane' }, zh: { name: 'Jane' } }],
+    labLives: [],
     projects: [{ id: 'research-ct', images: [{ url: image }], en: { title: 'CT imaging', descriptionHtml: '' }, zh: { title: 'CT 成像', descriptionHtml: '' } }],
     publications: [{ id: 'publication-ct', year: 2026, section: 'AIMI', citation: 'Jane. Imaging. 2026.', html: '<p>Jane. Imaging. 2026.</p>', links: [] }],
     groups: [{ id: 'faculty', en: 'Faculty', zh: '教师' }],
@@ -41,6 +42,19 @@ test('reports the file, record, and missing translation field', t => {
   const { data, validate } = fixture(t);
   delete data.news[0].zh.bodyHtml;
   assert.match(validate().join('\n'), /content\/news\.json \[news-welcome\] · zh\.bodyHtml/);
+});
+
+test('lab photos allow unknown years but require real images and both language captions', t => {
+  const { data, validate } = fixture(t);
+  data.labLives = [{ id: 'lab-life-gathering', original: '/assets/photo.jpg', en: { caption: 'Lab gathering', alt: 'Our lab together' }, zh: { caption: '实验室相聚', alt: '实验室成员合影' } }];
+  assert.deepEqual(validate(), []);
+  data.labLives[0].display = '/assets/missing.jpg';
+  data.labLives[0].year = '2026';
+  delete data.labLives[0].zh.caption;
+  const errors = validate().join('\n');
+  assert.match(errors, /lab-lives\.json.*display/);
+  assert.match(errors, /lab-lives\.json.*year/);
+  assert.match(errors, /lab-lives\.json.*zh\.caption/);
 });
 
 test('requires carousel photos with real assets, dimensions and bilingual captions', t => {

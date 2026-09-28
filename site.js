@@ -277,7 +277,7 @@
       if (!link || event.defaultPrevented || event.button !== 0
         || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
-      const group = link.closest('.lab-carousel, .home-gallery, .news-entry, .project-entry, .profile-content') || main;
+      const group = link.closest('.lab-lives-gallery, .lab-carousel, .home-gallery, .news-entry, .project-entry, .profile-content') || main;
       gallery = [...group.querySelectorAll('a[data-image-preview]')]
         .filter(candidate => candidate.getClientRects().length > 0);
       if (!gallery.includes(link)) return;

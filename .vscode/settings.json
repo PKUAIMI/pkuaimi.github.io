@@ -1,6 +1,10 @@
 {
   "json.schemas": [
     {
+      "fileMatch": ["/content/lab-lives.json"],
+      "url": "./content/schemas/lab-lives.schema.json"
+    },
+    {
       "fileMatch": [
         "/content/news.json"
       ],

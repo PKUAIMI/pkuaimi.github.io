@@ -213,6 +213,19 @@ a.person-card:hover h3 { color:var(--red); }
 .faculty-group .people-cards { grid-template-columns:1fr; }
 .faculty-group .person-card { grid-template-columns:120px minmax(0,1fr); column-gap:24px; }
 .faculty-group .person-card h3 { font-size:24px; }
+.lab-lives { margin-top:52px; }
+.lab-lives-heading { margin-bottom:24px; }
+.lab-lives-heading .people-group-title { margin-bottom:12px; }
+.lab-lives-heading p { margin:0; font-size:15px; color:var(--muted); }
+.lab-lives-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; }
+.lab-life-photo { min-width:0; margin:0; }
+.lab-life-image { display:block; position:relative; aspect-ratio:4/3; background:var(--paper); border:1px solid var(--line); border-radius:6px; overflow:hidden; }
+.lab-life-image img { width:100%; height:100%; object-fit:contain; }
+.lab-life-expand { position:absolute; right:12px; bottom:12px; display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:#ffffffed; color:var(--ink); box-shadow:0 1px 5px #00000015; }
+.lab-life-expand svg { width:18px; height:18px; }
+.lab-life-image:hover { border-color:#b6a1a7; }
+.lab-life-photo figcaption { display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-top:12px; font-size:15px; line-height:1.5; }
+.lab-life-year { flex-shrink:0; font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
 .profile-content>.prose>figure { max-width:230px; }
 .profile-content>.prose>figure:first-of-type,.profile-content>.prose>img:first-child { float:right; max-width:210px; margin:0 0 28px 32px; }
 .profile-content>.prose>figure img { border-radius:12px; }
@@ -387,6 +400,9 @@ a[data-image-preview] { cursor:zoom-in; }
   .publication-group { font-size:18px; }
   .people-cards { grid-template-columns:1fr; gap:20px; }
   .people-group { margin-bottom:30px; }
+  .lab-lives { margin-top:36px; }
+  .lab-lives-heading { margin-bottom:20px; }
+  .lab-lives-gallery { grid-template-columns:1fr; gap:24px; }
   .people-group-title { font-size:23px; }
   .person-card h3 { font-size:17px; }
   .faculty-group .person-card { grid-template-columns:96px minmax(0,1fr); column-gap:18px; }

@@ -57,6 +57,12 @@ test('new content builds in both languages without changing rendering code', () 
     const publications = read('content/publications.json');
     Object.assign(publications[0], {year: 2026, html: '<p>A. Author. Example paper. <a href="https://doi.org/10.1000/example">DOI</a></p>'});
     write('content/publications.json', publications);
+    const labLives = read('content/lab-lives.json');
+    labLives.push({ id: 'lab-life-workflow-example', original: photo,
+      en: {caption: 'Example lab gathering', alt: 'Members together'},
+      zh: {caption: '示例实验室相聚', alt: '成员合影'},
+    });
+    write('content/lab-lives.json', labLives);
 
     const counts = buildSite({ root });
     assert.equal(counts.pages, before.pages.length + 1);
@@ -65,6 +71,10 @@ test('new content builds in both languages without changing rendering code', () 
     assert.equal(data.publications[0].citation, 'A. Author. Example paper. DOI');
     assert.deepEqual(data.publications[0].links, [{url: 'https://doi.org/10.1000/example', text: 'DOI'}]);
     for (const prefix of ['', 'zh/']) {
+      const peoplePage = output(`${prefix}people/index.html`);
+      assert.match(peoplePage, /id="lab-life-workflow-example"/);
+      assert.ok(peoplePage.includes(prefix ? '示例实验室相聚' : 'Example lab gathering'));
+      assert.ok(peoplePage.indexOf('id="lab-lives"') > peoplePage.lastIndexOf('class="person-card"'), 'lab photos follow all member groups');
       assert.match(output(`${prefix}news/index.html`), /id="news-workflow-example"/);
       assert.match(output(`${prefix}news/index.html`), /id="news-without-photo"/);
       assert.match(output(`${prefix}people/index.html`), new RegExp(`href="/${prefix}people/workflow-example/"`));

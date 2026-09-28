@@ -144,6 +144,31 @@ npm run new -- profile jane-doe --member person-jane-doe
 
 示例中的姓名、照片和简介都应换为实际内容，并同步填写中文版本。
 
+### 添加 Lab Lives 合照
+
+People 页面底部的相册单独维护在 `content/lab-lives.json`，按数组顺序展示。将照片放入 `public/assets/`，然后复制一条记录并填写中英文说明：
+
+```json
+{
+  "id": "lab-life-summer-gathering",
+  "original": "/assets/summer-gathering.jpg",
+  "display": "/assets/summer-gathering-web.jpg",
+  "year": 2026,
+  "en": {
+    "caption": "Summer lab gathering",
+    "alt": "Lab members together at a summer gathering"
+  },
+  "zh": {
+    "caption": "夏日相聚",
+    "alt": "实验室成员夏日相聚合影"
+  }
+}
+```
+
+`original` 用于点击后的大图预览，`display` 是可选的压缩显示图；只有一份图片时省略 `display` 即可。`caption` 是照片下方的活动说明，`alt` 简洁描述画面内容。`year` 只填写已确认的活动年份，不确定时省略，不要根据上传目录推测。建议 `id` 以 `lab-life-` 开头，并保持已有标识不变。
+
+照片会完整显示，桌面端两列、手机端一列。点击后可以在同一相册的照片间切换，不会混入成员肖像。新增照片无需改模板，也无需改首页轮播配置；维护后运行 `npm run verify`。
+
 ## 4. 添加研究项目
 
 ```sh
