@@ -95,7 +95,14 @@
     "imageNext": "Next image",
     "imageLoading": "Loading image…",
     "imageError": "The image could not be loaded. You can try opening the original in a new tab.",
-    "imagePosition": "Image {current} of {total}"
+    "imagePosition": "Image {current} of {total}",
+    "heroLabCaption": "AIMI Lab · Peking University",
+    "heroTeamCaption": "Our team · AIMI Lab",
+    "teamGallery": "Life at AIMI Lab",
+    "carousel": "carousel",
+    "slide": "slide",
+    "pauseSlideshow": "Pause slideshow",
+    "playSlideshow": "Play slideshow"
   },
   "zh": {
     "overview": "首页",
@@ -193,6 +200,13 @@
     "imageNext": "下一张图片",
     "imageLoading": "图片加载中……",
     "imageError": "图片暂时无法加载，可尝试在新标签页打开原图。",
-    "imagePosition": "第 {current} 张，共 {total} 张"
+    "imagePosition": "第 {current} 张，共 {total} 张",
+    "heroLabCaption": "AIMI 实验室 · 北京大学",
+    "heroTeamCaption": "我们的团队 · AIMI 实验室",
+    "teamGallery": "AIMI 实验室团队相册",
+    "carousel": "轮播",
+    "slide": "幻灯片",
+    "pauseSlideshow": "暂停轮播",
+    "playSlideshow": "播放轮播"
   }
 }

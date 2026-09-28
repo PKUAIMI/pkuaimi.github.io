@@ -12,40 +12,63 @@
   ],
   "properties": {
     "hero": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "original",
-        "display",
-        "width",
-        "height"
-      ],
-      "properties": {
-        "original": {
-          "allOf": [
-            {
-              "$ref": "common.schema.json#/definitions/asset"
-            }
-          ],
-          "description": "首页合影原图，点击大图时打开。"
-        },
-        "display": {
-          "allOf": [
-            {
-              "$ref": "common.schema.json#/definitions/asset"
-            }
-          ],
-          "description": "首页实际显示的合影，推荐使用经过压缩的清晰图片。"
-        },
-        "width": {
-          "type": "integer",
-          "minimum": 1,
-          "description": "显示图片的实际宽度，单位为像素。"
-        },
-        "height": {
-          "type": "integer",
-          "minimum": 1,
-          "description": "显示图片的实际高度，单位为像素。"
+      "type": "array",
+      "minItems": 1,
+      "description": "首页轮播照片，按数组顺序播放；第一张同时用作分享预览。",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "original",
+          "display",
+          "width",
+          "height",
+          "altKey",
+          "captionKey"
+        ],
+        "properties": {
+          "original": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/asset"
+              }
+            ],
+            "description": "首页合影原图，点击大图时打开。"
+          },
+          "display": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/asset"
+              }
+            ],
+            "description": "首页实际显示的合影，推荐使用经过压缩的清晰图片。"
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "显示图片的实际宽度，单位为像素。"
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "显示图片的实际高度，单位为像素。"
+          },
+          "altKey": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "替代文字在 content/ui.json 中的键名；该键必须同时有 en 和 zh。"
+          },
+          "captionKey": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/nonEmptyText"
+              }
+            ],
+            "description": "图片说明在 content/ui.json 中的键名；该键必须同时有 en 和 zh。"
+          }
         }
       }
     },

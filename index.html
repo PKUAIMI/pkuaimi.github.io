@@ -17,9 +17,9 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://pkuaimi.github.io/assets/lab-group-2026-web.jpg">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
-    <link rel="stylesheet" href="/styles.css?v=5a1f557121">
-    <script type="application/json" id="ui-messages">{"menu":"Menu","menuClose":"Close menu","scrollableTable":"Scrollable table","searchHint":"Search people, research, news and publications.","searching":"Searching…","searchError":"Search could not load. Please try again, or use the main navigation.","resultSingular":"result","resultPlural":"results","searchEmpty":"No matching results. Try another name or keyword.","imageLoading":"Loading image…","imageError":"The image could not be loaded. You can try opening the original in a new tab.","imagePosition":"Image {current} of {total}"}</script>
-    <script src="/site.js?v=5a1f557121" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=f2fb22e902">
+    <script type="application/json" id="ui-messages">{"menu":"Menu","menuClose":"Close menu","scrollableTable":"Scrollable table","searchHint":"Search people, research, news and publications.","searching":"Searching…","searchError":"Search could not load. Please try again, or use the main navigation.","resultSingular":"result","resultPlural":"results","searchEmpty":"No matching results. Try another name or keyword.","imageLoading":"Loading image…","imageError":"The image could not be loaded. You can try opening the original in a new tab.","imagePosition":"Image {current} of {total}","pauseSlideshow":"Pause slideshow","playSlideshow":"Play slideshow"}</script>
+    <script src="/site.js?v=f2fb22e902" defer></script>
   </head>
   <body><a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
@@ -56,15 +56,38 @@
           <p class="lab-introduction">Our lab advances fundamental research and clinical translation of artificial intelligence in medical imaging. Our research spans image reconstruction, tumor segmentation, image-guided radiation oncology and other areas of precision medicine.</p>
           <a class="lab-more" href="#about">About the lab <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <figure class="lab-intro-visual">
-          <a href="/assets/lab-group-2026.jpg" aria-label="View full AIMI Lab group photograph" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener">
-            <img src="/assets/lab-group-2026-web.jpg" alt="AIMI Lab members together at a group outing" width="1920" height="1080" fetchpriority="high">
-          </a>
-          <figcaption>
-            <span>AIMI Lab · Peking University</span>
-            <a href="/people/">Our team <span class="arrow" aria-hidden="true">→</span></a>
-          </figcaption>
-        </figure>
+        <div class="lab-intro-visual lab-carousel" data-carousel role="region" aria-roledescription="carousel" aria-label="Life at AIMI Lab">
+          <div class="carousel-viewport" data-carousel-viewport>
+            <div class="carousel-track" data-carousel-track>
+    <figure class="carousel-slide" data-carousel-slide role="group" aria-roledescription="slide" aria-label="1 / 2">
+      <a href="/assets/lab-group-2026.jpg" aria-label="View full image: AIMI Lab members together at a group outing" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener">
+        <img src="/assets/lab-group-2026-web.jpg" alt="AIMI Lab members together at a group outing" width="1920" height="1080" decoding="async" fetchpriority="high">
+      </a>
+      <figcaption class="sr-only">AIMI Lab · Peking University</figcaption>
+    </figure>
+    <figure class="carousel-slide" data-carousel-slide role="group" aria-roledescription="slide" aria-label="2 / 2">
+      <a href="/assets/lab-group-2025.jpg" aria-label="View full image: AIMI Lab group photograph" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener">
+        <img src="/assets/lab-group-2025-web.jpg" alt="AIMI Lab group photograph" width="1024" height="768" decoding="async">
+      </a>
+      <figcaption class="sr-only">Our team · AIMI Lab</figcaption>
+    </figure></div>
+          </div>
+          <div class="carousel-footer">
+            <div class="carousel-caption">
+              <p data-carousel-caption>AIMI Lab · Peking University</p>
+              <a href="/people/">Our team <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+            <div class="carousel-controls" data-carousel-controls hidden>
+              <button type="button" data-carousel-previous aria-label="Previous image">←</button>
+              <span data-carousel-counter>1 / 2</span>
+              <button type="button" data-carousel-next aria-label="Next image">→</button>
+              <button type="button" data-carousel-play aria-label="Pause slideshow">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path data-carousel-pause-icon d="M7 5v10M13 5v10" fill="none" stroke="currentColor" stroke-width="2"/><path data-carousel-play-icon d="m6 4 10 6-10 6Z" fill="currentColor" hidden/></svg>
+              </button>
+            </div>
+          </div>
+          <span class="sr-only" data-carousel-status aria-live="polite" aria-atomic="true"></span>
+        </div>
       </div>
     </section>
     <section class="section home-updates">
@@ -178,13 +201,13 @@
     <section class="section soft" id="about">
       <div class="wrap">
         <div class="about-grid">
-          <div>
+          <div class="about-heading">
             <h2>About the lab</h2>
             <a class="text-link about-link" href="/people/">Meet our people <span class="arrow" aria-hidden="true">→</span></a>
           </div>
           <div class="prose"><p>The Artificial Intelligence for Medical Imaging (AIMI) Lab at the Institute of Medical Technology, Peking University Health Science Center, has been newly established. The lab is dedicated to advancing both fundamental research and clinical translation of artificial intelligence in medical imaging, with a strong focus on precision medicine. Its research areas include CT image reconstruction, MRI-based tumor segmentation, image-guided radiation oncology, patient prognosis and survival analysis, digital pathology, and computer-vision-driven medical image generation. AIMI strives to develop cutting-edge intelligent imaging technologies to support disease diagnosis, treatment planning, and therapy assessment.</p></div>
+          <div class="home-gallery"><figure><a href="/assets/research-overview.png" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/research-overview.png" alt="AIMI circuit-tree illustration" loading="lazy" decoding="async" width="511" height="600" ></a><figcaption>Artificial Intelligence for Medical Imaging</figcaption></figure></div>
         </div>
-        <div class="home-gallery"><figure><a href="/assets/lab-group-2025.jpg" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/lab-group-2025-web.jpg" alt="AIMI Lab group photograph" loading="lazy" decoding="async" width="1024" height="768" ></a><figcaption>Our team · AIMI Lab</figcaption></figure><figure><a href="/assets/research-overview.png" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/research-overview.png" alt="AIMI circuit-tree illustration" loading="lazy" decoding="async" width="511" height="600" ></a><figcaption>Artificial Intelligence for Medical Imaging</figcaption></figure></div>
       </div>
     </section>
   </main><footer class="site-footer">

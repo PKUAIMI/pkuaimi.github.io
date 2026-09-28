@@ -127,6 +127,8 @@ export function createLayout(context) {
       'imageLoading',
       'imageError',
       'imagePosition',
+      'pauseSlideshow',
+      'playSlideshow',
     ];
     const messages = JSON.stringify(Object.fromEntries(messageKeys.map(key => [key, t(key)])))
       .replace(/</g, '\\u003c');
@@ -148,7 +150,7 @@ export function createLayout(context) {
     <meta property="og:type" content="website">
     <meta property="og:url" content="${canonical}">
     <meta property="og:locale" content="${language === 'zh' ? 'zh_CN' : 'en_US'}">
-    <meta property="og:image" content="${config.url}${home.hero.display}">
+    <meta property="og:image" content="${config.url}${context.localUrl(home.hero[0].display)}">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
     <link rel="stylesheet" href="/styles.css?v=${assetVersion}">
     <script type="application/json" id="ui-messages">${messages}</script>

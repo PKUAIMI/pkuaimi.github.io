@@ -67,10 +67,18 @@ export function renderHome(context) {
     </article>`;
   }).join('');
 
-  const gallery = homeContent.gallery.map((image, index) => {
+  const slides = homeContent.hero.map((image, index) => `
+    <figure class="carousel-slide" data-carousel-slide role="group" aria-roledescription="${t('slide')}" aria-label="${index + 1} / ${homeContent.hero.length}">
+      <a href="${esc(localUrl(image.original))}" aria-label="${esc(t('fullImage') + t(image.altKey))}">
+        <img src="${esc(localUrl(image.display))}" alt="${t(image.altKey)}" width="${image.width}" height="${image.height}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''}>
+      </a>
+      <figcaption class="sr-only">${t(image.captionKey)}</figcaption>
+    </figure>`).join('');
+
+  const gallery = homeContent.gallery.map(image => {
     const photo = picture(image.url, t(image.altKey));
     const visual = `<a href="${esc(localUrl(image.url))}">${photo}</a>`;
-    const caption = t(image.captionKey) + (index === 0 ? ' · ' + t('labName') : '');
+    const caption = t(image.captionKey);
 
     return `<figure>${visual}<figcaption>${caption}</figcaption></figure>`;
   }).join('');
@@ -85,15 +93,26 @@ export function renderHome(context) {
           <p class="lab-introduction">${t('intro')}</p>
           <a class="lab-more" href="#about">${t('aboutLab')} ${straight}</a>
         </div>
-        <figure class="lab-intro-visual">
-          <a href="${esc(homeContent.hero.original)}" aria-label="${t('viewTeamPhoto')}">
-            <img src="${esc(homeContent.hero.display)}" alt="${t('teamPhotoAlt')}" width="${homeContent.hero.width}" height="${homeContent.hero.height}" fetchpriority="high">
-          </a>
-          <figcaption>
-            <span>${t('labName')} · ${t('university')}</span>
-            <a href="${pageUrl('/people/')}">${t('ourTeam')} ${straight}</a>
-          </figcaption>
-        </figure>
+        <div class="lab-intro-visual lab-carousel" data-carousel role="region" aria-roledescription="${t('carousel')}" aria-label="${t('teamGallery')}">
+          <div class="carousel-viewport" data-carousel-viewport>
+            <div class="carousel-track" data-carousel-track>${slides}</div>
+          </div>
+          <div class="carousel-footer">
+            <div class="carousel-caption">
+              <p data-carousel-caption>${t(homeContent.hero[0].captionKey)}</p>
+              <a href="${pageUrl('/people/')}">${t('ourTeam')} ${straight}</a>
+            </div>
+            <div class="carousel-controls" data-carousel-controls hidden>
+              <button type="button" data-carousel-previous aria-label="${t('imagePrevious')}">←</button>
+              <span data-carousel-counter>1 / ${homeContent.hero.length}</span>
+              <button type="button" data-carousel-next aria-label="${t('imageNext')}">→</button>
+              <button type="button" data-carousel-play aria-label="${t('pauseSlideshow')}">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path data-carousel-pause-icon d="M7 5v10M13 5v10" fill="none" stroke="currentColor" stroke-width="2"/><path data-carousel-play-icon d="m6 4 10 6-10 6Z" fill="currentColor" hidden/></svg>
+              </button>
+            </div>
+          </div>
+          <span class="sr-only" data-carousel-status aria-live="polite" aria-atomic="true"></span>
+        </div>
       </div>
     </section>
     <section class="section home-updates">
@@ -129,13 +148,13 @@ export function renderHome(context) {
     <section class="section soft" id="about">
       <div class="wrap">
         <div class="about-grid">
-          <div>
+          <div class="about-heading">
             <h2>${t('aboutLab')}</h2>
             <a class="text-link about-link" href="${pageUrl('/people/')}">${t('meetPeople')} ${straight}</a>
           </div>
           <div class="prose">${html(localized('pages', homePage.id).html)}</div>
+          <div class="home-gallery">${gallery}</div>
         </div>
-        <div class="home-gallery">${gallery}</div>
       </div>
     </section>
   </main>`;

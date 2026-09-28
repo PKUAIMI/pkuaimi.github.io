@@ -1,16 +1,23 @@
 {
-  "hero": {
-    "original": "/assets/lab-group-2026.jpg",
-    "display": "/assets/lab-group-2026-web.jpg",
-    "width": 1920,
-    "height": 1080
-  },
-  "gallery": [
+  "hero": [
     {
-      "url": "https://pkuaimi.com/wp-content/uploads/2025/11/%E5%90%88%E5%BD%B12.jpg",
-      "altKey": "groupPhotoAlt",
-      "captionKey": "ourTeam"
+      "original": "/assets/lab-group-2026.jpg",
+      "display": "/assets/lab-group-2026-web.jpg",
+      "width": 1920,
+      "height": 1080,
+      "altKey": "teamPhotoAlt",
+      "captionKey": "heroLabCaption"
     },
+    {
+      "original": "/assets/lab-group-2025.jpg",
+      "display": "/assets/lab-group-2025-web.jpg",
+      "width": 1024,
+      "height": 768,
+      "altKey": "groupPhotoAlt",
+      "captionKey": "heroTeamCaption"
+    }
+  ],
+  "gallery": [
     {
       "url": "https://pkuaimi.com/wp-content/uploads/2025/11/AIMI2.png",
       "altKey": "circuitTreeAlt",

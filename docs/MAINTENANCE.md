@@ -193,26 +193,32 @@ npm run new -- publication paper-2026
 | 首页欢迎语、简短介绍、按钮、栏目标题 | `content/ui.json` 中对应的 `en` / `zh` |
 | 中英文实验室名称、机构名称、联系地址与网站简介 | `content/ui.json` 中对应的 `en` / `zh` |
 | About 实验室正文 | `content/pages.json` 中 `type: "home"` 条目的 `en.html` / `zh.html` |
-| 首页主合影与下方图片 | `content/home.json` |
+| 首页轮播合影与 About 插图 | `content/home.json` |
 | 首页新闻、论文显示数量 | `home.json` 的 `newsLimit`、`publicationLimit` |
 | 网站域名、公共邮箱、GitHub 与仓库链接 | `site.config.json` |
 
 About 正文会完整呈现，不需要把段落放在特殊位置，也不从其他页面自动抽取。`site.config.json` 只保存公共设置；需要翻译的显示文字统一在 `ui.json` 中维护，避免同时修改多个文件。
 
-`home.json` 的主合影设置：
+`home.json` 的 `hero` 数组控制首页轮播，按数组顺序播放。例如：
 
 ```json
-"hero": {
-  "original": "/assets/lab-group-2026.jpg",
-  "display": "/assets/lab-group-2026-web.jpg",
-  "width": 1920,
-  "height": 1080
-}
+"hero": [
+  {
+    "original": "/assets/lab-group-2026.jpg",
+    "display": "/assets/lab-group-2026-web.jpg",
+    "width": 1920,
+    "height": 1080,
+    "altKey": "teamPhotoAlt",
+    "captionKey": "heroLabCaption"
+  }
+]
 ```
 
 `original` 是点击后打开的原图，`display` 是页面加载的显示图；两者也可以指向同一个文件。`width` 和 `height` 填显示图的实际像素尺寸。更换图片时先把两个文件放进 `public/assets/`。
 
-下方 `gallery` 每项包含 `url`、`altKey`、`captionKey`。后两者引用 `ui.json` 的文字键；修改图注或图片说明时同步填写中英文。`newsLimit` 和 `publicationLimit` 必须是大于零的整数。
+`altKey` 和 `captionKey` 引用 `ui.json` 中的中英文图片说明。添加照片时向 `hero` 追加完整对象即可；第一张同时用于网页分享预览。两张及以上会显示切换和播放/暂停按钮，每 6 秒切换；手动切换、键盘进入照片或系统设置减少动态效果时停止自动播放。鼠标悬停、大图预览、页面隐藏或滚出屏幕时暂时暂停。只有一张时显示普通图片，无 JavaScript 时仍可横向滚动查看照片。
+
+About 区域的 `gallery` 每项包含 `url`、`altKey`、`captionKey`。后两者引用 `ui.json` 的文字键；修改图注或图片说明时同步填写中英文。`newsLimit` 和 `publicationLimit` 必须是大于零的整数。
 
 ## 7. 图片、链接与 JSON 写法
 

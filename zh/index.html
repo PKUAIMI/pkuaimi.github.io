@@ -17,9 +17,9 @@
     <meta property="og:locale" content="zh_CN">
     <meta property="og:image" content="https://pkuaimi.github.io/assets/lab-group-2026-web.jpg">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
-    <link rel="stylesheet" href="/styles.css?v=5a1f557121">
-    <script type="application/json" id="ui-messages">{"menu":"菜单","menuClose":"关闭菜单","scrollableTable":"可横向滚动的表格","searchHint":"搜索团队成员、研究方向、新闻与学术成果。","searching":"正在搜索……","searchError":"暂时无法加载搜索，请重试或使用主导航浏览。","resultSingular":"条结果","resultPlural":"条结果","searchEmpty":"未找到匹配结果，请尝试其他姓名或关键词。","imageLoading":"图片加载中……","imageError":"图片暂时无法加载，可尝试在新标签页打开原图。","imagePosition":"第 {current} 张，共 {total} 张"}</script>
-    <script src="/site.js?v=5a1f557121" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=f2fb22e902">
+    <script type="application/json" id="ui-messages">{"menu":"菜单","menuClose":"关闭菜单","scrollableTable":"可横向滚动的表格","searchHint":"搜索团队成员、研究方向、新闻与学术成果。","searching":"正在搜索……","searchError":"暂时无法加载搜索，请重试或使用主导航浏览。","resultSingular":"条结果","resultPlural":"条结果","searchEmpty":"未找到匹配结果，请尝试其他姓名或关键词。","imageLoading":"图片加载中……","imageError":"图片暂时无法加载，可尝试在新标签页打开原图。","imagePosition":"第 {current} 张，共 {total} 张","pauseSlideshow":"暂停轮播","playSlideshow":"播放轮播"}</script>
+    <script src="/site.js?v=f2fb22e902" defer></script>
   </head>
   <body><a class="skip-link" href="#main">跳转到正文</a>
     <header class="site-header">
@@ -56,15 +56,38 @@
           <p class="lab-introduction">实验室聚焦人工智能在医学影像领域的基础研究与临床转化，面向精准医学需求，开展影像重建、肿瘤分割、影像引导肿瘤放疗等方向的研究。</p>
           <a class="lab-more" href="#about">了解实验室 <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <figure class="lab-intro-visual">
-          <a href="/assets/lab-group-2026.jpg" aria-label="查看 AIMI 实验室完整合影" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener">
-            <img src="/assets/lab-group-2026-web.jpg" alt="AIMI 实验室成员团建合影" width="1920" height="1080" fetchpriority="high">
-          </a>
-          <figcaption>
-            <span>AIMI 实验室 · 北京大学</span>
-            <a href="/zh/people/">我们的团队 <span class="arrow" aria-hidden="true">→</span></a>
-          </figcaption>
-        </figure>
+        <div class="lab-intro-visual lab-carousel" data-carousel role="region" aria-roledescription="轮播" aria-label="AIMI 实验室团队相册">
+          <div class="carousel-viewport" data-carousel-viewport>
+            <div class="carousel-track" data-carousel-track>
+    <figure class="carousel-slide" data-carousel-slide role="group" aria-roledescription="幻灯片" aria-label="1 / 2">
+      <a href="/assets/lab-group-2026.jpg" aria-label="查看原图：AIMI 实验室成员团建合影" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener">
+        <img src="/assets/lab-group-2026-web.jpg" alt="AIMI 实验室成员团建合影" width="1920" height="1080" decoding="async" fetchpriority="high">
+      </a>
+      <figcaption class="sr-only">AIMI 实验室 · 北京大学</figcaption>
+    </figure>
+    <figure class="carousel-slide" data-carousel-slide role="group" aria-roledescription="幻灯片" aria-label="2 / 2">
+      <a href="/assets/lab-group-2025.jpg" aria-label="查看原图：AIMI 实验室团队合影" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener">
+        <img src="/assets/lab-group-2025-web.jpg" alt="AIMI 实验室团队合影" width="1024" height="768" decoding="async">
+      </a>
+      <figcaption class="sr-only">我们的团队 · AIMI 实验室</figcaption>
+    </figure></div>
+          </div>
+          <div class="carousel-footer">
+            <div class="carousel-caption">
+              <p data-carousel-caption>AIMI 实验室 · 北京大学</p>
+              <a href="/zh/people/">我们的团队 <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+            <div class="carousel-controls" data-carousel-controls hidden>
+              <button type="button" data-carousel-previous aria-label="上一张图片">←</button>
+              <span data-carousel-counter>1 / 2</span>
+              <button type="button" data-carousel-next aria-label="下一张图片">→</button>
+              <button type="button" data-carousel-play aria-label="暂停轮播">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path data-carousel-pause-icon d="M7 5v10M13 5v10" fill="none" stroke="currentColor" stroke-width="2"/><path data-carousel-play-icon d="m6 4 10 6-10 6Z" fill="currentColor" hidden/></svg>
+              </button>
+            </div>
+          </div>
+          <span class="sr-only" data-carousel-status aria-live="polite" aria-atomic="true"></span>
+        </div>
       </div>
     </section>
     <section class="section home-updates">
@@ -178,13 +201,13 @@
     <section class="section soft" id="about">
       <div class="wrap">
         <div class="about-grid">
-          <div>
+          <div class="about-heading">
             <h2>了解实验室</h2>
             <a class="text-link about-link" href="/zh/people/">认识团队成员 <span class="arrow" aria-hidden="true">→</span></a>
           </div>
           <div class="prose"><p lang="zh-CN">北京大学医学部医学技术研究院智能医学影像实验室（Artificial Intelligence for Medical Imaging, AIMI）近日正式成立。课题组聚焦人工智能在医学影像领域的基础研究与临床转化应用，面向精准医学的发展需求，重点开展 CT 图像重建、MRI 肿瘤自动分割、图像引导肿瘤放疗、患者预后与生存分析、数字病理、机器视觉驱动的医学图像生成等方向的研究。实验室致力于推进智能影像技术的发展，为疾病诊断、治疗决策与疗效评估提供创新性的技术支撑。</p></div>
+          <div class="home-gallery"><figure><a href="/assets/research-overview.png" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/research-overview.png" alt="AIMI 电路树插画" loading="lazy" decoding="async" width="511" height="600" ></a><figcaption>智能医学影像实验室</figcaption></figure></div>
         </div>
-        <div class="home-gallery"><figure><a href="/assets/lab-group-2025.jpg" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/lab-group-2025-web.jpg" alt="AIMI 实验室团队合影" loading="lazy" decoding="async" width="1024" height="768" ></a><figcaption>我们的团队 · AIMI 实验室</figcaption></figure><figure><a href="/assets/research-overview.png" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/research-overview.png" alt="AIMI 电路树插画" loading="lazy" decoding="async" width="511" height="600" ></a><figcaption>智能医学影像实验室</figcaption></figure></div>
       </div>
     </section>
   </main><footer class="site-footer">

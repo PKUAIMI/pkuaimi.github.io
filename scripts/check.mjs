@@ -261,8 +261,12 @@ for (const page of pages) {
       if (sourceProfiles.includes(page)) assertContent(document.document, textHTML(entry.html || ''), `${locale.key} content page ${pageLabel(page)}`);
       if (page.type === 'home') {
         assertContent(document.document, textHTML(entry.html || ''), `${locale.key} homepage introduction`);
-        assertImage(document.document, home.hero.display, `${locale.key} homepage hero`);
-        check(document.elements.some(node => node.tag === 'a' && node.attrs.href === home.hero.original && descendants(node).some(image => image.tag === 'img' && image.attrs.src === home.hero.display)), `${locale.key} homepage: hero should open its original image`);
+        for (const slide of home.hero) {
+          assertImage(document.document, slide.display, `${locale.key} homepage carousel`);
+          const original = media[slide.original] || slide.original;
+          const thumbnail = media[slide.display] || slide.display;
+          check(document.elements.some(node => node.tag === 'a' && node.attrs.href === original && descendants(node).some(image => image.tag === 'img' && image.attrs.src === thumbnail)), `${locale.key} homepage: carousel photos should open their originals`);
+        }
         for (const image of home.gallery) assertImage(document.document, image.url, `${locale.key} homepage gallery`);
       }
     }

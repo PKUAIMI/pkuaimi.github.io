@@ -100,6 +100,120 @@
     });
   }
 
+  function initializeCarousel(messages) {
+    const carousel = document.querySelector('[data-carousel]');
+    if (!carousel) return;
+    const slides = [...carousel.querySelectorAll('[data-carousel-slide]')];
+    if (slides.length < 2) return;
+
+    const track = carousel.querySelector('[data-carousel-track]');
+    const viewport = carousel.querySelector('[data-carousel-viewport]');
+    const caption = carousel.querySelector('[data-carousel-caption]');
+    const counter = carousel.querySelector('[data-carousel-counter]');
+    const status = carousel.querySelector('[data-carousel-status]');
+    const playButton = carousel.querySelector('[data-carousel-play]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let index = 0;
+    let playing = !reducedMotion.matches;
+    let hovered = false;
+    let inView = true;
+    let timer;
+    let gesture;
+    let suppressClickUntil = 0;
+
+    function schedule() {
+      clearTimeout(timer);
+      if (!playing || hovered || !inView || document.hidden || document.querySelector('dialog[open]')) return;
+      timer = setTimeout(() => {
+        if (!document.querySelector('dialog[open]')) showSlide(index + 1);
+        schedule();
+      }, 6000);
+    }
+
+    function setPlaying(value) {
+      playing = value;
+      playButton.setAttribute('aria-label', playing ? messages.pauseSlideshow : messages.playSlideshow);
+      playButton.querySelector('[data-carousel-pause-icon]').toggleAttribute('hidden', !playing);
+      playButton.querySelector('[data-carousel-play-icon]').toggleAttribute('hidden', playing);
+      schedule();
+    }
+
+    function showSlide(nextIndex, manual = false) {
+      const focusWasOnPhoto = slides.some(slide => slide.contains(document.activeElement));
+      index = (nextIndex + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      slides.forEach((slide, slideIndex) => {
+        slide.inert = slideIndex !== index;
+        slide.setAttribute('aria-hidden', String(slideIndex !== index));
+      });
+      const label = slides[index].querySelector('figcaption').textContent;
+      const position = messages.imagePosition.replace('{current}', index + 1).replace('{total}', slides.length);
+      caption.textContent = label;
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      counter.setAttribute('aria-label', position);
+      if (manual) {
+        setPlaying(false);
+        status.textContent = `${position}: ${label}`;
+        if (focusWasOnPhoto) slides[index].querySelector('a').focus({ preventScroll: true });
+      }
+    }
+
+    carousel.querySelector('[data-carousel-controls]').hidden = false;
+    carousel.classList.add('is-ready');
+    carousel.querySelector('[data-carousel-previous]').addEventListener('click', () => showSlide(index - 1, true));
+    carousel.querySelector('[data-carousel-next]').addEventListener('click', () => showSlide(index + 1, true));
+    playButton.addEventListener('click', () => setPlaying(!playing));
+    carousel.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'touch') return;
+      hovered = true;
+      schedule();
+    });
+    carousel.addEventListener('pointerleave', () => { hovered = false; schedule(); });
+    carousel.addEventListener('focusin', event => {
+      if (event.target !== playButton) setPlaying(false);
+    });
+    carousel.addEventListener('keydown', event => {
+      if (['ArrowLeft', 'ArrowRight'].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index + (event.key === 'ArrowRight' ? 1 : -1), true);
+      }
+    });
+    viewport.addEventListener('pointerdown', event => {
+      gesture = event.pointerType === 'touch' && event.isPrimary
+        ? { x: event.clientX, y: event.clientY } : null;
+    });
+    viewport.addEventListener('pointerup', event => {
+      if (!gesture) return;
+      const dx = event.clientX - gesture.x;
+      const dy = event.clientY - gesture.y;
+      gesture = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        suppressClickUntil = Date.now() + 400;
+        showSlide(index + (dx < 0 ? 1 : -1), true);
+      }
+    });
+    viewport.addEventListener('pointercancel', () => { gesture = null; });
+    viewport.addEventListener('click', event => {
+      if (Date.now() < suppressClickUntil) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }, true);
+    document.addEventListener('visibilitychange', schedule);
+    document.querySelectorAll('dialog').forEach(dialog => dialog.addEventListener('close', schedule));
+    reducedMotion.addEventListener('change', () => {
+      if (reducedMotion.matches) setPlaying(false);
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(entries => {
+        inView = entries[0].isIntersecting;
+        schedule();
+      }).observe(carousel);
+    }
+    showSlide(0);
+    setPlaying(playing);
+  }
+
   function initializeImagePreview(messages, navigation) {
     const dialog = document.querySelector('[data-image-preview-dialog]');
     const main = document.querySelector('main');
@@ -163,7 +277,7 @@
       if (!link || event.defaultPrevented || event.button !== 0
         || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
-      const group = link.closest('.news-entry, .project-entry, .profile-content') || main;
+      const group = link.closest('.lab-carousel, .home-gallery, .news-entry, .project-entry, .profile-content') || main;
       gallery = [...group.querySelectorAll('a[data-image-preview]')]
         .filter(candidate => candidate.getClientRects().length > 0);
       if (!gallery.includes(link)) return;
@@ -364,6 +478,7 @@
   const navigation = initializeNavigation(messages);
   initializeListFilters();
   initializeScrollableTables(messages);
+  initializeCarousel(messages);
   initializeImagePreview(messages, navigation);
   initializeSiteSearch({ language, messages, navigation });
 })();

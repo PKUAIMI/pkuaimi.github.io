@@ -24,7 +24,7 @@ function fixture(t) {
     publications: [{ id: 'publication-ct', year: 2026, section: 'AIMI', citation: 'Jane. Imaging. 2026.', html: '<p>Jane. Imaging. 2026.</p>', links: [] }],
     groups: [{ id: 'faculty', en: 'Faculty', zh: '教师' }],
     ui: { en: { photo: 'Our lab' }, zh: { photo: '实验室' } },
-    home: { hero: { original: image, display: image, width: 100, height: 100 }, gallery: [{ url: image, altKey: 'photo', captionKey: 'photo' }], newsLimit: 3, publicationLimit: 3 },
+    home: { hero: [{ original: image, display: image, width: 100, height: 100, altKey: 'photo', captionKey: 'photo' }], gallery: [{ url: image, altKey: 'photo', captionKey: 'photo' }], newsLimit: 3, publicationLimit: 3 },
     media: {}, displayMedia: {}, provenance: {},
   };
   return { root, data, validate: () => validateContent(data, { root }) };
@@ -41,6 +41,17 @@ test('reports the file, record, and missing translation field', t => {
   const { data, validate } = fixture(t);
   delete data.news[0].zh.bodyHtml;
   assert.match(validate().join('\n'), /content\/news\.json \[news-welcome\] · zh\.bodyHtml/);
+});
+
+test('requires carousel photos with real assets, dimensions and bilingual captions', t => {
+  const { data, validate } = fixture(t);
+  data.home.hero = [];
+  assert.match(validate().join('\n'), /hero.*至少/);
+  data.home.hero = [{ original: '/assets/missing.jpg', display: '/assets/photo.jpg', width: 0, height: 100, altKey: 'photo', captionKey: 'missing' }];
+  const errors = validate().join('\n');
+  assert.match(errors, /hero\[0\]\.original/);
+  assert.match(errors, /hero\[0\]\.width/);
+  assert.match(errors, /hero\[0\]\.captionKey/);
 });
 
 test('rejects duplicate identifiers and encoded aliases that collide with canonical paths', t => {

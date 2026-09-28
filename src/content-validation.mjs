@@ -218,10 +218,12 @@ export function validateContent(data, { root = process.cwd() } = {}) {
   }
   if (isObject(data.home)) {
     for (const field of ['newsLimit', 'publicationLimit']) if (!Number.isInteger(data.home[field]) || data.home[field] < 1) fail('content/home.json', field, '应为大于 0 的整数。');
-    if (!isObject(data.home.hero)) fail('content/home.json', 'hero', '应为首页大图设置对象。');
-    else {
-      for (const field of ['original', 'display']) asset(data.home.hero[field], 'content/home.json', `hero.${field}`);
-      for (const field of ['width', 'height']) if (!Number.isInteger(data.home.hero[field]) || data.home.hero[field] < 1) fail('content/home.json', `hero.${field}`, '应为大于 0 的像素数整数。');
+    if (!Array.isArray(data.home.hero) || !data.home.hero.length) fail('content/home.json', 'hero', '应为至少包含一张图片的轮播数组。');
+    else for (const [index, image] of data.home.hero.entries()) {
+      if (!isObject(image)) { fail('content/home.json', `hero[${index}]`, '应为轮播图片设置对象。'); continue; }
+      for (const field of ['original', 'display']) asset(image[field], 'content/home.json', `hero[${index}].${field}`);
+      for (const field of ['width', 'height']) if (!Number.isInteger(image[field]) || image[field] < 1) fail('content/home.json', `hero[${index}].${field}`, '应为大于 0 的像素数整数。');
+      for (const field of ['altKey', 'captionKey']) if (!isNonempty(image[field]) || LANGUAGES.some(language => !isNonempty(data.ui?.[language]?.[image[field]]))) fail('content/home.json', `hero[${index}].${field}`, '应为 content/ui.json 中同时具有 en 和 zh 的文字键名。');
     }
     if (!Array.isArray(data.home.gallery)) fail('content/home.json', 'gallery', '应为图片对象数组。');
     else for (const [index, image] of data.home.gallery.entries()) {
