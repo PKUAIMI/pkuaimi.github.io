@@ -69,9 +69,7 @@ export function renderHome(context) {
 
   const gallery = homeContent.gallery.map((image, index) => {
     const photo = picture(image.url, t(image.altKey));
-    const visual = index === 0
-      ? `<a href="${esc(localUrl(image.url))}">${photo}</a>`
-      : photo;
+    const visual = `<a href="${esc(localUrl(image.url))}">${photo}</a>`;
     const caption = t(image.captionKey) + (index === 0 ? ' · ' + t('labName') : '');
 
     return `<figure>${visual}<figcaption>${caption}</figcaption></figure>`;

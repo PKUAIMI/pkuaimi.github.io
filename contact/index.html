@@ -17,9 +17,9 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://pkuaimi.github.io/assets/lab-group-2026-web.jpg">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
-    <link rel="stylesheet" href="/styles.css?v=116b1e2db4">
-    <script type="application/json" id="ui-messages">{"menu":"Menu","menuClose":"Close menu","scrollableTable":"Scrollable table","searchHint":"Search people, research, news and publications.","searching":"Searching…","searchError":"Search could not load. Please try again, or use the main navigation.","resultSingular":"result","resultPlural":"results","searchEmpty":"No matching results. Try another name or keyword."}</script>
-    <script src="/site.js?v=116b1e2db4" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=5a1f557121">
+    <script type="application/json" id="ui-messages">{"menu":"Menu","menuClose":"Close menu","scrollableTable":"Scrollable table","searchHint":"Search people, research, news and publications.","searching":"Searching…","searchError":"Search could not load. Please try again, or use the main navigation.","resultSingular":"result","resultPlural":"results","searchEmpty":"No matching results. Try another name or keyword.","imageLoading":"Loading image…","imageError":"The image could not be loaded. You can try opening the original in a new tab.","imagePosition":"Image {current} of {total}"}</script>
+    <script src="/site.js?v=5a1f557121" defer></script>
   </head>
   <body><a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
@@ -118,5 +118,24 @@
         <p class="search-hint" data-search-status aria-live="polite">Search people, research, news and publications.</p>
         <ul class="search-results" data-search-results></ul>
       </div>
+    </dialog>
+    <dialog class="image-preview" data-image-preview-dialog aria-labelledby="image-preview-title">
+      <header class="image-preview-toolbar">
+        <h2 id="image-preview-title">Image preview</h2>
+        <a class="image-preview-original" data-preview-original target="_blank" rel="noopener">Open original in new tab ↗</a>
+        <button type="button" data-preview-close aria-label="Close image preview" autofocus>×</button>
+      </header>
+      <div class="image-preview-stage" data-preview-stage>
+        <div class="image-preview-media" data-preview-media></div>
+        <p class="image-preview-status" data-preview-status role="status"></p>
+      </div>
+      <footer class="image-preview-footer">
+        <p class="image-preview-caption" data-preview-caption></p>
+        <div class="image-preview-navigation" data-preview-navigation>
+          <button type="button" data-preview-previous aria-label="Previous image">←</button>
+          <span data-preview-counter aria-live="polite" aria-atomic="true"></span>
+          <button type="button" data-preview-next aria-label="Next image">→</button>
+        </div>
+      </footer>
     </dialog></body>
 </html>

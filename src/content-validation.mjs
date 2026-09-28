@@ -10,7 +10,7 @@ const RESERVED_PATHS = new Set([
   'sitemap.xml', 'robots.txt', 'generated-files.json', 'site.config.json',
   'package.json', 'package-lock.json', 'readme.md', 'cname',
 ]);
-const RESERVED_IDS = new Set(['main', 'about', 'lab-welcome', 'primary-navigation', 'content-filter', 'year-filter', 'search-dialog', 'search-input', 'search-results', 'search-title']);
+const RESERVED_IDS = new Set(['main', 'about', 'lab-welcome', 'primary-navigation', 'content-filter', 'year-filter', 'search-dialog', 'search-input', 'search-results', 'search-title', 'image-preview-title']);
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const isString = value => typeof value === 'string';
 const isNonempty = value => isString(value) && value.trim().length > 0;

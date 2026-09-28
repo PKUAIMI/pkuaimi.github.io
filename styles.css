@@ -237,6 +237,27 @@ a.person-card:hover h3 { color:var(--red); }
 .search-results a:hover strong { color:var(--red); }
 .search-results strong { display:block; font-size:17px; font-weight:600; }
 .search-results span { display:block; margin-top:7px; color:var(--muted); font-size:13px; line-height:1.75; }
+/* Full-page photo viewer keeps the current page and its reading position intact. */
+a[data-image-preview] { cursor:zoom-in; }
+.image-preview { position:fixed; inset:0; width:100%; height:100vh; height:100dvh; max-width:none; max-height:none; margin:0; padding:0; border:0; background:#14171bf7; color:#fff; overscroll-behavior:contain; }
+.image-preview[open] { display:grid; grid-template-rows:auto minmax(0,1fr) auto; }
+.image-preview::backdrop { background:#14171b; }
+.image-preview-toolbar { display:flex; align-items:center; gap:20px; padding:12px max(24px,env(safe-area-inset-right)) 12px max(24px,env(safe-area-inset-left)); border-bottom:1px solid #ffffff25; }
+.image-preview-toolbar h2 { font-size:16px; font-weight:500; margin:0; }
+.image-preview-original { margin-left:auto; font-size:13px; color:#e2e5e9; text-decoration:underline; text-underline-offset:4px; }
+.image-preview button { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:44px; height:44px; border:1px solid #ffffff40; border-radius:6px; color:#fff; background:#ffffff0d; font-size:24px; line-height:1; }
+.image-preview button:hover { background:#ffffff25; }
+.image-preview [data-preview-close] { font-size:30px; }
+.image-preview :is(a,button):focus-visible { outline-color:#fff; outline-offset:3px; }
+.image-preview-stage { position:relative; min-height:0; padding:24px; touch-action:pan-y pinch-zoom; }
+.image-preview-media { display:flex; align-items:center; justify-content:center; width:100%; height:100%; min-height:0; }
+.image-preview-media img { width:auto; height:auto; max-width:100%; max-height:100%; object-fit:contain; user-select:none; }
+.image-preview-status { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); max-width:calc(100% - 48px); margin:0; text-align:center; color:#e2e5e9; font-size:15px; pointer-events:none; }
+.image-preview-status:empty { display:none; }
+.image-preview-footer { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:24px; padding:12px max(24px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left)); border-top:1px solid #ffffff25; }
+.image-preview-caption { font-size:14px; color:#e2e5e9; margin:0; max-height:16vh; overflow-y:auto; overflow-wrap:anywhere; }
+.image-preview-navigation { display:flex; align-items:center; gap:16px; }
+.image-preview-navigation span { font-size:13px; min-width:38px; text-align:center; font-variant-numeric:tabular-nums; }
 .not-found { min-height:50vh; padding:80px 24px; text-align:center; }
 .not-found h1 { font-size:80px; line-height:1.1; letter-spacing:-.05em; margin:0; }
 .not-found p { color:var(--muted); }
@@ -375,6 +396,13 @@ a.person-card:hover h3 { color:var(--red); }
   .search-dialog header { padding:20px 20px 16px; }
   .search-dialog h2 { font-size:22px; }
   .search-body { padding:0 20px 24px; }
+  .image-preview-toolbar { gap:12px; padding:10px 12px; }
+  .image-preview-toolbar h2 { font-size:14px; }
+  .image-preview-original { max-width:150px; font-size:12px; }
+  .image-preview-stage { padding:12px; }
+  .image-preview-footer { grid-template-columns:1fr; gap:12px; padding:12px 16px max(16px,env(safe-area-inset-bottom)); }
+  .image-preview-caption { font-size:13px; max-height:14vh; text-align:center; }
+  .image-preview-navigation { justify-content:center; }
 }
 html:lang(zh-CN) :is(h1,h2,h3,.lab-full-name) { letter-spacing:0; }
 
@@ -383,7 +411,7 @@ html:lang(zh-CN) :is(h1,h2,h3,.lab-full-name) { letter-spacing:0; }
   *,*::before,*::after { transition:none!important; animation:none!important; }
 }
 @media print {
-  .site-header,.site-footer,.search-dialog,.section-nav,.filter-bar,.lab-more,.skip-link { display:none!important; }
+  .site-header,.site-footer,.search-dialog,.image-preview,.section-nav,.filter-bar,.lab-more,.skip-link { display:none!important; }
   .wrap { width:100%; }
   .page-layout.has-sidebar { display:block; }
   .page-banner { padding:20px 0; }

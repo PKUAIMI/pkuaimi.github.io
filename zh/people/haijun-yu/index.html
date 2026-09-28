@@ -17,9 +17,9 @@
     <meta property="og:locale" content="zh_CN">
     <meta property="og:image" content="https://pkuaimi.github.io/assets/lab-group-2026-web.jpg">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
-    <link rel="stylesheet" href="/styles.css?v=116b1e2db4">
-    <script type="application/json" id="ui-messages">{"menu":"菜单","menuClose":"关闭菜单","scrollableTable":"可横向滚动的表格","searchHint":"搜索团队成员、研究方向、新闻与学术成果。","searching":"正在搜索……","searchError":"暂时无法加载搜索，请重试或使用主导航浏览。","resultSingular":"条结果","resultPlural":"条结果","searchEmpty":"未找到匹配结果，请尝试其他姓名或关键词。"}</script>
-    <script src="/site.js?v=116b1e2db4" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=5a1f557121">
+    <script type="application/json" id="ui-messages">{"menu":"菜单","menuClose":"关闭菜单","scrollableTable":"可横向滚动的表格","searchHint":"搜索团队成员、研究方向、新闻与学术成果。","searching":"正在搜索……","searchError":"暂时无法加载搜索，请重试或使用主导航浏览。","resultSingular":"条结果","resultPlural":"条结果","searchEmpty":"未找到匹配结果，请尝试其他姓名或关键词。","imageLoading":"图片加载中……","imageError":"图片暂时无法加载，可尝试在新标签页打开原图。","imagePosition":"第 {current} 张，共 {total} 张"}</script>
+    <script src="/site.js?v=5a1f557121" defer></script>
   </head>
   <body><a class="skip-link" href="#main">跳转到正文</a>
     <header class="site-header">
@@ -125,5 +125,24 @@
         <p class="search-hint" data-search-status aria-live="polite">搜索团队成员、研究方向、新闻与学术成果。</p>
         <ul class="search-results" data-search-results></ul>
       </div>
+    </dialog>
+    <dialog class="image-preview" data-image-preview-dialog aria-labelledby="image-preview-title">
+      <header class="image-preview-toolbar">
+        <h2 id="image-preview-title">图片预览</h2>
+        <a class="image-preview-original" data-preview-original target="_blank" rel="noopener">新标签页打开原图 ↗</a>
+        <button type="button" data-preview-close aria-label="关闭图片预览" autofocus>×</button>
+      </header>
+      <div class="image-preview-stage" data-preview-stage>
+        <div class="image-preview-media" data-preview-media></div>
+        <p class="image-preview-status" data-preview-status role="status"></p>
+      </div>
+      <footer class="image-preview-footer">
+        <p class="image-preview-caption" data-preview-caption></p>
+        <div class="image-preview-navigation" data-preview-navigation>
+          <button type="button" data-preview-previous aria-label="上一张图片">←</button>
+          <span data-preview-counter aria-live="polite" aria-atomic="true"></span>
+          <button type="button" data-preview-next aria-label="下一张图片">→</button>
+        </div>
+      </footer>
     </dialog></body>
 </html>

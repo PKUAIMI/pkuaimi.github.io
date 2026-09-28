@@ -17,9 +17,9 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://pkuaimi.github.io/assets/lab-group-2026-web.jpg">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
-    <link rel="stylesheet" href="/styles.css?v=116b1e2db4">
-    <script type="application/json" id="ui-messages">{"menu":"Menu","menuClose":"Close menu","scrollableTable":"Scrollable table","searchHint":"Search people, research, news and publications.","searching":"Searching…","searchError":"Search could not load. Please try again, or use the main navigation.","resultSingular":"result","resultPlural":"results","searchEmpty":"No matching results. Try another name or keyword."}</script>
-    <script src="/site.js?v=116b1e2db4" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=5a1f557121">
+    <script type="application/json" id="ui-messages">{"menu":"Menu","menuClose":"Close menu","scrollableTable":"Scrollable table","searchHint":"Search people, research, news and publications.","searching":"Searching…","searchError":"Search could not load. Please try again, or use the main navigation.","resultSingular":"result","resultPlural":"results","searchEmpty":"No matching results. Try another name or keyword.","imageLoading":"Loading image…","imageError":"The image could not be loaded. You can try opening the original in a new tab.","imagePosition":"Image {current} of {total}"}</script>
+    <script src="/site.js?v=5a1f557121" defer></script>
   </head>
   <body><a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
@@ -57,7 +57,7 @@
           <a class="lab-more" href="#about">About the lab <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <figure class="lab-intro-visual">
-          <a href="/assets/lab-group-2026.jpg" aria-label="View full AIMI Lab group photograph">
+          <a href="/assets/lab-group-2026.jpg" aria-label="View full AIMI Lab group photograph" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener">
             <img src="/assets/lab-group-2026-web.jpg" alt="AIMI Lab members together at a group outing" width="1920" height="1080" fetchpriority="high">
           </a>
           <figcaption>
@@ -184,7 +184,7 @@
           </div>
           <div class="prose"><p>The Artificial Intelligence for Medical Imaging (AIMI) Lab at the Institute of Medical Technology, Peking University Health Science Center, has been newly established. The lab is dedicated to advancing both fundamental research and clinical translation of artificial intelligence in medical imaging, with a strong focus on precision medicine. Its research areas include CT image reconstruction, MRI-based tumor segmentation, image-guided radiation oncology, patient prognosis and survival analysis, digital pathology, and computer-vision-driven medical image generation. AIMI strives to develop cutting-edge intelligent imaging technologies to support disease diagnosis, treatment planning, and therapy assessment.</p></div>
         </div>
-        <div class="home-gallery"><figure><a href="/assets/lab-group-2025.jpg"><img src="/assets/lab-group-2025-web.jpg" alt="AIMI Lab group photograph" loading="lazy" decoding="async" width="1024" height="768" ></a><figcaption>Our team · AIMI Lab</figcaption></figure><figure><img src="/assets/research-overview.png" alt="AIMI circuit-tree illustration" loading="lazy" decoding="async" width="511" height="600" ><figcaption>Artificial Intelligence for Medical Imaging</figcaption></figure></div>
+        <div class="home-gallery"><figure><a href="/assets/lab-group-2025.jpg" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/lab-group-2025-web.jpg" alt="AIMI Lab group photograph" loading="lazy" decoding="async" width="1024" height="768" ></a><figcaption>Our team · AIMI Lab</figcaption></figure><figure><a href="/assets/research-overview.png" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/research-overview.png" alt="AIMI circuit-tree illustration" loading="lazy" decoding="async" width="511" height="600" ></a><figcaption>Artificial Intelligence for Medical Imaging</figcaption></figure></div>
       </div>
     </section>
   </main><footer class="site-footer">
@@ -229,5 +229,24 @@
         <p class="search-hint" data-search-status aria-live="polite">Search people, research, news and publications.</p>
         <ul class="search-results" data-search-results></ul>
       </div>
+    </dialog>
+    <dialog class="image-preview" data-image-preview-dialog aria-labelledby="image-preview-title">
+      <header class="image-preview-toolbar">
+        <h2 id="image-preview-title">Image preview</h2>
+        <a class="image-preview-original" data-preview-original target="_blank" rel="noopener">Open original in new tab ↗</a>
+        <button type="button" data-preview-close aria-label="Close image preview" autofocus>×</button>
+      </header>
+      <div class="image-preview-stage" data-preview-stage>
+        <div class="image-preview-media" data-preview-media></div>
+        <p class="image-preview-status" data-preview-status role="status"></p>
+      </div>
+      <footer class="image-preview-footer">
+        <p class="image-preview-caption" data-preview-caption></p>
+        <div class="image-preview-navigation" data-preview-navigation>
+          <button type="button" data-preview-previous aria-label="Previous image">←</button>
+          <span data-preview-counter aria-live="polite" aria-atomic="true"></span>
+          <button type="button" data-preview-next aria-label="Next image">→</button>
+        </div>
+      </footer>
     </dialog></body>
 </html>

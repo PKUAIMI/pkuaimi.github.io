@@ -87,7 +87,15 @@
     "searchError": "Search could not load. Please try again, or use the main navigation.",
     "resultSingular": "result",
     "resultPlural": "results",
-    "searchEmpty": "No matching results. Try another name or keyword."
+    "searchEmpty": "No matching results. Try another name or keyword.",
+    "imagePreview": "Image preview",
+    "imageOriginal": "Open original in new tab",
+    "imageClose": "Close image preview",
+    "imagePrevious": "Previous image",
+    "imageNext": "Next image",
+    "imageLoading": "Loading image…",
+    "imageError": "The image could not be loaded. You can try opening the original in a new tab.",
+    "imagePosition": "Image {current} of {total}"
   },
   "zh": {
     "overview": "首页",
@@ -177,6 +185,14 @@
     "searchError": "暂时无法加载搜索，请重试或使用主导航浏览。",
     "resultSingular": "条结果",
     "resultPlural": "条结果",
-    "searchEmpty": "未找到匹配结果，请尝试其他姓名或关键词。"
+    "searchEmpty": "未找到匹配结果，请尝试其他姓名或关键词。",
+    "imagePreview": "图片预览",
+    "imageOriginal": "新标签页打开原图",
+    "imageClose": "关闭图片预览",
+    "imagePrevious": "上一张图片",
+    "imageNext": "下一张图片",
+    "imageLoading": "图片加载中……",
+    "imageError": "图片暂时无法加载，可尝试在新标签页打开原图。",
+    "imagePosition": "第 {current} 张，共 {total} 张"
   }
 }

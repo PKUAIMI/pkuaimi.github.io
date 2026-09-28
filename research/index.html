@@ -17,9 +17,9 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://pkuaimi.github.io/assets/lab-group-2026-web.jpg">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
-    <link rel="stylesheet" href="/styles.css?v=116b1e2db4">
-    <script type="application/json" id="ui-messages">{"menu":"Menu","menuClose":"Close menu","scrollableTable":"Scrollable table","searchHint":"Search people, research, news and publications.","searching":"Searching…","searchError":"Search could not load. Please try again, or use the main navigation.","resultSingular":"result","resultPlural":"results","searchEmpty":"No matching results. Try another name or keyword."}</script>
-    <script src="/site.js?v=116b1e2db4" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=5a1f557121">
+    <script type="application/json" id="ui-messages">{"menu":"Menu","menuClose":"Close menu","scrollableTable":"Scrollable table","searchHint":"Search people, research, news and publications.","searching":"Searching…","searchError":"Search could not load. Please try again, or use the main navigation.","resultSingular":"result","resultPlural":"results","searchEmpty":"No matching results. Try another name or keyword.","imageLoading":"Loading image…","imageError":"The image could not be loaded. You can try opening the original in a new tab.","imagePosition":"Image {current} of {total}"}</script>
+    <script src="/site.js?v=5a1f557121" defer></script>
   </head>
   <body><a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
@@ -63,16 +63,16 @@
 
         <div class="page-content"><article class="project-entry" id="research-1">
     <h2>Brain metastases detection and segmentation</h2>
-    <div class="prose"><figure><a href="/assets/2025-11-image-9edbc5bf.png" aria-label="View full image: Brain metastases detection and segmentation"><img src="/assets/2025-11-image-9edbc5bf-web.png" alt="Brain metastases detection and segmentation" loading="lazy" decoding="async" width="1200" height="379" ></a></figure><p>Major contributions：(1) prior scan to reduce false positive rate; (2) novel VSS loss to adjust sensitivity and precision; (3) dual models for human-AI interaction, high efficiency and robustness, fit well for clinical practice.</p></div>
+    <div class="prose"><figure><a href="/assets/2025-11-image-9edbc5bf.png" aria-label="View full image: Brain metastases detection and segmentation" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/2025-11-image-9edbc5bf-web.png" alt="Brain metastases detection and segmentation" loading="lazy" decoding="async" width="1200" height="379" ></a></figure><p>Major contributions：(1) prior scan to reduce false positive rate; (2) novel VSS loss to adjust sensitivity and precision; (3) dual models for human-AI interaction, high efficiency and robustness, fit well for clinical practice.</p></div>
   </article><article class="project-entry" id="research-2">
     <h2>Deep learning CBCT FOV extension for adaptive radiotherapy</h2>
-    <div class="prose"><figure><a href="/assets/2025-11-fov-extension-4dcfbf2f.png" aria-label="View full image: Deep learning CBCT FOV extension for adaptive radiotherapy"><img src="/assets/2025-11-fov-extension-4dcfbf2f-web.png" alt="Deep learning CBCT FOV extension for adaptive radiotherapy" loading="lazy" decoding="async" width="1200" height="298" ></a></figure></div>
+    <div class="prose"><figure><a href="/assets/2025-11-fov-extension-4dcfbf2f.png" aria-label="View full image: Deep learning CBCT FOV extension for adaptive radiotherapy" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/2025-11-fov-extension-4dcfbf2f-web.png" alt="Deep learning CBCT FOV extension for adaptive radiotherapy" loading="lazy" decoding="async" width="1200" height="298" ></a></figure></div>
   </article><article class="project-entry" id="research-3">
     <h2>Deep Learning for Perspective Deformation Correction in Cone-Beam Computed Tomography</h2>
-    <div class="prose"><figure><a href="/assets/2025-11-graphicalabstract2-df776415.png" aria-label="View full image: Deep Learning for Perspective Deformation Correction in Cone-Beam Computed Tomography"><img src="/assets/2025-11-graphicalabstract2-df776415-web.png" alt="Deep Learning for Perspective Deformation Correction in Cone-Beam Computed Tomography" loading="lazy" decoding="async" width="1024" height="423" ></a></figure></div>
+    <div class="prose"><figure><a href="/assets/2025-11-graphicalabstract2-df776415.png" aria-label="View full image: Deep Learning for Perspective Deformation Correction in Cone-Beam Computed Tomography" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/2025-11-graphicalabstract2-df776415-web.png" alt="Deep Learning for Perspective Deformation Correction in Cone-Beam Computed Tomography" loading="lazy" decoding="async" width="1024" height="423" ></a></figure></div>
   </article><article class="project-entry" id="research-4">
     <h2>LLM-based decision support for radiation oncology</h2>
-    <div class="prose"><figure><a href="/assets/2025-11-llmdecisionsupport-5216feee.png" aria-label="View full image: LLM-based decision support for radiation oncology"><img src="/assets/2025-11-llmdecisionsupport-5216feee-web.png" alt="LLM-based decision support for radiation oncology" loading="lazy" decoding="async" width="1200" height="387" ></a></figure></div>
+    <div class="prose"><figure><a href="/assets/2025-11-llmdecisionsupport-5216feee.png" aria-label="View full image: LLM-based decision support for radiation oncology" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/2025-11-llmdecisionsupport-5216feee-web.png" alt="LLM-based decision support for radiation oncology" loading="lazy" decoding="async" width="1200" height="387" ></a></figure></div>
   </article></div>
       </div>
     </main><footer class="site-footer">
@@ -117,5 +117,24 @@
         <p class="search-hint" data-search-status aria-live="polite">Search people, research, news and publications.</p>
         <ul class="search-results" data-search-results></ul>
       </div>
+    </dialog>
+    <dialog class="image-preview" data-image-preview-dialog aria-labelledby="image-preview-title">
+      <header class="image-preview-toolbar">
+        <h2 id="image-preview-title">Image preview</h2>
+        <a class="image-preview-original" data-preview-original target="_blank" rel="noopener">Open original in new tab ↗</a>
+        <button type="button" data-preview-close aria-label="Close image preview" autofocus>×</button>
+      </header>
+      <div class="image-preview-stage" data-preview-stage>
+        <div class="image-preview-media" data-preview-media></div>
+        <p class="image-preview-status" data-preview-status role="status"></p>
+      </div>
+      <footer class="image-preview-footer">
+        <p class="image-preview-caption" data-preview-caption></p>
+        <div class="image-preview-navigation" data-preview-navigation>
+          <button type="button" data-preview-previous aria-label="Previous image">←</button>
+          <span data-preview-counter aria-live="polite" aria-atomic="true"></span>
+          <button type="button" data-preview-next aria-label="Next image">→</button>
+        </div>
+      </footer>
     </dialog></body>
 </html>

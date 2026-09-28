@@ -1,4 +1,6 @@
-/** Shared navigation, metadata, page framing, footer and search dialog. */
+import { prepareImageLinks } from '../image-preview.mjs';
+
+/** Shared navigation, metadata, page framing, footer and dialogs. */
 export function createLayout(context) {
   const {
     config,
@@ -87,6 +89,25 @@ export function createLayout(context) {
         <p class="search-hint" data-search-status aria-live="polite">${t('searchHint')}</p>
         <ul class="search-results" data-search-results></ul>
       </div>
+    </dialog>
+    <dialog class="image-preview" data-image-preview-dialog aria-labelledby="image-preview-title">
+      <header class="image-preview-toolbar">
+        <h2 id="image-preview-title">${t('imagePreview')}</h2>
+        <a class="image-preview-original" data-preview-original target="_blank" rel="noopener">${t('imageOriginal')} ↗</a>
+        <button type="button" data-preview-close aria-label="${t('imageClose')}" autofocus>×</button>
+      </header>
+      <div class="image-preview-stage" data-preview-stage>
+        <div class="image-preview-media" data-preview-media></div>
+        <p class="image-preview-status" data-preview-status role="status"></p>
+      </div>
+      <footer class="image-preview-footer">
+        <p class="image-preview-caption" data-preview-caption></p>
+        <div class="image-preview-navigation" data-preview-navigation>
+          <button type="button" data-preview-previous aria-label="${t('imagePrevious')}">←</button>
+          <span data-preview-counter aria-live="polite" aria-atomic="true"></span>
+          <button type="button" data-preview-next aria-label="${t('imageNext')}">→</button>
+        </div>
+      </footer>
     </dialog>`;
   }
 
@@ -103,6 +124,9 @@ export function createLayout(context) {
       'resultSingular',
       'resultPlural',
       'searchEmpty',
+      'imageLoading',
+      'imageError',
+      'imagePosition',
     ];
     const messages = JSON.stringify(Object.fromEntries(messageKeys.map(key => [key, t(key)])))
       .replace(/</g, '\\u003c');
@@ -130,7 +154,7 @@ export function createLayout(context) {
     <script type="application/json" id="ui-messages">${messages}</script>
     <script src="/site.js?v=${assetVersion}" defer></script>
   </head>
-  <body>${header(url)}${body}${footer()}</body>
+  <body>${header(url)}${prepareImageLinks(body)}${footer()}</body>
 </html>`;
   }
 

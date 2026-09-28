@@ -100,6 +100,138 @@
     });
   }
 
+  function initializeImagePreview(messages, navigation) {
+    const dialog = document.querySelector('[data-image-preview-dialog]');
+    const main = document.querySelector('main');
+    if (!main || !dialog || typeof dialog.showModal !== 'function') return;
+
+    const media = dialog.querySelector('[data-preview-media]');
+    const stage = dialog.querySelector('[data-preview-stage]');
+    const status = dialog.querySelector('[data-preview-status]');
+    const caption = dialog.querySelector('[data-preview-caption]');
+    const original = dialog.querySelector('[data-preview-original]');
+    const controls = dialog.querySelector('[data-preview-navigation]');
+    const counter = dialog.querySelector('[data-preview-counter]');
+    const closeButton = dialog.querySelector('[data-preview-close]');
+    let gallery = [];
+    let index = 0;
+    let opener;
+    let previousOverflow;
+    let requestVersion = 0;
+    let gesture;
+    let suppressBackdropUntil = 0;
+
+    function showImage(nextIndex) {
+      index = (nextIndex + gallery.length) % gallery.length;
+      const link = gallery[index];
+      const thumbnail = link.querySelector('img');
+      const figureCaption = link.closest('figure')?.querySelector('figcaption');
+      const captionText = (figureCaption?.querySelector(':scope > span') || figureCaption)?.textContent;
+      const label = captionText?.replace(/\s+/g, ' ').trim() || thumbnail.alt || link.getAttribute('aria-label') || '';
+      const version = ++requestVersion;
+      caption.textContent = label;
+      original.href = link.href;
+      controls.hidden = gallery.length < 2;
+      counter.textContent = `${index + 1} / ${gallery.length}`;
+      counter.setAttribute('aria-label', messages.imagePosition
+        .replace('{current}', index + 1).replace('{total}', gallery.length));
+      media.replaceChildren();
+      media.setAttribute('aria-busy', 'true');
+      status.textContent = messages.imageLoading;
+
+      const image = new Image();
+      image.alt = thumbnail.alt || label;
+      image.decoding = 'async';
+      image.draggable = false;
+      image.addEventListener('load', () => {
+        // Ignore a late image response after the visitor changes photos or closes.
+        if (version !== requestVersion || !dialog.open) return;
+        media.replaceChildren(image);
+        media.setAttribute('aria-busy', 'false');
+        status.textContent = '';
+      });
+      image.addEventListener('error', () => {
+        if (version !== requestVersion || !dialog.open) return;
+        media.setAttribute('aria-busy', 'false');
+        status.textContent = messages.imageError;
+      });
+      image.src = link.href;
+    }
+
+    main.addEventListener('click', event => {
+      const link = event.target.closest('a[data-image-preview]');
+      if (!link || event.defaultPrevented || event.button !== 0
+        || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      const group = link.closest('.news-entry, .project-entry, .profile-content') || main;
+      gallery = [...group.querySelectorAll('a[data-image-preview]')]
+        .filter(candidate => candidate.getClientRects().length > 0);
+      if (!gallery.includes(link)) return;
+      event.preventDefault();
+      opener = link;
+      navigation.close();
+      previousOverflow = document.body.style.overflow;
+      dialog.showModal();
+      document.body.style.overflow = 'hidden';
+      showImage(gallery.indexOf(link));
+      closeButton.focus({ preventScroll: true });
+    });
+
+    closeButton.addEventListener('click', () => dialog.close());
+    dialog.querySelector('[data-preview-previous]').addEventListener('click', () => showImage(index - 1));
+    dialog.querySelector('[data-preview-next]').addEventListener('click', () => showImage(index + 1));
+    dialog.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        dialog.close();
+      } else if (gallery.length > 1 && ['ArrowLeft', 'ArrowRight'].includes(event.key)) {
+        event.preventDefault();
+        showImage(index + (event.key === 'ArrowRight' ? 1 : -1));
+      } else if (event.key === 'Tab') {
+        const buttons = [...dialog.querySelectorAll('a[href], button')]
+          .filter(element => element.getClientRects().length > 0);
+        const first = buttons[0];
+        const last = buttons.at(-1);
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+    dialog.addEventListener('click', event => {
+      if (Date.now() < suppressBackdropUntil) return;
+      if ([dialog, stage, media].includes(event.target)) dialog.close();
+    });
+    stage.addEventListener('pointerdown', event => {
+      gesture = event.pointerType === 'touch' && event.isPrimary
+        ? { x: event.clientX, y: event.clientY } : null;
+    });
+    stage.addEventListener('pointerup', event => {
+      if (!gesture) return;
+      const dx = event.clientX - gesture.x;
+      const dy = event.clientY - gesture.y;
+      gesture = null;
+      if (gallery.length > 1 && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        suppressBackdropUntil = Date.now() + 400;
+        showImage(index + (dx < 0 ? 1 : -1));
+      }
+    });
+    stage.addEventListener('pointercancel', () => { gesture = null; });
+    dialog.addEventListener('close', () => {
+      requestVersion++;
+      gesture = null;
+      suppressBackdropUntil = 0;
+      media.replaceChildren();
+      status.textContent = '';
+      document.body.style.overflow = previousOverflow;
+      opener?.focus({ preventScroll: true });
+    });
+  }
+
   function initializeSiteSearch({ language, messages, navigation }) {
     const dialog = document.querySelector('[data-search-dialog]');
     if (!dialog) return;
@@ -232,5 +364,6 @@
   const navigation = initializeNavigation(messages);
   initializeListFilters();
   initializeScrollableTables(messages);
+  initializeImagePreview(messages, navigation);
   initializeSiteSearch({ language, messages, navigation });
 })();
