@@ -8,7 +8,7 @@ import { buildSite } from '../src/build-site.mjs';
 import { createContent } from '../src/scaffold.mjs';
 
 // Exercise the editor workflow in an isolated copy; never add examples to the lab site.
-test('new content builds in both languages without changing rendering code', () => {
+test('new content builds in both languages without changing rendering code', async () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'aimi-build-workflow-'));
   const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
   const write = (file, data) => fs.writeFileSync(path.join(root, file), JSON.stringify(data, null, 2) + '\n');
@@ -18,12 +18,18 @@ test('new content builds in both languages without changing rendering code', () 
     fs.cpSync(path.join(ROOT, 'public'), path.join(root, 'public'), { recursive: true });
     fs.copyFileSync(path.join(ROOT, 'site.config.json'), path.join(root, 'site.config.json'));
     const before = loadContent(root);
-    buildSite({ root });
+    await buildSite({ root });
     const validHome = output('index.html');
+    assert.match(validHome, /type="module" src="\/assets\/scroll\/home-scroll\.js/);
+    assert.doesNotMatch(output('news/index.html'), /assets\/scroll\//, 'inner pages must not load the scrolling engine');
+    for (const id of ['home', 'updates', 'research', 'about', 'contact']) {
+      for (const prefix of ['', 'zh/']) assert.match(output(`${prefix}index.html`), new RegExp(`id="${id}"[^>]*data-story-section`));
+    }
+    assert.ok(fs.statSync(path.join(root, 'dist/assets/scroll/home-scroll.js')).size < 230_000, 'keep the optional homepage bundle bounded');
 
     for (const type of ['news', 'member', 'research', 'publication']) createContent({ root, type, slug: 'workflow-example' });
     createContent({ root, type: 'profile', slug: 'workflow-example', member: 'person-workflow-example' });
-    assert.throws(() => buildSite({ root }), /TODO/);
+    await assert.rejects(() => buildSite({ root }), /TODO/);
     assert.equal(output('index.html'), validHome, 'unfinished content must not replace a valid preview');
 
     const photo = '/assets/lab-group-2026-web.jpg';
@@ -64,7 +70,7 @@ test('new content builds in both languages without changing rendering code', () 
     });
     write('content/lab-lives.json', labLives);
 
-    const counts = buildSite({ root });
+    const counts = await buildSite({ root });
     assert.equal(counts.pages, before.pages.length + 1);
     assert.equal(counts.news, before.news.length + 2);
     const data = loadContent(root);
@@ -97,7 +103,7 @@ test('new content builds in both languages without changing rendering code', () 
     const currentHome = output('index.html');
     pages.at(-1).aliases.push('/news/');
     write('content/pages.json', pages);
-    assert.throws(() => buildSite({ root }), /重复/);
+    await assert.rejects(() => buildSite({ root }), /重复/);
     assert.equal(output('index.html'), currentHome);
     pages.at(-1).aliases.pop();
     pages.pop();
@@ -105,7 +111,7 @@ test('new content builds in both languages without changing rendering code', () 
     write('content/pages.json', pages);
     write('content/people.json', people);
     fs.writeFileSync(path.join(root, 'keep-user-file.txt'), 'owned by the maintainer');
-    buildSite({ root });
+    await buildSite({ root });
     assert.equal(fs.existsSync(path.join(root, 'dist/people/workflow-example/index.html')), false);
     assert.equal(fs.existsSync(path.join(root, 'former-example/index.html')), false);
     assert.equal(fs.readFileSync(path.join(root, 'keep-user-file.txt'), 'utf8'), 'owned by the maintainer');

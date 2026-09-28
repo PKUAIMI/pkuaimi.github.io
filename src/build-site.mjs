@@ -13,6 +13,7 @@ import { renderPeople } from './templates/people.mjs';
 import { renderResearch } from './templates/research.mjs';
 import { renderPublications } from './templates/publications.mjs';
 import { renderContact } from './templates/contact.mjs';
+import { buildBrowserAssets } from './browser-assets.mjs';
 
 const listingTemplates = {
   news: renderNews, people: renderPeople, research: renderResearch,
@@ -20,13 +21,16 @@ const listingTemplates = {
 };
 
 /** Build every edition in memory before updating published files. */
-export function buildSite({ root = ROOT } = {}) {
+export async function buildSite({ root = ROOT } = {}) {
   const data = loadContent(root);
+  const browserAssets = await buildBrowserAssets();
   const assetVersion = createHash('sha256')
     .update(fs.readFileSync(path.join(root, 'public/styles.css')))
     .update(fs.readFileSync(path.join(root, 'public/site.js')))
+    .update(fs.readFileSync(path.join(root, 'public/home.css')))
+    .update([...browserAssets.values()].map(value => String(value)).join(''))
     .digest('hex').slice(0, 10);
-  const files = new Map();
+  const files = new Map(browserAssets);
 
   for (const language of LANGUAGES) {
     const context = createContext(data, language, assetVersion);

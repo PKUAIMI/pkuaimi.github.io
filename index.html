@@ -17,11 +17,14 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://pkuaimi.github.io/assets/lab-group-2026-web.jpg">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
-    <link rel="stylesheet" href="/styles.css?v=85e366eabc">
+    <link rel="stylesheet" href="/styles.css?v=6e2f041b33">
+    <link rel="stylesheet" href="/home.css?v=6e2f041b33">
+    <link rel="stylesheet" href="/assets/scroll/home-scroll.css?v=6e2f041b33">
+    <script type="module" src="/assets/scroll/home-scroll.js?v=6e2f041b33"></script>
     <script type="application/json" id="ui-messages">{"menu":"Menu","menuClose":"Close menu","scrollableTable":"Scrollable table","searchHint":"Search people, research, news and publications.","searching":"Searching…","searchError":"Search could not load. Please try again, or use the main navigation.","resultSingular":"result","resultPlural":"results","searchEmpty":"No matching results. Try another name or keyword.","imageLoading":"Loading image…","imageError":"The image could not be loaded. You can try opening the original in a new tab.","imagePosition":"Image {current} of {total}","pauseSlideshow":"Pause slideshow","playSlideshow":"Play slideshow"}</script>
-    <script src="/site.js?v=85e366eabc" defer></script>
+    <script src="/site.js?v=6e2f041b33" defer></script>
   </head>
-  <body><a class="skip-link" href="#main">Skip to content</a>
+  <body class="is-home"><a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="wrap header-inner">
         <a class="identity" href="/" aria-label="AIMI Lab home">
@@ -48,10 +51,21 @@
           </button>
         </div>
       </div>
-    </header><main id="main">
-    <section class="lab-intro" aria-labelledby="lab-welcome">
+    </header><nav class="story-chapters" aria-label="Homepage chapters">
+      <div class="wrap story-chapter-links">
+        <a href="#home" data-story-link><span aria-hidden="true">01</span>Lab</a>
+        <a href="#updates" data-story-link><span aria-hidden="true">02</span>Updates</a>
+        <a href="#research" data-story-link><span aria-hidden="true">03</span>Research</a>
+        <a href="#about" data-story-link><span aria-hidden="true">04</span>About the lab</a>
+        <a href="#contact" data-story-link><span aria-hidden="true">05</span>Contact</a>
+      </div>
+      <div class="story-progress" aria-hidden="true"><span data-story-progress></span></div>
+    </nav>
+    <main id="main" class="home-story">
+    <section class="lab-intro story-section" id="home" data-story-section aria-labelledby="lab-welcome">
+      <div class="story-atmosphere" aria-hidden="true"><span data-story-cloud></span><span data-story-cloud></span></div>
       <div class="wrap lab-intro-grid">
-        <div class="lab-intro-copy">
+        <div class="lab-intro-copy" data-story-copy>
           <p class="lab-affiliation">Peking University Health Science Center<span>Institute of Medical Technology</span></p>
           <h1 id="lab-welcome">Welcome to the<br>AIMI Lab</h1>
           <p class="lab-full-name">Artificial Intelligence for Medical Imaging</p>
@@ -91,8 +105,9 @@
           <span class="sr-only" data-carousel-status aria-live="polite" aria-atomic="true"></span>
         </div>
       </div>
+      <a class="story-next" href="#updates">Explore our lab <span aria-hidden="true">↓</span></a>
     </section>
-    <section class="section home-updates">
+    <section class="section home-updates story-section" id="updates" data-story-section aria-label="Latest news and publications">
       <div class="wrap updates-grid">
         <section class="updates-news" aria-labelledby="home-news-heading">
           <div class="section-heading">
@@ -160,11 +175,11 @@
         </section>
       </div>
     </section>
-    <section class="section home-research">
+    <section class="section home-research story-section" id="research" data-story-section aria-labelledby="story-research-heading">
       <div class="wrap">
         <div class="section-heading">
           <div>
-            <h2>Research Projects</h2>
+            <h2 id="story-research-heading">Research Projects</h2>
             <p class="section-description">Exploring artificial intelligence across image formation, image analysis and clinical decision support.</p>
           </div>
           <a class="text-link" href="/research/">Explore all research <span class="arrow" aria-hidden="true">→</span></a>
@@ -200,11 +215,11 @@
     </a></div>
       </div>
     </section>
-    <section class="section soft" id="about">
+    <section class="section soft story-section" id="about" data-story-section aria-labelledby="story-about-heading">
       <div class="wrap">
         <div class="about-grid">
           <div class="about-heading">
-            <h2>About the lab</h2>
+            <h2 id="story-about-heading">About the lab</h2>
             <a class="text-link about-link" href="/people/">Meet our people <span class="arrow" aria-hidden="true">→</span></a>
           </div>
           <div class="prose"><p>The Artificial Intelligence for Medical Imaging (AIMI) Lab at the Institute of Medical Technology, Peking University Health Science Center, has been newly established. The lab is dedicated to advancing both fundamental research and clinical translation of artificial intelligence in medical imaging, with a strong focus on precision medicine. Its research areas include CT image reconstruction, MRI-based tumor segmentation, image-guided radiation oncology, patient prognosis and survival analysis, digital pathology, and computer-vision-driven medical image generation. AIMI strives to develop cutting-edge intelligent imaging technologies to support disease diagnosis, treatment planning, and therapy assessment.</p></div>
@@ -212,7 +227,7 @@
         </div>
       </div>
     </section>
-  </main><footer class="site-footer">
+  </main><footer class="site-footer story-section story-contact" id="contact" data-story-section>
       <div class="wrap">
         <div class="footer-grid">
           <div>

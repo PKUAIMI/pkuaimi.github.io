@@ -50,11 +50,11 @@ export function createLayout(context) {
     </header>`;
   }
 
-  function footer() {
+  function footer(homepage = false) {
     const navigationLinks = navItems.slice(1).map(([url, key]) => `
       <li><a href="${pageUrl(url)}">${t(key)}</a></li>`).join('');
 
-    return `<footer class="site-footer">
+    return `<footer class="site-footer${homepage ? ' story-section story-contact' : ''}"${homepage ? ' id="contact" data-story-section' : ''}>
       <div class="wrap">
         <div class="footer-grid">
           <div>
@@ -158,10 +158,13 @@ export function createLayout(context) {
     <meta property="og:image" content="${config.url}${context.localUrl(home.hero[0].display)}">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
     <link rel="stylesheet" href="/styles.css?v=${assetVersion}">
+    ${url === '/' ? `<link rel="stylesheet" href="/home.css?v=${assetVersion}">
+    <link rel="stylesheet" href="/assets/scroll/home-scroll.css?v=${assetVersion}">
+    <script type="module" src="/assets/scroll/home-scroll.js?v=${assetVersion}"></script>` : ''}
     <script type="application/json" id="ui-messages">${messages}</script>
     <script src="/site.js?v=${assetVersion}" defer></script>
   </head>
-  <body>${header(url)}${prepareImageLinks(body)}${footer()}</body>
+  <body${url === '/' ? ' class="is-home"' : ''}>${header(url)}${prepareImageLinks(body)}${footer(url === '/')}</body>
 </html>`;
   }
 

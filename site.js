@@ -10,6 +10,8 @@
 
     updateLanguageLink();
     window.addEventListener('hashchange', updateLanguageLink);
+    window.addEventListener('popstate', updateLanguageLink);
+    window.addEventListener('aimi:sectionchange', updateLanguageLink);
   }
 
   function initializeNavigation(messages) {

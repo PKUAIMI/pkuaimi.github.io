@@ -12,7 +12,7 @@
 4. 用 `npm run dev` 打开本地预览，查看英文、中文和手机宽度下的效果。
 5. 发布前运行 `npm run verify`，再提交并推送。
 
-需要 Node.js 22 或更高版本，无需安装第三方依赖。以下命令都在仓库根目录执行。
+需要 Node.js 22.12 或更高版本。首次运行 `npm install`，自动化环境使用 `npm ci`。以下命令都在仓库根目录执行。
 
 ```sh
 npm run new -- --help
@@ -319,7 +319,7 @@ git push origin main
 
 GitHub Pages 设置保持 **Deploy from a branch → main → / (root)**。推送后可在仓库的 Actions 页面查看检查和部署结果，再访问 [pkuaimi.github.io](https://pkuaimi.github.io/) 确认新内容。站点仅使用该域名，不添加 `CNAME`。
 
-不要直接修改根目录的 HTML、CSS、JavaScript 或 `assets/`：下一次构建会覆盖它们。样式源文件是 `public/styles.css`，交互源文件是 `public/site.js`。
+不要直接修改根目录的 HTML、CSS、JavaScript 或 `assets/`：下一次构建会覆盖它们。公共样式与交互源文件是 `public/styles.css` 和 `public/site.js`；首页分屏排版在 `public/home.css`，滚动交互在 `src/browser/home-scroll.ts`，见 [滚动交互说明](SCROLLING.md)。
 
 ## 11. 迁移记录如何处理
 

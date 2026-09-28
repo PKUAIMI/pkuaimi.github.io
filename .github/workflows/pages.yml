@@ -13,6 +13,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
+      - name: Install pinned dependencies
+        run: npm ci
       - name: Test, build and validate website
         run: npm run verify
       - name: Verify published files match source

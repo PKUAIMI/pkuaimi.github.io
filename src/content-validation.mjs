@@ -6,11 +6,11 @@ const PAGE_TYPES = new Set(['home', 'news', 'people', 'research', 'publications'
 const SINGLETON_TYPES = new Set(['home', 'news', 'people', 'research', 'publications', 'contact']);
 const RESERVED_PATHS = new Set([
   'zh', 'assets', 'dist', 'public', 'content', 'src', 'scripts', 'tests', 'migration', '__aimi_preview__',
-  'node_modules', '404.html', 'styles.css', 'site.js', 'search-index.json',
+  'node_modules', '404.html', 'styles.css', 'home.css', 'site.js', 'search-index.json', 'tsconfig.json',
   'sitemap.xml', 'robots.txt', 'generated-files.json', 'site.config.json',
   'package.json', 'package-lock.json', 'readme.md', 'cname',
 ]);
-const RESERVED_IDS = new Set(['main', 'about', 'lab-welcome', 'lab-lives', 'lab-lives-heading', 'primary-navigation', 'content-filter', 'year-filter', 'search-dialog', 'search-input', 'search-results', 'search-title', 'image-preview-title']);
+const RESERVED_IDS = new Set(['main', 'home', 'updates', 'research', 'about', 'contact', 'story-research-heading', 'story-about-heading', 'lab-welcome', 'lab-lives', 'lab-lives-heading', 'primary-navigation', 'content-filter', 'year-filter', 'search-dialog', 'search-input', 'search-results', 'search-title', 'image-preview-title']);
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const isString = value => typeof value === 'string';
 const isNonempty = value => isString(value) && value.trim().length > 0;
@@ -52,7 +52,8 @@ export function validateContent(data, { root = process.cwd() } = {}) {
       const location = where(file, item, index);
       if (!isObject(item)) { fail(location, '条目', '应为对象。'); return false; }
       const validId = (numericId && Number.isSafeInteger(item.id) && item.id > 0) || (isString(item.id) && /^[a-z0-9][a-z0-9_-]*$/.test(item.id));
-      if (!validId || RESERVED_IDS.has(String(item.id))) fail(location, 'id', numericId ? '请使用正整数或小写英文、数字、连字符、下划线组成的唯一标识，且不能使用页面保留标识。' : '请使用小写英文、数字、连字符、下划线组成的唯一标识，且不能使用页面保留标识。');
+      // Page IDs are metadata; only content record IDs become document anchors.
+      if (!validId || (key !== 'pages' && RESERVED_IDS.has(String(item.id)))) fail(location, 'id', numericId ? '请使用正整数或小写英文、数字、连字符、下划线组成的唯一标识。' : '请使用小写英文、数字、连字符、下划线组成的唯一标识，且不能使用页面保留标识。');
       if (ids.has(String(item.id))) fail(location, 'id', '与本文件其他条目重复；已有条目的 id 请保持稳定。');
       ids.add(String(item.id));
       return true;

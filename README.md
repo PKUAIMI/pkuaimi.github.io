@@ -6,9 +6,11 @@
 
 ## 开始维护
 
-安装 Node.js 22 或更高版本，在仓库目录打开终端。项目没有第三方构建依赖，无需运行 `npm install`。
+安装 Node.js 22.12 或更高版本，在仓库目录运行 `npm install`（自动化环境使用 `npm ci`）。首页交互由 Vite + TypeScript 构建，使用 GSAP / ScrollTrigger 与 Lenis，内容页面继续由静态模板生成。
 
 ```sh
+npm install
+
 # 查看新增内容的命令
 npm run new -- --help
 
@@ -46,7 +48,8 @@ npm run dev
 
 ```sh
 npm run verify
-git add .
+git add -u
+# 新图片及新源文件需另外明确添加，勿提交无关原始素材。
 git commit -m "Update lab website"
 git push origin main
 ```
@@ -54,6 +57,12 @@ git push origin main
 `verify` 会运行测试、重新构建并检查页面。通过后，同时提交源文件和生成结果。GitHub Pages 沿用 **Deploy from a branch → main → / (root)**，推送后自动发布。
 
 根目录的 HTML、`styles.css`、`site.js`、`assets/`、`zh/` 等是生成结果，请编辑上表中的源文件。`dist/` 用于本地预览，不提交；`generated-files.json` 由构建维护。网站只使用 `pkuaimi.github.io`，不配置 `CNAME`。
+
+## 全屏滚动首页
+
+首页章节依次为 `#home`、`#updates`、`#research`、`#about`、`#contact`。章节导航支持直接链接和前进后退，滚动时同步地址；切换语言保留章节。手机、低资源设备及减少动态效果模式使用原生滚动。内页保持普通阅读方式。
+
+排版维护在 `public/home.css`，滚动逻辑在 `src/browser/home-scroll.ts`。具体集成、降级和验收方法见 [滚动交互说明](docs/SCROLLING.md)。构建仍输出纯静态文件，沿用 GitHub Pages 的 `main /` 发布方式。
 
 ## 迁移记录
 

@@ -104,7 +104,12 @@
     "carousel": "carousel",
     "slide": "slide",
     "pauseSlideshow": "Pause slideshow",
-    "playSlideshow": "Play slideshow"
+    "playSlideshow": "Play slideshow",
+    "storyHome": "Lab",
+    "storyUpdates": "Updates",
+    "storyNavigation": "Homepage chapters",
+    "storyUpdatesTitle": "Latest news and publications",
+    "scrollToExplore": "Explore our lab"
   },
   "zh": {
     "overview": "首页",
@@ -211,6 +216,11 @@
     "carousel": "轮播",
     "slide": "幻灯片",
     "pauseSlideshow": "暂停轮播",
-    "playSlideshow": "播放轮播"
+    "playSlideshow": "播放轮播",
+    "storyHome": "实验室",
+    "storyUpdates": "动态",
+    "storyNavigation": "首页章节导航",
+    "storyUpdatesTitle": "最新动态与学术成果",
+    "scrollToExplore": "向下探索实验室"
   }
 }

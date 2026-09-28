@@ -83,10 +83,19 @@ export function renderHome(context) {
     return `<figure>${visual}<figcaption>${caption}</figcaption></figure>`;
   }).join('');
 
-  return `<main id="main">
-    <section class="lab-intro" aria-labelledby="lab-welcome">
+  const chapters = [['home', 'storyHome'], ['updates', 'storyUpdates'], ['research', 'research'], ['about', 'aboutLab'], ['contact', 'contact']];
+
+  return `<nav class="story-chapters" aria-label="${t('storyNavigation')}">
+      <div class="wrap story-chapter-links">${chapters.map(([id, label], index) => `
+        <a href="#${id}" data-story-link><span aria-hidden="true">0${index + 1}</span>${t(label)}</a>`).join('')}
+      </div>
+      <div class="story-progress" aria-hidden="true"><span data-story-progress></span></div>
+    </nav>
+    <main id="main" class="home-story">
+    <section class="lab-intro story-section" id="home" data-story-section aria-labelledby="lab-welcome">
+      <div class="story-atmosphere" aria-hidden="true"><span data-story-cloud></span><span data-story-cloud></span></div>
       <div class="wrap lab-intro-grid">
-        <div class="lab-intro-copy">
+        <div class="lab-intro-copy" data-story-copy>
           <p class="lab-affiliation">${t('institution')}<span>${t('institute')}</span></p>
           <h1 id="lab-welcome">${t('welcome')}</h1>
           <p class="lab-full-name">${t('fullName')}</p>
@@ -114,8 +123,9 @@ export function renderHome(context) {
           <span class="sr-only" data-carousel-status aria-live="polite" aria-atomic="true"></span>
         </div>
       </div>
+      <a class="story-next" href="#updates">${t('scrollToExplore')} <span aria-hidden="true">↓</span></a>
     </section>
-    <section class="section home-updates">
+    <section class="section home-updates story-section" id="updates" data-story-section aria-label="${t('storyUpdatesTitle')}">
       <div class="wrap updates-grid">
         <section class="updates-news" aria-labelledby="home-news-heading">
           <div class="section-heading">
@@ -133,11 +143,11 @@ export function renderHome(context) {
         </section>
       </div>
     </section>
-    <section class="section home-research">
+    <section class="section home-research story-section" id="research" data-story-section aria-labelledby="story-research-heading">
       <div class="wrap">
         <div class="section-heading">
           <div>
-            <h2>${t('researchTitle')}</h2>
+            <h2 id="story-research-heading">${t('researchTitle')}</h2>
             <p class="section-description">${t('researchDescription')}</p>
           </div>
           <a class="text-link" href="${pageUrl('/research/')}">${t('allResearch')} ${straight}</a>
@@ -145,11 +155,11 @@ export function renderHome(context) {
         <div class="research-grid">${researchCards}</div>
       </div>
     </section>
-    <section class="section soft" id="about">
+    <section class="section soft story-section" id="about" data-story-section aria-labelledby="story-about-heading">
       <div class="wrap">
         <div class="about-grid">
           <div class="about-heading">
-            <h2>${t('aboutLab')}</h2>
+            <h2 id="story-about-heading">${t('aboutLab')}</h2>
             <a class="text-link about-link" href="${pageUrl('/people/')}">${t('meetPeople')} ${straight}</a>
           </div>
           <div class="prose">${html(localized('pages', homePage.id).html)}</div>
