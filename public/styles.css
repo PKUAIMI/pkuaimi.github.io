@@ -35,14 +35,12 @@ svg { vertical-align:middle; }
 /* One quiet, persistent navigation layer. */
 .site-header { position:sticky; top:0; z-index:20; background:rgba(255,255,255,.97); border-top:3px solid var(--red); border-bottom:1px solid var(--line); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); }
 .header-inner { display:flex; align-items:center; min-height:88px; gap:28px; }
-.identity { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+.identity { display:flex; align-items:center; gap:6px; flex-shrink:0; margin-left:-12px; }
 /* A6 clear space: one quarter of the emblem diameter on every side. */
 .university-emblem { box-sizing:content-box; width:48px; height:48px; padding:12px; flex-shrink:0; }
-.identity-copy { display:block; }
-.wordmark { display:block; color:var(--red); font-family:Arial,sans-serif; font-size:29px; line-height:1.1; letter-spacing:-.8px; font-weight:700; white-space:nowrap; }
-.wordmark>span { font-size:12px; letter-spacing:.1em; font-weight:400; }
-.identity-text { display:block; font-size:11px; line-height:1.45; margin-top:3px; font-weight:400; color:var(--ink); }
-.identity-text span { display:block; font-size:10px; margin-top:2px; color:var(--muted); font-weight:400; }
+.identity-copy { display:flex; flex-direction:column; gap:4px; }
+.wordmark { display:block; color:var(--red); font-family:Arial,sans-serif; font-size:28px; line-height:1.1; letter-spacing:-.025em; font-weight:600; white-space:nowrap; }
+.identity-text { display:block; font-size:11px; line-height:1.5; letter-spacing:.045em; font-weight:400; color:var(--muted); white-space:nowrap; }
 .navigation { margin-left:auto; }
 .nav-links { display:flex; align-items:center; gap:26px; margin:0; padding:0; list-style:none; }
 .nav-links a { position:relative; display:block; padding:24px 0; font-size:13px; font-weight:500; transition:color .2s; }
@@ -304,7 +302,6 @@ a[data-image-preview] { cursor:zoom-in; }
 @media(max-width:1100px) {
   .header-inner { gap:16px; }
   .nav-links { gap:20px; }
-  .identity-text { display:none; }
   .lab-intro-grid { gap:28px; }
   .lab-intro h1 { font-size:42px; }
   .updates-grid { grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:28px; }
@@ -351,12 +348,12 @@ a[data-image-preview] { cursor:zoom-in; }
 @media(max-width:640px) {
   html { scroll-padding-top:84px; }
   .wrap { width:calc(100% - 40px); }
-  .header-inner { min-height:68px; gap:6px; }
-  .university-emblem { width:36px; height:36px; padding:9px; }
-  .wordmark { font-size:23px; }
-  .wordmark>span { font-size:10px; letter-spacing:.04em; }
-  .identity { gap:0; }
-  .identity-text { display:none; }
+  .header-inner { min-height:68px; gap:0; }
+  .university-emblem { width:32px; height:32px; padding:8px; }
+  .wordmark { font-size:20px; }
+  .identity { gap:2px; margin-left:-8px; }
+  .identity-copy { gap:3px; }
+  .identity-text { font-size:9px; letter-spacing:.02em; }
   .header-actions { gap:0; }
   .search-toggle,.menu-toggle { width:44px; height:44px; }
   .nav-links { padding-inline:20px; max-height:calc(100dvh - 71px); }

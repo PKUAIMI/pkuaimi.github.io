@@ -31,8 +31,8 @@ export function createLayout(context) {
       <div class="wrap header-inner">
         <a class="identity" href="${pageUrl('/')}" aria-label="${t('homeLabel')}">
           <img class="university-emblem" src="/assets/brand/pku-emblem-red.png" alt="${t('university')}" width="360" height="360">
-          <span class="identity-copy"><span class="wordmark">AIMI <span>LAB</span></span>
-            <span class="identity-text">${t('university')}<span>${t('identitySubtitle')}</span></span>
+          <span class="identity-copy"><span class="wordmark">AIMI Lab</span>
+            <span class="identity-text">${t('university')}</span>
           </span>
         </a>
         <nav class="navigation" aria-label="${t('navLabel')}">
