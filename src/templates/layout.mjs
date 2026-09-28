@@ -30,8 +30,10 @@ export function createLayout(context) {
     <header class="site-header">
       <div class="wrap header-inner">
         <a class="identity" href="${pageUrl('/')}" aria-label="${t('homeLabel')}">
-          <span class="wordmark">AIMI<span class="dot" aria-hidden="true"></span></span>
-          <span class="identity-text">${t('university')}<span>${t('identitySubtitle')}</span></span>
+          <img class="university-emblem" src="/assets/brand/pku-emblem-red.png" alt="${t('university')}" width="360" height="360">
+          <span class="identity-copy"><span class="wordmark">AIMI <span>LAB</span></span>
+            <span class="identity-text">${t('university')}<span>${t('identitySubtitle')}</span></span>
+          </span>
         </a>
         <nav class="navigation" aria-label="${t('navLabel')}">
           <ul class="nav-links" id="primary-navigation" data-nav-links>${navigationLinks}</ul>
@@ -56,7 +58,10 @@ export function createLayout(context) {
       <div class="wrap">
         <div class="footer-grid">
           <div>
-            <a class="footer-brand" href="${pageUrl('/')}">${t('labName')}</a>
+            <a class="footer-brand" href="${pageUrl('/')}">
+              <img class="footer-emblem" src="/assets/brand/pku-emblem-white.png" alt="" width="360" height="360" loading="lazy">
+              <span>${t('labName')}<small>${t('university')}</small></span>
+            </a>
             <p>${t('fullName')}<br>${t('institute')}<br>${t('institution')}</p>
           </div>
           <div>
@@ -140,7 +145,7 @@ export function createLayout(context) {
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>${esc(pageTitleText)}</title>
     <meta name="description" content="${esc(description)}">
-    <meta name="theme-color" content="#fafafa">
+    <meta name="theme-color" content="#94070a">
     <link rel="canonical" href="${canonical}">
     <link rel="alternate" hreflang="en" href="${config.url}${pageUrl(url, 'en')}">
     <link rel="alternate" hreflang="zh-CN" href="${config.url}${pageUrl(url, 'zh')}">
