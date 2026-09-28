@@ -98,18 +98,6 @@ export function renderHome(context) {
         </figure>
       </div>
     </section>
-    <section class="section home-research">
-      <div class="wrap">
-        <div class="section-heading">
-          <div>
-            <h2>${t('researchTitle')}</h2>
-            <p class="section-description">${t('researchDescription')}</p>
-          </div>
-          <a class="text-link" href="${pageUrl('/research/')}">${t('allResearch')} ${straight}</a>
-        </div>
-        <div class="research-grid">${researchCards}</div>
-      </div>
-    </section>
     <section class="section home-updates">
       <div class="wrap updates-grid">
         <section class="updates-news" aria-labelledby="home-news-heading">
@@ -126,6 +114,18 @@ export function renderHome(context) {
           </div>
           ${publicationPreviews}
         </section>
+      </div>
+    </section>
+    <section class="section home-research">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <h2>${t('researchTitle')}</h2>
+            <p class="section-description">${t('researchDescription')}</p>
+          </div>
+          <a class="text-link" href="${pageUrl('/research/')}">${t('allResearch')} ${straight}</a>
+        </div>
+        <div class="research-grid">${researchCards}</div>
       </div>
     </section>
     <section class="section soft" id="about">

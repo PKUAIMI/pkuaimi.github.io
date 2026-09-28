@@ -89,7 +89,7 @@ svg { vertical-align:middle; }
 .research-card-copy { display:flex; flex-direction:column; flex:1; min-width:0; padding:16px; overflow-wrap:anywhere; }
 .research-card h3 { font-size:17px; line-height:1.45; font-weight:600; margin:0 0 14px; }
 .research-card .text-link { margin-top:auto; font-size:12px; }
-.home-updates { border-top:1px solid var(--line); }
+.home-updates { border-bottom:1px solid var(--line); }
 .updates-grid { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:40px; }
 .updates-grid>section { min-width:0; }
 .updates-grid .section-heading { border-bottom:2px solid var(--ink); padding-bottom:14px; margin-bottom:0; }
