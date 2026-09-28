@@ -26,7 +26,7 @@
       }
     ],
     "en": {
-      "title": "Our Paper Receives Provisional Acceptance from Physics in Medicine & Biology!",
+      "title": "Our Paper Receives Acceptance from Physics in Medicine & Biology!",
       "bodyHtml": "<p>The manuscript “Self-Cascade Latent Schrödinger Bridge for CT Field-of-View Extension,” authored by Xihao Wu, Jiacheng Liu, Haijun Yu, Andreas Maier, and Yixing Huang, has been accepted by Physics in Medicine &amp; Biology. The study introduces a self-cascade latent Schrödinger bridge (SCL-SB) that combines a two-round shared-weight cascade with a frequency-aware residual mechanism to recover missing peripheral anatomy in truncated CT images while maintaining efficient inference. Congratulations to all the authors!</p>"
     },
     "zh": {
