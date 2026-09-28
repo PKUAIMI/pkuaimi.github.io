@@ -19,9 +19,11 @@
   ],
   "gallery": [
     {
-      "url": "https://pkuaimi.com/wp-content/uploads/2025/11/AIMI2.png",
+      "url": "/assets/brand/silicon-based-tree-of-life.png",
       "altKey": "circuitTreeAlt",
-      "captionKey": "fullName"
+      "captionKey": "siliconTreeTitle",
+      "eyebrowKey": "labTotem",
+      "descriptionKey": "siliconTreeDescription"
     }
   ],
   "newsLimit": 3,

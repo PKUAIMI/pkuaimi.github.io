@@ -101,10 +101,18 @@
               }
             ],
             "description": "图片说明在 content/ui.json 中的键名；该键必须同时有 en 和 zh。"
+          },
+          "eyebrowKey": {
+            "$ref": "common.schema.json#/definitions/nonEmptyText",
+            "description": "图片类别在 content/ui.json 中的键名（可选）；该键必须同时有 en 和 zh。"
+          },
+          "descriptionKey": {
+            "$ref": "common.schema.json#/definitions/nonEmptyText",
+            "description": "图片简介在 content/ui.json 中的键名（可选）；该键必须同时有 en 和 zh。"
           }
         }
       },
-      "description": "首页介绍区下方的图片，按数组顺序显示。"
+      "description": "首页介绍区的图片与图文简介，按数组顺序显示。"
     },
     "newsLimit": {
       "type": "integer",

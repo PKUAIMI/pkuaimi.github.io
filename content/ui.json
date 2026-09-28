@@ -61,7 +61,7 @@
     "aboutHeading": "AI meets medicine.<br>People make it happen.",
     "meetPeople": "Meet our people",
     "groupPhotoAlt": "AIMI Lab group photograph",
-    "circuitTreeAlt": "AIMI circuit-tree illustration",
+    "circuitTreeAlt": "The Silicon-Based Tree of Life, with blue, violet and turquoise circuit-like branches and roots",
     "publicationSingular": "publication",
     "publicationPlural": "publications",
     "newsSingular": "news item",
@@ -109,7 +109,10 @@
     "storyUpdates": "Updates",
     "storyNavigation": "Homepage chapters",
     "storyUpdatesTitle": "Latest news and publications",
-    "scrollToExplore": "Explore our lab"
+    "scrollToExplore": "Explore our lab",
+    "labTotem": "Our lab totem",
+    "siliconTreeTitle": "Silicon-Based Tree of Life",
+    "siliconTreeDescription": "Circuit-like branches bring computation and life into a single image. As AIMI Lab’s totem, the tree symbolizes the connection between artificial intelligence and medical imaging, and the continued growth of knowledge through exploration and collaboration."
   },
   "zh": {
     "overview": "首页",
@@ -173,7 +176,7 @@
     "aboutHeading": "人工智能与医学交汇，<br>由研究者共同探索。",
     "meetPeople": "认识团队成员",
     "groupPhotoAlt": "AIMI 实验室团队合影",
-    "circuitTreeAlt": "AIMI 电路树插画",
+    "circuitTreeAlt": "硅基生命树：蓝色、紫色与青色的电路构成树枝与根系",
     "publicationSingular": "篇论文",
     "publicationPlural": "篇论文",
     "newsSingular": "条新闻",
@@ -221,6 +224,9 @@
     "storyUpdates": "动态",
     "storyNavigation": "首页章节导航",
     "storyUpdatesTitle": "最新动态与学术成果",
-    "scrollToExplore": "向下探索实验室"
+    "scrollToExplore": "向下探索实验室",
+    "labTotem": "实验室图腾",
+    "siliconTreeTitle": "硅基生命树",
+    "siliconTreeDescription": "以电路为枝干，让计算与生命在同一棵树上相遇。作为 AIMI 实验室的图腾，硅基生命树象征着人工智能与医学影像的交汇，也寓意着知识在探索与协作中扎根、连接、持续生长。"
   }
 }

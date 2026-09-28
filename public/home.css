@@ -38,10 +38,18 @@ html.lenis { scroll-behavior:auto; }
 .home-story .research-card-copy { padding:22px 18px; }
 .home-story .research-card h3 { font-size:19px; line-height:1.5; margin-bottom:32px; }
 .home-story #about { background:white; }
-.home-story .about-grid { grid-template-columns:1fr 1.45fr; column-gap:64px; }
-.home-story .about-grid .prose { font-size:19px; line-height:1.9; }
-.home-story .home-gallery { max-width:300px; }
-.home-story .home-gallery img { height:250px; }
+.home-story .about-grid { grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); grid-template-areas:"heading heading" "copy gallery"; gap:32px 64px; }
+.home-story .about-heading { display:flex; justify-content:space-between; align-items:center; gap:24px; padding-bottom:24px; border-bottom:1px solid var(--line); }
+.home-story .about-heading .about-link { margin-top:0; flex-shrink:0; }
+.home-story .about-grid .prose { font-size:17px; line-height:1.85; max-width:65ch; }
+.home-story .about-grid .prose>p { margin-bottom:20px; }
+.home-story .home-gallery { width:100%; max-width:none; justify-self:stretch; padding:28px 32px; background:var(--paper); border:1px solid var(--line); border-radius:4px; }
+.home-story .home-gallery figure>a { display:block; width:100%; }
+.home-story .home-gallery img { display:block; height:260px; max-height:none; width:100%; object-fit:contain; }
+.home-story .home-gallery figcaption { margin-top:24px; }
+.home-story .gallery-eyebrow { display:block; color:var(--red); font-size:11px; font-weight:600; letter-spacing:.08em; margin-bottom:8px; }
+.home-story .home-gallery h3 { font-family:var(--display); color:var(--ink); font-size:26px; line-height:1.25; margin:0 0 12px; }
+.home-story .home-gallery figcaption p { font-size:14px; line-height:1.75; margin:0; color:var(--muted); }
 .story-contact { padding-block:80px 40px; }
 .story-contact .footer-grid { gap:64px; }
 .story-contact .footer-brand { font-size:34px; }
@@ -70,6 +78,7 @@ html.lenis { scroll-behavior:auto; }
   .home-story .research-image { aspect-ratio:auto; }
   .home-story .about-grid { gap:32px; }
   .home-story .about-grid .prose { font-size:17px; }
+  .home-story .home-gallery { padding:24px; }
 }
 @media(max-width:640px) {
   .is-home { --story-header:71px; --story-nav:52px; }
@@ -89,9 +98,10 @@ html.lenis { scroll-behavior:auto; }
   .home-story .section-description { font-size:15px; }
   .home-story .research-card-copy { padding:16px; }
   .home-story .research-card h3 { font-size:16px; margin-bottom:18px; }
-  .home-story .about-grid { grid-template-columns:1fr; gap:24px; }
+  .home-story .about-grid { grid-template-columns:1fr; grid-template-areas:"heading" "copy" "gallery"; gap:24px; }
+  .home-story .about-heading { align-items:flex-start; flex-direction:column; gap:12px; padding-bottom:20px; }
   .home-story .about-grid .prose { font-size:16px; }
-  .home-story .home-gallery img { height:200px; }
+  .home-story .home-gallery img { height:240px; }
   .story-contact .footer-grid { gap:28px; }
   .story-contact .footer-brand { font-size:28px; }
   .story-contact .footer-bottom { margin-top:36px; }

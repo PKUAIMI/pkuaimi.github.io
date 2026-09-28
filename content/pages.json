@@ -102,11 +102,11 @@
     "aliases": [],
     "en": {
       "title": "AIMI",
-      "html": "<p>The Artificial Intelligence for Medical Imaging (AIMI) Lab at the Institute of Medical Technology, Peking University Health Science Center, has been newly established. The lab is dedicated to advancing both fundamental research and clinical translation of artificial intelligence in medical imaging, with a strong focus on precision medicine. Its research areas include CT image reconstruction, MRI-based tumor segmentation, image-guided radiation oncology, patient prognosis and survival analysis, digital pathology, and computer-vision-driven medical image generation. AIMI strives to develop cutting-edge intelligent imaging technologies to support disease diagnosis, treatment planning, and therapy assessment.</p>"
+      "html": "<p>The Artificial Intelligence for Medical Imaging (AIMI) Lab at the Institute of Medical Technology, Peking University Health Science Center, has been newly established. The lab is dedicated to advancing both fundamental research and clinical translation of artificial intelligence in medical imaging, with a strong focus on precision medicine.</p>\n<p>Its research areas include CT image reconstruction, MRI-based tumor segmentation, image-guided radiation oncology, patient prognosis and survival analysis, digital pathology, and computer-vision-driven medical image generation.</p>\n<p>AIMI strives to develop cutting-edge intelligent imaging technologies to support disease diagnosis, treatment planning, and therapy assessment.</p>"
     },
     "zh": {
       "title": "AIMI 智能医学影像实验室",
-      "html": "<p>北京大学医学部医学技术研究院智能医学影像实验室（Artificial Intelligence for Medical Imaging, AIMI）近日正式成立。课题组聚焦人工智能在医学影像领域的基础研究与临床转化应用，面向精准医学的发展需求，重点开展 CT 图像重建、MRI 肿瘤自动分割、图像引导肿瘤放疗、患者预后与生存分析、数字病理、机器视觉驱动的医学图像生成等方向的研究。实验室致力于推进智能影像技术的发展，为疾病诊断、治疗决策与疗效评估提供创新性的技术支撑。</p>"
+      "html": "<p>北京大学医学部医学技术研究院智能医学影像实验室（Artificial Intelligence for Medical Imaging, AIMI）近日正式成立。</p>\n<p>课题组聚焦人工智能在医学影像领域的基础研究与临床转化应用，面向精准医学的发展需求，重点开展 CT 图像重建、MRI 肿瘤自动分割、图像引导肿瘤放疗、患者预后与生存分析、数字病理、机器视觉驱动的医学图像生成等方向的研究。</p>\n<p>实验室致力于推进智能影像技术的发展，为疾病诊断、治疗决策与疗效评估提供创新性的技术支撑。</p>"
     }
   }
 ]

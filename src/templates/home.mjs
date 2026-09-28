@@ -77,10 +77,12 @@ export function renderHome(context) {
 
   const gallery = homeContent.gallery.map(image => {
     const photo = picture(image.url, t(image.altKey));
-    const visual = `<a href="${esc(localUrl(image.url))}">${photo}</a>`;
-    const caption = t(image.captionKey);
+    const visual = `<a href="${esc(localUrl(image.url))}" aria-label="${esc(t('fullImage') + t(image.captionKey))}">${photo}</a>`;
+    const caption = esc(t(image.captionKey));
+    const eyebrow = image.eyebrowKey ? `<span class="gallery-eyebrow">${esc(t(image.eyebrowKey))}</span>` : '';
+    const description = image.descriptionKey ? `<p>${esc(t(image.descriptionKey))}</p>` : '';
 
-    return `<figure>${visual}<figcaption>${caption}</figcaption></figure>`;
+    return `<figure>${visual}<figcaption>${eyebrow}<h3 data-image-caption>${caption}</h3>${description}</figcaption></figure>`;
   }).join('');
 
   const chapters = [['home', 'storyHome'], ['updates', 'storyUpdates'], ['research', 'research'], ['about', 'aboutLab'], ['contact', 'contact']];

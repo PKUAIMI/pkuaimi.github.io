@@ -242,7 +242,7 @@
       const link = gallery[index];
       const thumbnail = link.querySelector('img');
       const figureCaption = link.closest('figure')?.querySelector('figcaption');
-      const captionText = (figureCaption?.querySelector(':scope > span') || figureCaption)?.textContent;
+      const captionText = (figureCaption?.querySelector('[data-image-caption]') || figureCaption?.querySelector(':scope > span') || figureCaption)?.textContent;
       const label = captionText?.replace(/\s+/g, ' ').trim() || thumbnail.alt || link.getAttribute('aria-label') || '';
       const version = ++requestVersion;
       caption.textContent = label;

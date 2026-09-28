@@ -245,7 +245,7 @@ About 正文会完整呈现，不需要把段落放在特殊位置，也不从�
 
 `altKey` 和 `captionKey` 引用 `ui.json` 中的中英文图片说明。添加照片时向 `hero` 追加完整对象即可；第一张同时用于网页分享预览。两张及以上会显示切换和播放/暂停按钮，每 6 秒切换；手动切换、键盘进入照片或系统设置减少动态效果时停止自动播放。鼠标悬停、大图预览、页面隐藏或滚出屏幕时暂时暂停。只有一张时显示普通图片，无 JavaScript 时仍可横向滚动查看照片。
 
-About 区域的 `gallery` 每项包含 `url`、`altKey`、`captionKey`。后两者引用 `ui.json` 的文字键；修改图注或图片说明时同步填写中英文。`newsLimit` 和 `publicationLimit` 必须是大于零的整数。
+About 区域的 `gallery` 每项包含 `url`、`altKey`、`captionKey`，可选 `eyebrowKey`（类别）和 `descriptionKey`（简介）。这些文字键引用 `ui.json`；修改时同步填写中英文。当前展示实验室图腾“硅基生命树”，原图为 `public/assets/brand/silicon-based-tree-of-life.png`，保留老师提供的透明背景与原色。`newsLimit` 和 `publicationLimit` 必须是大于零的整数。
 
 ## 7. 图片、链接与 JSON 写法
 

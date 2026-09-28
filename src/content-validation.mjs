@@ -240,6 +240,7 @@ export function validateContent(data, { root = process.cwd() } = {}) {
       if (!isObject(image)) { fail('content/home.json', `gallery[${index}]`, '应为包含 url、altKey、captionKey 的对象。'); continue; }
       asset(image.url, 'content/home.json', `gallery[${index}].url`);
       for (const field of ['altKey', 'captionKey']) if (!isNonempty(image[field]) || LANGUAGES.some(language => !isNonempty(data.ui?.[language]?.[image[field]]))) fail('content/home.json', `gallery[${index}].${field}`, '应为 content/ui.json 中同时具有 en 和 zh 的文字键名。');
+      for (const field of ['eyebrowKey', 'descriptionKey']) if (field in image && (!isNonempty(image[field]) || LANGUAGES.some(language => !isNonempty(data.ui?.[language]?.[image[field]])))) fail('content/home.json', `gallery[${index}].${field}`, '应为 content/ui.json 中同时具有 en 和 zh 的文字键名。');
     }
   } else fail('content/home.json', '文件内容', '应为首页设置对象。');
   return errors;
