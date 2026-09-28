@@ -148,7 +148,7 @@ npm run new -- profile jane-doe --member person-jane-doe
 
 ### 添加 Lab Lives 合照
 
-People 页面底部的相册单独维护在 `content/lab-lives.json`，按数组顺序展示。将照片放入 `public/assets/`，然后复制一条记录并填写中英文说明：
+People 页面底部的相册单独维护在 `content/lab-lives.json`，按年份从新到旧分组，同年内按数组顺序展示；未注明年份的照片放在最后的“其他瞬间”组。将照片放入 `public/assets/`，然后复制一条记录并填写中英文说明：
 
 ```json
 {
