@@ -156,6 +156,42 @@
     }
   },
   {
+    "id": "person-shijie-hou",
+    "group": "bachelors",
+    "image": "/assets/shijie-hou.jpg",
+    "profilePath": null,
+    "en": {
+      "name": "ShiJie Hou"
+    },
+    "zh": {
+      "name": "候士杰"
+    }
+  },
+  {
+    "id": "person-wenqi-zhang",
+    "group": "bachelors",
+    "image": "/assets/wenqi-zhang.jpg",
+    "profilePath": null,
+    "en": {
+      "name": "WenQi Zhang"
+    },
+    "zh": {
+      "name": "张文起"
+    }
+  },
+  {
+    "id": "person-yiteng-ji",
+    "group": "bachelors",
+    "image": "/assets/yiteng-ji.jpg",
+    "profilePath": null,
+    "en": {
+      "name": "YiTeng Ji"
+    },
+    "zh": {
+      "name": "纪抑腾"
+    }
+  },
+  {
     "id": "person-14",
     "group": "alumni",
     "image": "https://pkuaimi.com/wp-content/uploads/2026/06/%E6%A2%85%E6%80%9D%E8%BF%9C.jpg",
