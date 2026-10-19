@@ -1,5 +1,24 @@
 [
   {
+    "id": "news-yujie-liu-national-scholarship-2026",
+    "images": [
+      {
+        "url": "/assets/yujie-liu-national-scholarship-2026-certificate.png"
+      },
+      {
+        "url": "/assets/yujie-liu-national-scholarship-2026-announcement.png"
+      }
+    ],
+    "en": {
+      "title": "Congratulations to Yujie Liu on Receiving the 2026 National Scholarship for Graduate Students!",
+      "bodyHtml": "<p>Yujie Liu, a member of the AIMI Lab and a master’s student at the School of Optoelectronic Engineering, Chongqing University, has received the 2026 National Scholarship for Graduate Students. Congratulations to Yujie, and best wishes for continued success in her studies and research!</p>"
+    },
+    "zh": {
+      "title": "祝贺刘雨洁同学荣获 2026 年研究生国家奖学金！",
+      "bodyHtml": "<p>我组成员、重庆大学光电工程学院硕士研究生刘雨洁同学荣获 2026 年研究生国家奖学金。热烈祝贺雨洁，祝愿她在今后的学习与科研中再创佳绩！</p>"
+    }
+  },
+  {
     "id": "news-quantum-technology-frontier-summit-2026",
     "date": "2026-10-16",
     "dateKind": "event",
