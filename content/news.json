@@ -1,5 +1,26 @@
 [
   {
+    "id": "news-quantum-technology-frontier-summit-2026",
+    "date": "2026-10-16",
+    "dateKind": "event",
+    "images": [
+      {
+        "url": "/assets/quantum-technology-frontier-summit-2026-group.jpg"
+      },
+      {
+        "url": "/assets/quantum-technology-frontier-summit-2026-certificate.jpg"
+      }
+    ],
+    "en": {
+      "title": "Professor Yixing Huang Gives an Invited Talk at the 2026 2nd Quantum Technology Frontier Summit",
+      "bodyHtml": "<p>On October 16–18, 2026, Professor Yixing Huang, Head of the AIMI Lab, attended the <a href=\"https://www.nmri.ac.cn/index/meeting/custom?id=71\">2026 2nd Quantum Technology Frontier Summit</a> in Hangzhou and delivered an invited talk titled “High-Resolution, High-Bit-Depth Quantum CT Medical Image Reconstruction under Qubit Constraints.”</p>"
+    },
+    "zh": {
+      "title": "黄益星老师参加 2026 第二届量子科技前沿峰会并作邀请报告",
+      "bodyHtml": "<p>2026 年 10 月 16—18 日，<a href=\"https://www.nmri.ac.cn/index/meeting/custom?id=71\">2026 第二届量子科技前沿峰会</a>在杭州举行。实验室负责人黄益星老师受邀参会，并作题为“比特限制下的高分辨率高位深量子 CT 医学影像重建”的邀请报告。</p>"
+    }
+  },
+  {
     "id": "news-yixing-huang-teaching-competition-award-2026",
     "images": [
       {
