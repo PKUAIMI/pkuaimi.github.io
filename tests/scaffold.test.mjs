@@ -38,7 +38,7 @@ test('creates each content type from its template in the correct position', (t) 
   const cases = [
     ['news', 'news.json', 'news-demo', 0],
     ['member', 'people.json', 'person-demo', 1],
-    ['research', 'research.json', 'research-demo', 1],
+    ['research', 'research.json', 'research-demo', 0],
     ['publication', 'publications.json', 'publication-demo', 0],
   ];
   for (const [type, file, id, position] of cases) {

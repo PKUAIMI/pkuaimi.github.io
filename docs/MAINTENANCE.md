@@ -179,7 +179,7 @@ npm run new -- research ct-reconstruction
 
 在 `content/research.json` 填写两种语言的 `title` 和 `descriptionHtml`，并替换 `images` 中的图片路径。研究项目至少一张图，第一张用于首页研究卡片；研究详情会显示所有图片。
 
-项目按文件顺序展示，新增命令将项目追加到末尾。需要突出某个项目时，移动完整条目到希望的位置。已有项目的 `id` 不变，这样 `/research/#research-ct-reconstruction` 等链接仍然有效。
+项目按文件顺序展示，遵循“新研究在上”的顺序。新增命令默认将项目插入文件开头；手动新增时也应放在数组顶部。首页研究卡片和 Research 页的研究项目列表共用这一顺序。调整顺序时移动完整条目，已有项目的 `id` 不变，这样 `/research/#research-ct-reconstruction` 等链接仍然有效。
 
 研究说明可以明确填写空字符串 `""`，适合只有标题和图的项目；不要保留模板中的 `TODO`。
 

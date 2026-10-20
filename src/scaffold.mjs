@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 const types = {
   news: { file: 'news.json', prefix: 'news', prepend: true },
   member: { file: 'people.json', prefix: 'person', prepend: false },
-  research: { file: 'research.json', prefix: 'research', prepend: false },
+  research: { file: 'research.json', prefix: 'research', prepend: true },
   publication: { file: 'publications.json', prefix: 'publication', prepend: true },
   profile: { file: 'pages.json', prefix: 'profile', prepend: false },
 };
@@ -31,6 +31,7 @@ export const helpText = `新增网站内容
 
 slug 只能使用小写英文字母、数字和连接词之间的单个连字符。
 profile 必须关联已有且尚未设置个人主页的成员。
+新增新闻、研究项目和论文默认放在列表顶部。
 --dry-run 仅显示计划，不写入文件；--help 显示此帮助。
 
 新条目使用 content/templates/ 下的 JSON 模板。创建后，请填写中英文
