@@ -58,7 +58,7 @@ if (!fs.existsSync(dist)) {
   console.error('Missing dist/. Run npm run build before npm run check.');
   process.exit(1);
 }
-const { config, ui, pages, news, people, labLives, publications, projects, home, media, displayMedia: display } = await loadContent(root);
+const { config, ui, pages, news, people, labLives, publications, projects, researchFunds, home, media, displayMedia: display } = await loadContent(root);
 const site = new URL(config.url);
 const locales = [{ key: 'en', htmlLang: 'en', prefix: '' }, { key: 'zh', htmlLang: 'zh-CN', prefix: '/zh' }];
 const localizedPath = (route, locale) => locale.prefix + route;
@@ -324,6 +324,15 @@ for (const locale of locales) {
     assertContent(node, textHTML(entry.descriptionHtml || ''), `${locale.key} research ${project.id} description`);
     for (const image of project.images || []) assertImage(node, image.url, `${locale.key} research ${project.id}`);
   }
+  check(researchDocument.elements.filter(node => hasClass(node, 'research-fund-entry')).length === researchFunds.length, `${locale.key} research funds: rendered count differs from editable records`);
+  for (const fund of researchFunds) {
+    const node = recordNode(researchDocument, fund, `${locale.key} research fund ${fund.id}`);
+    for (const field of ['program', 'title']) assertContent(node, fund[locale.key][field], `${locale.key} research fund ${fund.id} ${field}`);
+    for (const field of ['start', 'end']) {
+      assertContent(node, fund[field].replace('-', '.'), `${locale.key} research fund ${fund.id} ${field}`);
+      check(descendants(node).some(item => item.tag === 'time' && item.attrs.datetime === fund[field]), `${locale.key} research fund ${fund.id}: missing ${field} month`);
+    }
+  }
   const contact = documentForPath(localizedPath(routeForType('contact'), locale));
   if (contact) {
     assertContent(contact.document, ui[locale.key].address, `${locale.key} contact address`);
@@ -364,6 +373,14 @@ for (const locale of locales) {
     const record = search.find(record => record.url === localizedPath(routeForType('publications') + '#' + item.id, locale));
     check(!!record, `${locale.key} publication ${item.id}: missing from search index`);
     if (record) check(normalized(record.text).includes(normalized(item.citation)), `${locale.key} publication ${item.id}: search text is missing the original citation`);
+  }
+  for (const fund of researchFunds) {
+    const record = search.find(item => item.url === localizedPath(routeForType('research') + '#' + fund.id, locale));
+    check(!!record, `${locale.key} research fund ${fund.id}: missing from search index`);
+    if (record) {
+      check(record.title === fund[locale.key].title, `${locale.key} research fund ${fund.id}: search title is out of sync`);
+      check(record.text.includes(fund[locale.key].program), `${locale.key} research fund ${fund.id}: funding program missing from search`);
+    }
   }
   for (const page of pages) {
     const route = pageRoutes.get(page.id);

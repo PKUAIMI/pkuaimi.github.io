@@ -48,6 +48,7 @@ export function createContext(data, language, assetVersion) {
     pageRoute: page => page.path,
     currentNews: () => current(data.news),
     currentProjects: () => current(data.projects),
+    currentResearchFunds: () => current(data.researchFunds),
     currentPeople: () => current(data.people),
     groupLabel: id => data.groups.find(group => group.id === id)[language],
   };

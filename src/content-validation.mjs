@@ -10,7 +10,7 @@ const RESERVED_PATHS = new Set([
   'sitemap.xml', 'robots.txt', 'generated-files.json', 'site.config.json',
   'package.json', 'package-lock.json', 'readme.md', 'cname',
 ]);
-const RESERVED_IDS = new Set(['main', 'home', 'updates', 'research', 'about', 'contact', 'story-research-heading', 'story-about-heading', 'lab-welcome', 'lab-lives', 'lab-lives-heading', 'primary-navigation', 'content-filter', 'year-filter', 'search-dialog', 'search-input', 'search-results', 'search-title', 'image-preview-title']);
+const RESERVED_IDS = new Set(['main', 'home', 'updates', 'research', 'research-projects', 'research-fund', 'research-fund-heading', 'about', 'contact', 'story-research-heading', 'story-about-heading', 'lab-welcome', 'lab-lives', 'lab-lives-heading', 'primary-navigation', 'content-filter', 'year-filter', 'search-dialog', 'search-input', 'search-results', 'search-title', 'image-preview-title']);
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const isString = value => typeof value === 'string';
 const isNonempty = value => isString(value) && value.trim().length > 0;
@@ -118,6 +118,7 @@ export function validateContent(data, { root = process.cwd() } = {}) {
   const people = records('people', 'content/people.json');
   const labLives = records('labLives', 'content/lab-lives.json');
   const projects = records('projects', 'content/research.json');
+  const researchFunds = records('researchFunds', 'content/research-funds.json');
   const publications = records('publications', 'content/publications.json');
   const groups = records('groups', 'content/groups.json');
   const groupIds = new Set(groups.map(group => group.id));
@@ -205,6 +206,16 @@ export function validateContent(data, { root = process.cwd() } = {}) {
     const location = where('content/research.json', project, index);
     translations(project, location, { title: false, descriptionHtml: true });
     images(project.images, location, { required: true });
+  }
+  for (const [index, fund] of researchFunds.entries()) {
+    const location = where('content/research-funds.json', fund, index);
+    translations(fund, location, { program: false, title: false });
+    const validMonth = value => isString(value) && /^[1-9]\d{3}-(0[1-9]|1[0-2])$/.test(value);
+    for (const field of ['start', 'end']) {
+      if (!validMonth(fund[field])) fail(location, field, '请填写真实月份 YYYY-MM，例如 2026-01。');
+    }
+    if (validMonth(fund.start) && validMonth(fund.end) && fund.end < fund.start) fail(location, 'end', '结束月份不能早于开始月份。');
+    if (projects.some(project => project.id === fund.id)) fail(location, 'id', '不能与研究项目 id 重复，两者出现在同一页面。');
   }
   for (const [index, publication] of publications.entries()) {
     const location = where('content/publications.json', publication, index);

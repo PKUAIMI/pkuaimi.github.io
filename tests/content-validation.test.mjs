@@ -22,6 +22,7 @@ function fixture(t) {
     people: [{ id: 'person-jane', group: 'faculty', image, profilePath: '/people/jane/', en: { name: 'Jane' }, zh: { name: 'Jane' } }],
     labLives: [],
     projects: [{ id: 'research-ct', images: [{ url: image }], en: { title: 'CT imaging', descriptionHtml: '' }, zh: { title: 'CT 成像', descriptionHtml: '' } }],
+    researchFunds: [],
     publications: [{ id: 'publication-ct', year: 2026, section: 'AIMI', citation: 'Jane. Imaging. 2026.', html: '<p>Jane. Imaging. 2026.</p>', links: [] }],
     groups: [{ id: 'faculty', en: 'Faculty', zh: '教师' }],
     ui: { en: { photo: 'Our lab' }, zh: { photo: '实验室' } },
@@ -55,6 +56,25 @@ test('lab photos allow unknown years but require real images and both language c
   assert.match(errors, /lab-lives\.json.*display/);
   assert.match(errors, /lab-lives\.json.*year/);
   assert.match(errors, /lab-lives\.json.*zh\.caption/);
+});
+
+test('research funds require bilingual text, valid month ranges and distinct page anchors', t => {
+  const { data, validate } = fixture(t);
+  data.researchFunds = [{
+    id: 'fund-ct', start: '2027-01', end: '2029-12',
+    en: { program: 'Research fund', title: 'CT imaging' },
+    zh: { program: '科研基金', title: 'CT 成像' },
+  }];
+  assert.deepEqual(validate(), []);
+  data.researchFunds[0].end = '2026-12';
+  assert.match(validate().join('\n'), /research-funds\.json.*end.*早于/);
+  data.researchFunds[0].start = '2027-13';
+  data.researchFunds[0].id = 'research-ct';
+  delete data.researchFunds[0].zh.program;
+  const errors = validate().join('\n');
+  assert.match(errors, /research-funds\.json.*start.*YYYY-MM/);
+  assert.match(errors, /research-funds\.json.*id.*重复/);
+  assert.match(errors, /research-funds\.json.*zh\.program/);
 });
 
 test('requires carousel photos with real assets, dimensions and bilingual captions', t => {

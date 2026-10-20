@@ -455,6 +455,11 @@
     dialog.querySelector('[data-search-close]').addEventListener('click', () => {
       dialog.close();
     });
+    results.addEventListener('click', event => {
+      if (!event.target.closest('a') || event.defaultPrevented || event.button !== 0
+        || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      dialog.close();
+    });
     dialog.addEventListener('click', event => {
       if (event.target !== dialog) return;
 
@@ -468,7 +473,7 @@
     dialog.addEventListener('close', () => {
       document.body.style.overflow = previousOverflow;
       const target = opener?.getClientRects().length ? opener : navigation.toggle;
-      target?.focus();
+      target?.focus({ preventScroll: true });
     });
     input.addEventListener('input', updateSearchResults);
   }

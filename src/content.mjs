@@ -26,6 +26,7 @@ export async function loadContent(root = ROOT) {
     people: read('content/people.json'),
     labLives: read('content/lab-lives.json'),
     projects: read('content/research.json'),
+    researchFunds: read('content/research-funds.json'),
     groups: read('content/groups.json'),
     home: read('content/home.json'),
     ui: read('content/ui.json'),

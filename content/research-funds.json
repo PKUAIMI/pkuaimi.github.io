@@ -1,0 +1,80 @@
+[
+  {
+    "id": "fund-nsfc-excellent-young-overseas-2025",
+    "start": "2025-01",
+    "end": "2027-12",
+    "en": {
+      "program": "National Natural Science Foundation of China (NSFC) Excellent Young Scientists Fund (Overseas)",
+      "title": "Intelligent Medical Imaging for Precision Radiotherapy"
+    },
+    "zh": {
+      "program": "国家自然科学基金优秀青年科学基金项目（海外）",
+      "title": "面向精准放疗的智能医学影像处理"
+    }
+  },
+  {
+    "id": "fund-capital-health-gastric-cancer-2026",
+    "start": "2026-01",
+    "end": "2028-12",
+    "en": {
+      "program": "Capital Health Development Research Special Youth Key Project",
+      "title": "Clinical Study on the Construction and Application of an Intelligent Agent for Gastric Cancer Disease Monitoring Based on ctDNA and Pathological Intelligent Multimodal Data Fusion"
+    },
+    "zh": {
+      "program": "首都卫生发展科研专项青年重点攻关项目",
+      "title": "基于ctDNA与病理智能化多模态数据融合的胃癌疾病监测智能体构建与应用的临床研究"
+    }
+  },
+  {
+    "id": "fund-pku-graduate-course-2026",
+    "start": "2026-05",
+    "end": "2027-12",
+    "en": {
+      "program": "Peking University Graduate Course Construction Project",
+      "title": "《Advanced Medical Artificial Intelligence》"
+    },
+    "zh": {
+      "program": "北京大学研究生课程建设",
+      "title": "《高级医学人工智能》"
+    }
+  },
+  {
+    "id": "fund-beijing-joint-dental-cbct-2026",
+    "start": "2026-07",
+    "end": "2029-06",
+    "en": {
+      "program": "Cultivation Project of the Beijing Natural Science Foundation Joint Fund",
+      "title": "Neural Operator-Driven Dual-Domain Intelligent Motion Artifact Correction for Dental CBCT"
+    },
+    "zh": {
+      "program": "北京市自然科学基金联合基金培育项目",
+      "title": "神经算子驱动的双域口腔 CBCT 运动伪影智能校正方法研究"
+    }
+  },
+  {
+    "id": "fund-nsfc-general-quantum-ct-2027",
+    "start": "2027-01",
+    "end": "2030-12",
+    "en": {
+      "program": "NSFC General Program",
+      "title": "Quantum Reconstruction of High-Resolution and High-Precision CT Images in Bit-Constrained Environments"
+    },
+    "zh": {
+      "program": "国家自然科学基金面上项目",
+      "title": "比特受限环境下的高分辨率高精度CT图像量子重建"
+    }
+  },
+  {
+    "id": "fund-nsfc-young-haijun-yu-2027",
+    "start": "2027-01",
+    "end": "2029-12",
+    "en": {
+      "program": "NSFC Young Scientists Fund (Category C, Haijun Yu)",
+      "title": "Research on Spiral Anode Linear Source Dual-Ring Static CT Imaging"
+    },
+    "zh": {
+      "program": "国家自然科学基金青年项目（余海军）",
+      "title": "螺旋阳极线源双环静态CT成像研究"
+    }
+  }
+]

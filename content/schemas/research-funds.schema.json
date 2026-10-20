@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "科研基金",
+  "description": "Research 页面中的科研基金，按数组顺序展示；每条记录同时维护中英文。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "start", "end", "en", "zh"],
+    "properties": {
+      "id": { "$ref": "common.schema.json#/definitions/id" },
+      "start": {
+        "$ref": "#/definitions/month",
+        "description": "项目开始月份，格式为 YYYY-MM。"
+      },
+      "end": {
+        "$ref": "#/definitions/month",
+        "description": "项目结束月份，格式为 YYYY-MM，不能早于开始月份。"
+      },
+      "en": { "$ref": "#/definitions/translation" },
+      "zh": { "$ref": "#/definitions/translation" }
+    }
+  },
+  "definitions": {
+    "month": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]{3}-(0[1-9]|1[0-2])$"
+    },
+    "translation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["program", "title"],
+      "properties": {
+        "program": {
+          "allOf": [{ "$ref": "common.schema.json#/definitions/nonEmptyText" }],
+          "description": "基金或资助计划名称；需要时在括号中保留负责人。"
+        },
+        "title": {
+          "allOf": [{ "$ref": "common.schema.json#/definitions/nonEmptyText" }],
+          "description": "获资助的研究项目或课程名称。"
+        }
+      }
+    }
+  }
+}

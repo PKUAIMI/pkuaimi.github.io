@@ -61,6 +61,11 @@ export async function buildSite({ root = ROOT } = {}) {
     search.push(
       ...data.news.map(item => ({ title: item[language].title, url: `${pageUrl('/news/')}#${item.id}`, text: plainText(item[language].bodyHtml) })),
       ...data.publications.map(item => ({ title: item.citation, url: `${pageUrl('/publications/')}#${item.id}`, text: item.citation })),
+      ...data.researchFunds.map(item => ({
+        title: item[language].title,
+        url: `${pageUrl('/research/')}#${item.id}`,
+        text: `${t('researchFund')} ${item.start.replace('-', '.')}–${item.end.replace('-', '.')} ${item[language].program} ${item[language].title}`,
+      })),
     );
     files.set(language === 'zh' ? 'zh/search-index.json' : 'search-index.json', JSON.stringify(search));
   }

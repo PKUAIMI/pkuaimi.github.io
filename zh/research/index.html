@@ -17,10 +17,10 @@
     <meta property="og:locale" content="zh_CN">
     <meta property="og:image" content="https://pkuaimi.github.io/assets/home-slides/01-summer-outing.jpg">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
-    <link rel="stylesheet" href="/styles.css?v=95f6b55ab1">
+    <link rel="stylesheet" href="/styles.css?v=7ad5defa1b">
 
     <script type="application/json" id="ui-messages">{"menu":"菜单","menuClose":"关闭菜单","scrollableTable":"可横向滚动的表格","searchHint":"搜索团队成员、研究方向、新闻与学术成果。","searching":"正在搜索……","searchError":"暂时无法加载搜索，请重试或使用主导航浏览。","resultSingular":"条结果","resultPlural":"条结果","searchEmpty":"未找到匹配结果，请尝试其他姓名或关键词。","imageLoading":"图片加载中……","imageError":"图片暂时无法加载，可尝试在新标签页打开原图。","imagePosition":"第 {current} 张，共 {total} 张","pauseSlideshow":"暂停轮播","playSlideshow":"播放轮播"}</script>
-    <script src="/site.js?v=95f6b55ab1" defer></script>
+    <script src="/site.js?v=7ad5defa1b" defer></script>
   </head>
   <body><a class="skip-link" href="#main">跳转到正文</a>
     <header class="site-header">
@@ -64,7 +64,11 @@
     </div>
       <div class="wrap page-layout">
 
-        <div class="page-content"><article class="project-entry" id="research-1">
+        <div class="page-content"><nav class="research-nav" aria-label="科研栏目导航">
+    <a href="#research-projects">研究项目</a>
+    <a href="#research-fund">科研基金</a>
+  </nav>
+  <div id="research-projects"><article class="project-entry" id="research-1">
     <h2>脑转移瘤检测与分割</h2>
     <div class="prose"><figure><a href="/assets/2025-11-image-9edbc5bf.png" aria-label="查看原图：脑转移瘤检测与分割" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/2025-11-image-9edbc5bf-web.png" alt="脑转移瘤检测与分割" loading="lazy" decoding="async" width="1200" height="379" ></a></figure><p lang="zh-CN">主要贡献：（1）利用既往扫描降低假阳性率；（2）提出新的 VSS 损失函数，以调节灵敏度与精确率；（3）采用双模型实现人机交互，兼顾效率与稳健性，契合临床实践需求。</p></div>
   </article><article class="project-entry" id="research-2">
@@ -76,7 +80,41 @@
   </article><article class="project-entry" id="research-4">
     <h2>基于大语言模型的放射肿瘤学决策支持</h2>
     <div class="prose"><figure><a href="/assets/2025-11-llmdecisionsupport-5216feee.png" aria-label="查看原图：基于大语言模型的放射肿瘤学决策支持" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/2025-11-llmdecisionsupport-5216feee-web.png" alt="基于大语言模型的放射肿瘤学决策支持" loading="lazy" decoding="async" width="1200" height="387" ></a></figure></div>
+  </article><article class="project-entry" id="research-gr-gaussian">
+    <h2>GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction</h2>
+    <div class="prose"><figure><a href="/assets/gr-gaussian-fig-4.jpg" aria-label="查看原图：GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/gr-gaussian-fig-4.jpg" alt="GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction" loading="lazy" decoding="async" ></a></figure></div>
   </article></div>
+  <section class="research-funds" id="research-fund" aria-labelledby="research-fund-heading">
+    <h2 id="research-fund-heading">科研基金</h2>
+    <div class="research-fund-columns" aria-hidden="true">
+      <span>项目周期</span><span>基金类别</span><span>项目名称</span>
+    </div>
+    <ol class="research-fund-list" role="list"><li class="research-fund-entry" id="fund-nsfc-excellent-young-overseas-2025">
+    <p class="research-fund-period"><time datetime="2025-01">2025.01</time>–<time datetime="2027-12">2027.12</time></p>
+    <p class="research-fund-program">国家自然科学基金优秀青年科学基金项目（海外）</p>
+    <h3>面向精准放疗的智能医学影像处理</h3>
+  </li><li class="research-fund-entry" id="fund-capital-health-gastric-cancer-2026">
+    <p class="research-fund-period"><time datetime="2026-01">2026.01</time>–<time datetime="2028-12">2028.12</time></p>
+    <p class="research-fund-program">首都卫生发展科研专项青年重点攻关项目</p>
+    <h3>基于ctDNA与病理智能化多模态数据融合的胃癌疾病监测智能体构建与应用的临床研究</h3>
+  </li><li class="research-fund-entry" id="fund-pku-graduate-course-2026">
+    <p class="research-fund-period"><time datetime="2026-05">2026.05</time>–<time datetime="2027-12">2027.12</time></p>
+    <p class="research-fund-program">北京大学研究生课程建设</p>
+    <h3>《高级医学人工智能》</h3>
+  </li><li class="research-fund-entry" id="fund-beijing-joint-dental-cbct-2026">
+    <p class="research-fund-period"><time datetime="2026-07">2026.07</time>–<time datetime="2029-06">2029.06</time></p>
+    <p class="research-fund-program">北京市自然科学基金联合基金培育项目</p>
+    <h3>神经算子驱动的双域口腔 CBCT 运动伪影智能校正方法研究</h3>
+  </li><li class="research-fund-entry" id="fund-nsfc-general-quantum-ct-2027">
+    <p class="research-fund-period"><time datetime="2027-01">2027.01</time>–<time datetime="2030-12">2030.12</time></p>
+    <p class="research-fund-program">国家自然科学基金面上项目</p>
+    <h3>比特受限环境下的高分辨率高精度CT图像量子重建</h3>
+  </li><li class="research-fund-entry" id="fund-nsfc-young-haijun-yu-2027">
+    <p class="research-fund-period"><time datetime="2027-01">2027.01</time>–<time datetime="2029-12">2029.12</time></p>
+    <p class="research-fund-program">国家自然科学基金青年项目（余海军）</p>
+    <h3>螺旋阳极线源双环静态CT成像研究</h3>
+  </li></ol>
+  </section></div>
       </div>
     </main><footer class="site-footer">
       <div class="wrap">

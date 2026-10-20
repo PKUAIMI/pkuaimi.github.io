@@ -56,6 +56,8 @@ src/output.mjs ← public/ 图片、CSS、JavaScript
 
 论文只维护一份正式引文 `html`。`loadContent()` 在内存中派生 `citation` 与 `links`，提供给搜索和校验；不会把派生字段写回内容文件。
 
+科研基金单独维护在 `research-funds.json`，每条记录包含稳定 `id`、起止月份及中英文基金类别和项目名称。Research 模板将其显示在研究项目之后；全站搜索为每项生成对应语言的定位链接。月份有效性、起止顺序、双语完整性及与研究项目的锚点冲突在构建前校验。
+
 页面用 `type` 选择模板，`path` 声明规范地址，`aliases` 声明旧地址。新增成员个人页由数据驱动，不依赖姓名与地址的硬编码表。首页 About 直接渲染首页条目的 `en.html` / `zh.html`；轮播合影自动扫描 `public/assets/home-slides/`；可选图注、图库和展示数量来自 `home.json`。
 
 成员分组采用稳定 `id`，名称和顺序由 `groups.json` 提供。模板按分组顺序输出有成员的分组，组内保持成员数组顺序。

@@ -17,10 +17,10 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://pkuaimi.github.io/assets/home-slides/01-summer-outing.jpg">
     <link rel="icon" href="/assets/lab-logo.png" type="image/png">
-    <link rel="stylesheet" href="/styles.css?v=95f6b55ab1">
+    <link rel="stylesheet" href="/styles.css?v=7ad5defa1b">
 
     <script type="application/json" id="ui-messages">{"menu":"Menu","menuClose":"Close menu","scrollableTable":"Scrollable table","searchHint":"Search people, research, news and publications.","searching":"Searching…","searchError":"Search could not load. Please try again, or use the main navigation.","resultSingular":"result","resultPlural":"results","searchEmpty":"No matching results. Try another name or keyword.","imageLoading":"Loading image…","imageError":"The image could not be loaded. You can try opening the original in a new tab.","imagePosition":"Image {current} of {total}","pauseSlideshow":"Pause slideshow","playSlideshow":"Play slideshow"}</script>
-    <script src="/site.js?v=95f6b55ab1" defer></script>
+    <script src="/site.js?v=7ad5defa1b" defer></script>
   </head>
   <body><a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
@@ -64,7 +64,11 @@
     </div>
       <div class="wrap page-layout">
 
-        <div class="page-content"><article class="project-entry" id="research-1">
+        <div class="page-content"><nav class="research-nav" aria-label="Research sections">
+    <a href="#research-projects">Research Projects</a>
+    <a href="#research-fund">Research Fund</a>
+  </nav>
+  <div id="research-projects"><article class="project-entry" id="research-1">
     <h2>Brain metastases detection and segmentation</h2>
     <div class="prose"><figure><a href="/assets/2025-11-image-9edbc5bf.png" aria-label="View full image: Brain metastases detection and segmentation" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/2025-11-image-9edbc5bf-web.png" alt="Brain metastases detection and segmentation" loading="lazy" decoding="async" width="1200" height="379" ></a></figure><p>Major contributions：(1) prior scan to reduce false positive rate; (2) novel VSS loss to adjust sensitivity and precision; (3) dual models for human-AI interaction, high efficiency and robustness, fit well for clinical practice.</p></div>
   </article><article class="project-entry" id="research-2">
@@ -76,7 +80,41 @@
   </article><article class="project-entry" id="research-4">
     <h2>LLM-based decision support for radiation oncology</h2>
     <div class="prose"><figure><a href="/assets/2025-11-llmdecisionsupport-5216feee.png" aria-label="View full image: LLM-based decision support for radiation oncology" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/2025-11-llmdecisionsupport-5216feee-web.png" alt="LLM-based decision support for radiation oncology" loading="lazy" decoding="async" width="1200" height="387" ></a></figure></div>
+  </article><article class="project-entry" id="research-gr-gaussian">
+    <h2>GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction</h2>
+    <div class="prose"><figure><a href="/assets/gr-gaussian-fig-4.jpg" aria-label="View full image: GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction" data-image-preview aria-haspopup="dialog" target="_blank" rel="noopener"><img src="/assets/gr-gaussian-fig-4.jpg" alt="GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction" loading="lazy" decoding="async" ></a></figure></div>
   </article></div>
+  <section class="research-funds" id="research-fund" aria-labelledby="research-fund-heading">
+    <h2 id="research-fund-heading">Research Fund</h2>
+    <div class="research-fund-columns" aria-hidden="true">
+      <span>Period</span><span>Funding program</span><span>Project</span>
+    </div>
+    <ol class="research-fund-list" role="list"><li class="research-fund-entry" id="fund-nsfc-excellent-young-overseas-2025">
+    <p class="research-fund-period"><time datetime="2025-01">2025.01</time>–<time datetime="2027-12">2027.12</time></p>
+    <p class="research-fund-program">National Natural Science Foundation of China (NSFC) Excellent Young Scientists Fund (Overseas)</p>
+    <h3>Intelligent Medical Imaging for Precision Radiotherapy</h3>
+  </li><li class="research-fund-entry" id="fund-capital-health-gastric-cancer-2026">
+    <p class="research-fund-period"><time datetime="2026-01">2026.01</time>–<time datetime="2028-12">2028.12</time></p>
+    <p class="research-fund-program">Capital Health Development Research Special Youth Key Project</p>
+    <h3>Clinical Study on the Construction and Application of an Intelligent Agent for Gastric Cancer Disease Monitoring Based on ctDNA and Pathological Intelligent Multimodal Data Fusion</h3>
+  </li><li class="research-fund-entry" id="fund-pku-graduate-course-2026">
+    <p class="research-fund-period"><time datetime="2026-05">2026.05</time>–<time datetime="2027-12">2027.12</time></p>
+    <p class="research-fund-program">Peking University Graduate Course Construction Project</p>
+    <h3>《Advanced Medical Artificial Intelligence》</h3>
+  </li><li class="research-fund-entry" id="fund-beijing-joint-dental-cbct-2026">
+    <p class="research-fund-period"><time datetime="2026-07">2026.07</time>–<time datetime="2029-06">2029.06</time></p>
+    <p class="research-fund-program">Cultivation Project of the Beijing Natural Science Foundation Joint Fund</p>
+    <h3>Neural Operator-Driven Dual-Domain Intelligent Motion Artifact Correction for Dental CBCT</h3>
+  </li><li class="research-fund-entry" id="fund-nsfc-general-quantum-ct-2027">
+    <p class="research-fund-period"><time datetime="2027-01">2027.01</time>–<time datetime="2030-12">2030.12</time></p>
+    <p class="research-fund-program">NSFC General Program</p>
+    <h3>Quantum Reconstruction of High-Resolution and High-Precision CT Images in Bit-Constrained Environments</h3>
+  </li><li class="research-fund-entry" id="fund-nsfc-young-haijun-yu-2027">
+    <p class="research-fund-period"><time datetime="2027-01">2027.01</time>–<time datetime="2029-12">2029.12</time></p>
+    <p class="research-fund-program">NSFC Young Scientists Fund (Category C, Haijun Yu)</p>
+    <h3>Research on Spiral Anode Linear Source Dual-Ring Static CT Imaging</h3>
+  </li></ol>
+  </section></div>
       </div>
     </main><footer class="site-footer">
       <div class="wrap">

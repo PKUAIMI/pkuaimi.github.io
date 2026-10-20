@@ -62,5 +62,21 @@
       "title": "基于大语言模型的放射肿瘤学决策支持",
       "descriptionHtml": ""
     }
+  },
+  {
+    "id": "research-gr-gaussian",
+    "images": [
+      {
+        "url": "/assets/gr-gaussian-fig-4.jpg"
+      }
+    ],
+    "en": {
+      "title": "GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction",
+      "descriptionHtml": ""
+    },
+    "zh": {
+      "title": "GR-Gaussian: Graph-Based Radiative Gaussian Splatting for Sparse-View Tomographic Reconstruction",
+      "descriptionHtml": ""
+    }
   }
 ]

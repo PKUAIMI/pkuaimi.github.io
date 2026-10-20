@@ -23,6 +23,10 @@
       "url": "./content/schemas/research.schema.json"
     },
     {
+      "fileMatch": ["/content/research-funds.json"],
+      "url": "./content/schemas/research-funds.schema.json"
+    },
+    {
       "fileMatch": [
         "/content/publications.json"
       ],
