@@ -172,7 +172,7 @@ export function createLayout(context) {
     return {
       '/news/': [t('news'), t('newsDescription')],
       '/people/': [t('people'), t('peopleDescription')],
-      '/research/': [t('researchTitle'), t('researchDescription')],
+      '/research/': [t('research'), t('researchDescription')],
       '/publications/': [t('publications'), t('publicationsDescription')],
       '/contact/': [t('contact'), t('institute') + ' · ' + t('institution')],
     }[url];

@@ -185,7 +185,7 @@ npm run new -- research ct-reconstruction
 
 ### 科研基金
 
-Research 页面下方的“科研基金 / Research Fund”在 `content/research-funds.json` 中维护，页面顶部提供跳转入口。复制已有条目，填写唯一且稳定的 `id`、`start` / `end`（`YYYY-MM`），以及同一条记录中的 `en.program` / `zh.program`（基金类别）和 `en.title` / `zh.title`（项目名称）。
+Research 页面中的“科研基金 / Research Fund”显示在研究项目上方，在 `content/research-funds.json` 中维护，页面顶部提供跳转入口。复制已有条目，填写唯一且稳定的 `id`、`start` / `end`（`YYYY-MM`），以及同一条记录中的 `en.program` / `zh.program`（基金类别）和 `en.title` / `zh.title`（项目名称）。
 
 基金按数组顺序显示，桌面端分为项目周期、基金类别和项目名称三列，手机端逐条展开。每项自动进入对应语言的全站搜索，搜索结果直接跳转到该基金。新增或修改后运行 `npm run verify`。
 

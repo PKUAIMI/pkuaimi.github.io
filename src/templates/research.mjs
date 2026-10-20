@@ -19,16 +19,20 @@ export function renderResearch(context) {
   const { esc, html, figure, t, currentProjects, currentResearchFunds } = context;
   const funds = currentResearchFunds();
 
-  const projects = currentProjects().map(project => `<article class="project-entry" id="${project.id}">
-    <h2>${esc(project.title)}</h2>
+  const entries = currentProjects().map(project => `<article class="project-entry" id="${project.id}">
+    <h3>${esc(project.title)}</h3>
     <div class="prose">${project.images.map(image => figure(image.url, project.title)).join('')}${html(project.descriptionHtml)}</div>
   </article>`).join('');
+  const projects = `<section class="research-projects" id="research-projects" aria-label="${esc(t('researchTitle'))}">
+    <h2>${esc(t('researchTitle'))}</h2>
+    ${entries}
+  </section>`;
 
   if (!funds.length) return projects;
   return `<nav class="research-nav" aria-label="${esc(t('researchSections'))}">
-    <a href="#research-projects">${esc(t('researchTitle'))}</a>
     <a href="#research-fund">${esc(t('researchFund'))}</a>
+    <a href="#research-projects">${esc(t('researchTitle'))}</a>
   </nav>
-  <div id="research-projects">${projects}</div>
-  ${renderResearchFunds(context, funds)}`;
+  ${renderResearchFunds(context, funds)}
+  ${projects}`;
 }
