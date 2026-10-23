@@ -192,6 +192,18 @@
     }
   },
   {
+    "id": "person-shiqi-fan",
+    "group": "bachelors",
+    "image": "/assets/shiqi-fan.jpg",
+    "profilePath": null,
+    "en": {
+      "name": "ShiQi Fan"
+    },
+    "zh": {
+      "name": "樊师祁"
+    }
+  },
+  {
     "id": "person-14",
     "group": "alumni",
     "image": "https://pkuaimi.com/wp-content/uploads/2026/06/%E6%A2%85%E6%80%9D%E8%BF%9C.jpg",
