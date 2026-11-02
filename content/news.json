@@ -1,5 +1,21 @@
 [
   {
+    "id": "news-tilted-detector-tiling-tim-acceptance",
+    "images": [
+      {
+        "url": "/assets/tilted-detector-tiling-tim-figure-1.png"
+      }
+    ],
+    "en": {
+      "title": "Tilted Detector Tiling Design for Modular CT Systems Provisionally Accepted by IEEE TIM",
+      "bodyHtml": "<p>Our paper, “Tilted Detector Tiling Design for Modular CT Systems,” has been <strong>provisionally accepted</strong> for publication in <em>IEEE Transactions on Instrumentation and Measurement</em> (IEEE TIM), pending final approval of the final manuscript files.</p><p>The authors are Ao Wang, Haijun Yu, Yikuang Yuluo, Jiacheng Liu, Yujie Liu, Chuandong Tan, Hengyong Yu, Fenglin Liu, and Yixing Huang. Ao Wang and Haijun Yu are co-first authors.</p><p>The study proposes an in-plane tilted detector-module tiling layout to redistribute gap-induced missing samples and reduce ring and banding artifacts in CT reconstruction. The design is evaluated through simulations of rotary CT, helical CT, and multi-source static CT, with an additional projection-domain mask-emulation study using measured rotary CT projections.</p><p>Congratulations to all the authors!</p><p><em>Figure: conventional vertical tiling (a) and the proposed tilted layout (b), reproduced from Fig. 1 of the manuscript.</em></p>"
+    },
+    "zh": {
+      "title": "模块化 CT 系统的倾斜探测器拼接设计研究获 IEEE TIM 有条件接收",
+      "bodyHtml": "<p>我组论文《Tilted Detector Tiling Design for Modular CT Systems》获 <em>IEEE Transactions on Instrumentation and Measurement</em>（IEEE TIM）<strong>有条件接收（provisionally accepted）</strong>，最终稿文件仍待期刊审核批准。</p><p>论文作者为 Ao Wang、Haijun Yu、Yikuang Yuluo、Jiacheng Liu、Yujie Liu、Chuandong Tan、Hengyong Yu、Fenglin Liu 和 Yixing Huang，其中王奥（Ao Wang）与余海军（Haijun Yu）为共同第一作者。</p><p>该研究提出探测器模块在自身平面内旋转的倾斜拼接布局，通过重新分布模块间隙造成的缺失采样，减轻 CT 重建中的环状与条带伪影。作者在旋转 CT、螺旋 CT 和多源静态 CT 的仿真中进行了评估，并进一步在实测旋转 CT 投影上开展掩膜模拟实验。</p><p>祝贺各位作者！</p><p><em>配图：常规竖直拼接（a）与所提出的倾斜拼接布局（b）对比，摘自论文图 1。</em></p>"
+    }
+  },
+  {
     "id": "news-jiachen-tang-cycling-championships-2026",
     "date": "2026-10-22",
     "dateKind": "event",
