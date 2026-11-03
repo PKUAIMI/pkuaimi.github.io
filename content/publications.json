@@ -54,6 +54,12 @@
     "html": "<p> <strong>Y. Huang</strong>, A. Gomaa, T. Weissmann, J. Grigo, H. Ben Tkhayat, B. Frey, U. Gaipl, L. Distel, A. Maier, R. Fietkau, C. Bert, F. Putz, “Benchmarking ChatGPT-4 on ACR radiation oncology in-training exam (TXIT): Potentials and challenges for AI-assisted medical education and decision making in radiation oncology.” <em>Front. Oncol</em>. 2023</p>"
   },
   {
+    "id": "publication-brain-metastasis-longitudinal-mri-2022",
+    "year": 2022,
+    "section": "Publications Before AIMI",
+    "html": "<p><strong>Y. Huang</strong>, C. Bert, P. Sommer, B. Frey, U. Gaipl, L. Distel, M. Uder, M. Schmidt, A. Dörfler, A. Maier, R. Fietkau, and F. Putz, “Deep Learning for Brain Metastasis Detection and Segmentation in Longitudinal MRI Data,” <em>Med. Phys.</em> 2022 (<strong>Top Downloaded Article</strong>)</p>"
+  },
+  {
     "id": "publication-9",
     "year": 2021,
     "section": "Publications Before AIMI",
