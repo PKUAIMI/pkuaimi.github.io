@@ -191,6 +191,8 @@ Research 页面中的“科研基金 / Research Fund”显示在研究项目上�
 
 ## 5. 添加论文
 
+发布新论文接收新闻时，同步将论文加入 `content/publications.json` 的 Publication 列表。如果已有该论文条目，更新现有记录，避免重复添加；新闻和论文列表在同一次更新中发布。
+
 ```sh
 npm run new -- publication paper-2026
 ```

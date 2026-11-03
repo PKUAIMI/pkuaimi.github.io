@@ -5,6 +5,7 @@
 - A content record owns both its `en` and `zh` text. English remains the default, with Chinese under `/zh/`. Keep navigation, search results and language switches consistent.
 - Keep existing record IDs and page URLs stable. Use `aliases` for previous page paths. Never generate member routes from display names.
 - Publication `html` is authoritative; citation text and links are derived. Keep official paper titles and bibliographic information unchanged unless requested.
+- When publishing news about a newly accepted paper, add it to `content/publications.json` in the same update, or update its existing record to avoid duplicates.
 - Preserve the original migration archive and known source discrepancies. The import script writes to `migration/imported/`, not editable content.
 - Prefer Node.js built-ins and the existing static-site architecture. Use two-space indentation, semicolons, small named functions and readable templates. Do not introduce a framework for routine content work.
 - For additions, use `npm run new -- --help` and the templates in `content/templates/`.
