@@ -5,10 +5,11 @@ export function renderPeople(context) {
     .map(group => group.id)
     .filter(groupId => members.some(member => member.group === groupId));
 
-  const memberSections = memberGroups.map((group, index) => {
-    const cards = members.filter(member => member.group === group).map(person => {
+  function renderCards(people, nameTag = 'h3') {
+    const cards = people.map(person => {
       const url = person.profilePath ? localUrl(person.profilePath) : null;
       const tag = url ? 'a' : 'article';
+      const subtitle = person.group === 'bachelors' ? '' : `<p>${groupLabel(person.group)}</p>`;
       const profileLink = url
         ? `<span class="text-link">${t('viewProfile')} ${straight}</span>`
         : '';
@@ -16,16 +17,36 @@ export function renderPeople(context) {
       return `<${tag} class="person-card"${url ? ` href="${url}"` : ''} id="${person.id}">
         ${picture(person.image, person.name)}
         <div class="person-copy">
-          <h3>${esc(person.name)}</h3>
-          <p>${groupLabel(group)}</p>
+          <${nameTag} class="person-name">${esc(person.name)}</${nameTag}>
+          ${subtitle}
           ${profileLink}
         </div>
       </${tag}>`;
     }).join('');
+    return `<div class="people-cards">${cards}</div>`;
+  }
 
+  function renderCohorts(students) {
+    const byYear = Map.groupBy(students, student => student.cohortYear);
+    const years = [...byYear.keys()].filter(year => year !== undefined).sort((a, b) => a - b);
+    if (!years.length) return renderCards(students);
+    if (byYear.has(undefined)) years.push(undefined);
+
+    return years.map(year => {
+      const heading = `bachelors-cohort-${year ?? 'other'}`;
+      const label = year ? t('studentCohort').replace('{year}', year) : t('otherUndergraduates');
+      return `<section class="student-cohort" aria-labelledby="${heading}">
+        <h3 class="student-cohort-title" id="${heading}">${esc(label)}</h3>
+        ${renderCards(byYear.get(year), 'h4')}
+      </section>`;
+    }).join('');
+  }
+
+  const memberSections = memberGroups.map((group, index) => {
+    const people = members.filter(member => member.group === group);
     return `<section class="people-group${group === 'faculty' ? ' faculty-group' : ''}" aria-labelledby="group-${index}">
       <h2 class="people-group-title" id="group-${index}">${groupLabel(group)}</h2>
-      <div class="people-cards">${cards}</div>
+      ${group === 'bachelors' ? renderCohorts(people) : renderCards(people)}
     </section>`;
   }).join('');
 

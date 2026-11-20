@@ -122,6 +122,7 @@
   {
     "id": "person-11",
     "group": "bachelors",
+    "cohortYear": 2023,
     "image": "https://pkuaimi.com/wp-content/uploads/2025/11/%E5%BC%A0%E7%8E%89%E9%9B%AF.jpg",
     "profilePath": null,
     "en": {
@@ -134,6 +135,7 @@
   {
     "id": "person-12",
     "group": "bachelors",
+    "cohortYear": 2023,
     "image": "https://pkuaimi.com/wp-content/uploads/2025/11/%E7%B4%A2%E6%9C%97%E6%8E%AA%E5%A7%86.jpg",
     "profilePath": null,
     "en": {
@@ -144,20 +146,22 @@
     }
   },
   {
-    "id": "person-13",
+    "id": "person-shiqi-fan",
     "group": "bachelors",
-    "image": "https://pkuaimi.com/wp-content/uploads/2025/11/%E9%AD%8F%E4%B8%80%E7%A6%BE2.png",
+    "cohortYear": 2023,
+    "image": "/assets/shiqi-fan.jpg",
     "profilePath": null,
     "en": {
-      "name": "YiHe Wei"
+      "name": "ShiQi Fan"
     },
     "zh": {
-      "name": "魏一禾"
+      "name": "樊师岐"
     }
   },
   {
     "id": "person-shijie-hou",
     "group": "bachelors",
+    "cohortYear": 2024,
     "image": "/assets/shijie-hou.jpg",
     "profilePath": null,
     "en": {
@@ -170,6 +174,7 @@
   {
     "id": "person-wenqi-zhang",
     "group": "bachelors",
+    "cohortYear": 2024,
     "image": "/assets/wenqi-zhang.jpg",
     "profilePath": null,
     "en": {
@@ -182,6 +187,7 @@
   {
     "id": "person-yiteng-ji",
     "group": "bachelors",
+    "cohortYear": 2024,
     "image": "/assets/yiteng-ji.jpg",
     "profilePath": null,
     "en": {
@@ -192,15 +198,16 @@
     }
   },
   {
-    "id": "person-shiqi-fan",
+    "id": "person-13",
     "group": "bachelors",
-    "image": "/assets/shiqi-fan.jpg",
+    "cohortYear": 2025,
+    "image": "https://pkuaimi.com/wp-content/uploads/2025/11/%E9%AD%8F%E4%B8%80%E7%A6%BE2.png",
     "profilePath": null,
     "en": {
-      "name": "ShiQi Fan"
+      "name": "YiHe Wei"
     },
     "zh": {
-      "name": "樊师祁"
+      "name": "魏一禾"
     }
   },
   {

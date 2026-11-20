@@ -184,6 +184,9 @@ export function validateContent(data, { root = process.cwd() } = {}) {
     translations(person, location, { name: false });
     if (!groupIds.has(person.group)) fail(location, 'group', `未知成员分组 ${String(person.group)}；请使用 content/groups.json 中已有的 id。`);
     asset(person.image, location, 'image');
+    if ('cohortYear' in person && (!Number.isInteger(person.cohortYear) || person.cohortYear < 1000 || person.cohortYear > 9999)) {
+      fail(location, 'cohortYear', '请填写四位数入学年份；未知时省略。');
+    }
     if (person.profilePath !== null && person.profilePath !== undefined) {
       if (!isString(person.profilePath)) fail(location, 'profilePath', '应为个人主页的规范地址或 null。');
       else {

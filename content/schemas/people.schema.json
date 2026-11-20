@@ -25,6 +25,12 @@
         ],
         "description": "成员分组 id，必须与 content/groups.json 中的一个 id 完全一致。"
       },
+      "cohortYear": {
+        "type": "integer",
+        "minimum": 1000,
+        "maximum": 9999,
+        "description": "本科入学年份，用于将同级成员排在同一年级小标题下。未知时省略。"
+      },
       "image": {
         "allOf": [
           {

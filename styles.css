@@ -211,17 +211,20 @@ svg { vertical-align:middle; }
 .publication-item:target { background:var(--paper); border-radius:10px; box-shadow:0 0 0 12px var(--paper); }
 .people-group { margin-bottom:36px; }
 .people-group-title { color:var(--red); font-family:var(--display); font-size:26px; font-weight:700; line-height:1.3; letter-spacing:-.015em; padding-bottom:12px; margin:0 0 20px; border-bottom:1px solid var(--line); }
+.student-cohort + .student-cohort { margin-top:28px; }
+.student-cohort-title { margin:0 0 14px; padding-left:10px; border-left:3px solid var(--red); font-size:16px; font-weight:600; line-height:1.4; font-variant-numeric:tabular-nums; }
 /* Keep empty column slots so short groups and final rows align with full rows. */
 .people-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:24px 28px; }
 .person-card { display:grid; grid-template-columns:96px minmax(0,1fr); gap:18px; align-items:center; min-width:0; width:100%; }
 .person-card img { width:100%; aspect-ratio:4/5; object-fit:cover; object-position:50% 25%; border-radius:4px; background:var(--paper); }
 .person-copy { min-width:0; overflow-wrap:anywhere; }
-.person-card h3 { font-size:18px; line-height:1.4; font-weight:600; margin:0 0 6px; letter-spacing:-.015em; }
+.person-name { font-size:18px; line-height:1.4; font-weight:600; margin:0; letter-spacing:-.015em; }
 .person-card p { color:var(--muted); font-size:12px; margin:0; }
+.person-name + p { margin-top:6px; }
 .person-card .text-link { font-size:12px; margin-top:10px; }
-a.person-card:hover h3 { color:var(--red); }
+a.person-card:hover .person-name { color:var(--red); }
 .faculty-group .person-card { grid-template-columns:120px minmax(0,1fr); column-gap:24px; }
-.faculty-group .person-card h3 { font-size:24px; }
+.faculty-group .person-name { font-size:24px; }
 .lab-lives { margin-top:52px; }
 .lab-lives-heading { margin-bottom:24px; }
 .lab-lives-heading .people-group-title { margin-bottom:12px; }
@@ -440,9 +443,9 @@ a[data-image-preview] { cursor:zoom-in; }
   .lab-lives-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 16px; }
   .lab-life-image { height:auto; aspect-ratio:4/3; }
   .people-group-title { font-size:25px; }
-  .person-card h3 { font-size:17px; }
+  .person-name { font-size:17px; }
   .faculty-group .person-card { grid-template-columns:96px minmax(0,1fr); column-gap:18px; }
-  .faculty-group .person-card h3 { font-size:22px; }
+  .faculty-group .person-name { font-size:22px; }
   .person-card p { font-size:11px; }
   .profile-content>.prose>figure:first-of-type,.profile-content>.prose>img:first-child { float:none; max-width:180px; margin:0 0 22px; }
   .project-entry { padding-bottom:24px; margin-bottom:24px; }

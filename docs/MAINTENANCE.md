@@ -128,6 +128,8 @@ npm run new -- member jane-doe
 
 毕业或转组时修改 `group`，不用删除成员再新建。分组显示顺序由 `content/groups.json` 决定，同组成员按 `people.json` 中的顺序排列。新增分组时，在 `groups.json` 添加唯一 `id` 及对应 `en`、`zh` 名称，再用于成员的 `group`。
 
+本科生可填写入学年份（例如 `"cohortYear": 2024`）。成员页按年份从早到晚自动分组，每组共用一个小标题，如「2024 级」或「2024 cohort」。同级成员按文件顺序展示，未填写年份的成员排在最后。
+
 ### 关联个人主页
 
 ```sh
